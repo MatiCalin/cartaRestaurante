@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./css/login.css"
 
+
 export const LoginScreen = () => {
+
+
+  const [userLog, setUserLog] = useState({
+    email: "",
+    contraseña:"",
+  });
+
+  const inputChange = (e) => {
+    setUserLog ({
+      ...userLog,
+      [e.target.name]: e.target.value,
+    })
+  };
+  
+  const onLoginSubmit = (e) =>{
+    e.preventDefault();
+    
+  };
+
   return (
     <div className="">
       <div className="text-center">
@@ -17,10 +37,10 @@ export const LoginScreen = () => {
       </div>
       
     <div className="d-flex align-items-center justify-content-center mt-3">
-    <Form className="px-3 my-1 formulario-login">
+    <Form onSubmit={onLoginSubmit} className="px-3 my-1 formulario-login">
         <Form.Group className="mb-2" controlId="formBasicEmail">
           <Form.Label>Correo electrónico</Form.Label>
-          <Form.Control type="email" placeholder="Ingrese su email" required/>
+          <Form.Control type="email" placeholder="Ingrese su email" name="email" value={userLog.email} onChange={inputChange} required/>
           <Form.Text className="text-muted">
             Recuerde que debe ser el mismo con el que se registró.
           </Form.Text>
@@ -28,7 +48,7 @@ export const LoginScreen = () => {
 
         <Form.Group className="mb-2" controlId="formBasicPassword">
           <Form.Label>Contraseña</Form.Label>
-          <Form.Control type="password" placeholder="Ingrese su contraseña" required/>
+          <Form.Control type="password" placeholder="Ingrese su contraseña" name="contraseña" value={userLog.contraseña} onChange={inputChange} required/>
           <Link to="" className="pt-2 mt-3 text-decoration-none"><small>Olvidé mi contraseña</small></Link>
         </Form.Group>
         <Form.Group className="mb-2" controlId="formBasicCheckbox">
