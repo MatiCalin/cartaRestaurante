@@ -43,12 +43,12 @@ export const LoginScreen = () => {
   return (
     <div className="">
       <div className="text-center">
-        <h1 className=" mt-3 py-2">¡Bienvenidos comensales!</h1>
+        <h1 className=" mt-3 py-2 text-light">¡Bienvenidos comensales!</h1>
       </div>
 
-      <div className="d-flex align-items-center justify-content-center mt-3 formulario-login">
+      <div className="d-flex align-items-center justify-content-center mt-3 text-light formulario-login">
         <img
-          src="https://marketplace.canva.com/EAFDw2DA9TU/1/0/1131w/canva-men%C3%BA-carta-restaurante-japon%C3%A9s-formas-org%C3%A1nicas-txbBFK-dh8Q.jpg"
+          src="https://png.pngtree.com/png-vector/20220727/ourmid/pngtree-food-logo-png-image_6089719.png"
           alt=""
           className="w-25 h-25"
         />
@@ -83,7 +83,7 @@ export const LoginScreen = () => {
               // required
             />
             {errorContraseña ? (
-              <Alert variant="danger">Por favor ingresa tu contraseña</Alert>
+              <Alert variant="danger" className="mt-1">Por favor ingresa tu contraseña</Alert>
             ) : (
               ""
             )}

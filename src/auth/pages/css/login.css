@@ -1,3 +1,15 @@
-.formulario-login {
-    border: 5px solid rgb(207, 181, 79);
+@media only screen and (max-width: 360px){
+    .formulario-login img{
+        
+    }
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-image: url(wavesBackground1.svg);
+    background-size: cover ;
+    background-repeat: no-repeat;
+}
+
