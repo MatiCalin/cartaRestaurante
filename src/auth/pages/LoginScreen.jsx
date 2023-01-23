@@ -41,7 +41,7 @@ export const LoginScreen = () => {
   };
 
   return (
-    <div className="">
+    <div>      
       <div className="text-center">
         <h1 className=" mt-3 py-2 text-light">¡Bienvenidos comensales!</h1>
       </div>
