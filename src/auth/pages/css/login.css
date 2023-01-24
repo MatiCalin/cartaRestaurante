@@ -1,28 +1,118 @@
-/* @media only screen and (max-width: 360px){
-    .formulario-login img{
-        
-    }
-} */
+@media only screen and (max-width: 400px){
+  html {
+    font-size: 12px !important;
+  }
 
-/* @keyframes animate{
-    0%{
-        transform: translateX(0) translateZ(0) scaleY(1);
+  .formulario-login {
+      display: flex ;
+      flex-direction: column ;
     }
-    50%{
-        transform: translateX(-25%) translateZ(0) scaleY(0.5);
-    }
-    100%{
-        transform: translateX(-50%) translateZ(0) scaleY(1);
-    }
-} */
 
-body {
+    .formulario-login img {
+      width: 100px !important;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+  html {
+    font-size: 20px;
+  }
+
+  .formulario-login {
+    display: flex ;
+    flex-direction: column ;
+  }
+
+  .formulario-login img {
+    width: 300px !important;
+  }
+}
+
+@media only screen and (min-width: 860px){
+  html {
+    font-size: 16px;
+  }
+}
+
+* {
     margin: 0;
     padding: 0;
-    min-height: 100vh;    
-    background-size: cover ;
-    background-repeat: no-repeat;
-    background-image: url(wavesBackground1.svg);
-    animation: animate 18s linear infinite;
+  }
+
+.formulario-login form{
+    z-index: 2000 ; 
 }
+
+.loginSection {
+    
+    width: 100vw;
+    height: 100vh;
+    background: #001220;
+    overflow: hidden;
+  }
+  
+.loginSection .air {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%; 
+    background: url("http://front-end-noobs.com/jecko/img/wave-mid.png");
+    background-repeat: repeat no-repeat; 
+    background-position: 0 bottom; 
+    transform-origin: center bottom; 
+  }
+  
+.loginSection .air.air1 {
+    animation: wave 30s linear infinite;
+    z-index: 1000;
+    opacity: 1;
+    animation-delay: 0s;
+    bottom: 0;
+  }
+  
+.loginSection .air.air2 {
+    animation: wave2 15s linear infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+  }
+  
+.loginSection .air.air3 {
+    animation: wave 30s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 15px;
+  }
+  
+.loginSection .air.air4 {
+    animation: wave2 15s linear infinite;
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: -5s;
+    bottom: 20px;
+  }
+  
+@keyframes wave {
+    0% {
+      background-position-x: 0px;
+    }
+    100% {
+      background-position-x: 100px;
+    }
+  }
+@keyframes wave2 {
+    0% {
+      background-position-x: 0px;
+    }
+    100% {
+      background-position-x: -1500px;
+    }
+  }
+
+  
+
+
 
