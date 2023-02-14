@@ -1,4 +1,4 @@
-.coverimage{
+.cover-image{
     display: block;
     width: 100%;
     max-height: 30rem;
@@ -7,3 +7,18 @@
     width: 100px;
     max-height: 100px;
 }
+.card-container{
+    margin-top: 30px;
+    width: 80%;
+    margin-left: 10%;
+}
+.card-group{
+    margin-top: 30px;
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+}
+
+
+
+/* PARA LAS IMAGENES DE COMIDA <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt="" style="width: 80px;"> */
