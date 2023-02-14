@@ -8,6 +8,7 @@ import { ProtectedRoute } from '../components/ProtectedRoute'
 import { HomeScreen } from '../user/pages/HomeScreen'
 import { MenuScreen } from '../user/pages/MenuScreen'
 
+
 export const AppRouter = () => {
   return (
     <BrowserRouter>
