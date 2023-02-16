@@ -3,35 +3,70 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 
 
 export const CardTwo = () => {
+    const array = [
+      {
+        img: 'https://placeralplato.com/files/2015/06/lemon-pie-640x480.jpg?width=1200&enable=upscale',
+        title: 'Lemon Pie',
+        text: 'Tarta de crema de limon con merengue',
+        text2: '$300',
+        button: 'Comprar',
+      },
+      {
+        img: 'img',
+        title: 'Tarta de Frambuesa',
+        text: 'Tarta con frambuesas y dulce de leche',
+        text2: '$300',
+        button: 'comprar',
+      },
+      {
+        img: 'img',
+        title: 'Tarta de Frambuesa',
+        text: 'Tarta con frambuesas y dulce de leche',
+        text2: '$300',
+        button: 'comprar',
+      },
+      {
+        img: 'img',
+        title: 'Tarta de Frambuesa',
+        text: 'Tarta con frambuesas y dulce de leche',
+        text2: '$300',
+        button: 'comprar',
+      },
+            {
+        img: 'img',
+        title: 'Tarta de Frambuesa',
+        text: 'Tarta con frambuesas y dulce de leche',
+        text2: '$300',
+        button: 'comprar',
+      },
+            {
+        img: 'img',
+        title: 'Tarta de Frambuesa',
+        text: 'Tarta con frambuesas y dulce de leche',
+        text2: '$300',
+        button: 'comprar',
+      },
+
+    ]
 
     return (    
       
-      <div className='card-container'>
-          <Row xs={1} md={2} className="g-4">
-            {Array.from({length: 6 }).map((_, idx) => (
+      <div className='cardtwo-container'>
+          <Row xs={1} md={3} className="g-4">
+            {array.map(( food ) => (
               <Col>
-                <Card className='border-light'>
-                  <Card.Img variant="top" src="holder.js/100px160" />
+                <Card className='card-food border-light'>
+                  <Card.Img className='flex-shrink-0 img-fluid rounded' variant="top" src= {food.img}/>
                   <Card.Body className='card-body'>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                      This is a longer card with supporting text below as a natural
-                      lead-in to additional content. This content is a little bit
-                      longer.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Card.Title>{food.title}</Card.Title>
+                    <Card.Text> {food.text} </Card.Text>
+                    <Card.Text> {food.text2} </Card.Text>
+                    <Button variant="secondary">{food.button}</Button>
                   </Card.Body>
                 </Card>
               </Col>
             ))}
           </Row>
         </div>
-  
     );
   } 
-
-  /* 
-  
-  
-  
-  */
