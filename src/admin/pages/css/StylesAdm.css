@@ -1,0 +1,19 @@
+html {
+    background-color: #001220;
+}
+.contenedor {
+    background-color: #001220;
+}
+.imageAdm {
+    width: 100px;
+    height: 100px;
+}
+.table-color{  
+    background-color: rgb(151, 32, 48);    
+}
+@media screen and (max-width: 768px) {
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+  }

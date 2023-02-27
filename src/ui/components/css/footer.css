@@ -1,0 +1,53 @@
+.footerSection {
+   
+   background-color: rgba(41, 39, 39, 0.738);
+}
+
+.footerItems {
+    position: relative;
+    display: flex;
+    top: 25%;
+    justify-content: center;
+}
+
+.footerItems li {
+    position: relative;
+    list-style: none;
+    margin: 0 28px;
+}
+
+
+.footerItems li Link {
+    text-decoration: none;
+}
+
+.faBrands {
+    font-size: 3rem;
+    color: #222;
+}
+
+.instagramIcon:hover {
+    color: orange;
+}
+
+.whatsappIcon:hover{
+    color: green;
+}
+
+.twitterIcon:hover{
+    color: rgb(105, 214, 250);
+}
+
+.secondCol {
+    display: flex;
+    justify-content: center;
+}
+
+.thirdCol {
+    display: flex;
+    padding-top: 1.5rem;
+    flex-direction: column;
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
