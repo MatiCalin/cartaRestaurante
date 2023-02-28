@@ -10,9 +10,9 @@ import "./css/footer.css";
 
 export const Footer = () => {
   return (
-    <div>
-      <Container>
-        <Row className="footerSection w-100">
+    <div className="footerSection"> 
+      <Container fluid >
+        <Row >
           <Col>
           <ul className="footerItems">
             <li>
