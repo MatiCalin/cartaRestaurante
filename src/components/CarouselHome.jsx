@@ -16,7 +16,7 @@ export const CarouselHome = () => {
               <Carousel.Caption>
                 <h1>DISFRUTA NUESTRA COMIDA </h1>
                 <p></p>
-                <Button variant="outline-light">Haz tu reserva</Button>
+                <Button variant="outline-light">Haz tu Reserva</Button>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -27,7 +27,7 @@ export const CarouselHome = () => {
               />
   
               <Carousel.Caption>
-                <h2>Prueba distintos sabores</h2>
+                <h1>PRUEBA DISTINTOS SABORES</h1>
                 <p></p>
                 <Button variant="outline-light">Haz tu reserva</Button>
               </Carousel.Caption>
@@ -40,7 +40,7 @@ export const CarouselHome = () => {
               />
   
               <Carousel.Caption>
-                <h2>Cafeteria de primera calidad</h2>
+                <h1>CAFETERIA DE PRIMERA CALIDAD</h1>
                 <p></p>
                 <Button variant="outline-light">Haz tu reserva</Button>
               </Carousel.Caption>

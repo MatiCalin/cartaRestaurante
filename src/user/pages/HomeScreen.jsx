@@ -9,8 +9,8 @@ export const HomeScreen = () => {
   return (
     <div>
      <CarouselHome/>
-     <CardOne/>
      <CardTwo/>
+     <CardOne/>
     </div>
   );
 }
