@@ -7,7 +7,7 @@ export const CardOne = () => {
   return (
 
     <div className='CardOne-Container'>
-    <Row xs={1} md={4} className="g-4">
+    <Row xs={2} md={3} className="g-4">
       <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
         <ShoppingCartIcon/>
         <Card.Body>

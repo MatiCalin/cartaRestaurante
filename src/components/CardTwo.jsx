@@ -94,7 +94,7 @@ export const CardTwo = () => {
     return (    
       
       <div className='cardtwo-container'>
-          <Row xs={1} md={3} className="g-4">
+          <Row xs={1} md={4} className="g-4" style={{ margin: '5rem' }}>
             {array.map(( food ) => (
               <Col>
                 <Card className='card-food border-light'>

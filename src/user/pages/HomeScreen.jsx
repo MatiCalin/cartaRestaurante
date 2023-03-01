@@ -7,11 +7,13 @@ import "../pages/HomeScreen.css";
 
 export const HomeScreen = () => {
   return (
+    <>
     <div>
      <CarouselHome/>
      <CardTwo/>
      <CardOne/>
     </div>
+    </>
   );
 }
 
