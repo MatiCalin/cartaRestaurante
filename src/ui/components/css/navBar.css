@@ -1,9 +1,45 @@
-.navBar {
-  height: 5rem;    
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
+.navImg {
+  height: 5rem;
 }
 
 
+.logoutBtn {
+  text-decoration: none;
+  list-style: none;
+  position: absolute;
+  right: 2rem;
+}
+
+@media screen and (max-width: 1190px) {
+  .navImg {
+    height: 10rem;
+    position: absolute;
+    right: 3rem;
+    align-items: center;
+  }
+
+  .logoutBtn {
+    position: relative;
+    left: 0.1 rem;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .navLinks {
+    display: flex;
+    align-items: center;
+  }
+
+  .logoutBtn {
+    top: 1.5rem;
+    border: white solid 0.1rem;
+    border-radius: 25%;
+  }
+  
+  .logoutBtn:hover {
+    background-color: rgb(137, 9, 9);
+    color: white;
+    transform: scale(1.15);
+  }
+}
