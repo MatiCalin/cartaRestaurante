@@ -1,8 +1,8 @@
 
-/* import React, { useState } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet";
-import products from "../Store/products";
+import products from '../Store/products'
 import ProductCard from "../ui/components/ProductCard";
 import ReactPaginate from "react-paginate";
 
@@ -12,7 +12,7 @@ export const AllFoods = () => {
 
   const [pageNumber, setPageNumber] = useState(0);
 
-  const searchedProduct = products.filter((item) => {
+  const searchedProduct = products?.filter((item) => {
     if (searchTerm.value === "") {
       return item;
     }
@@ -69,7 +69,7 @@ export const AllFoods = () => {
 
             {displayPage.map((item) => (
               <Col lg="3" md="4" sm="6" xs="6" key={item.id} className="mb-4">
-                <ProductCard item={item} />
+                <ProductCard key={item.id} item={item} />
               </Col>
             ))}
 
@@ -88,5 +88,5 @@ export const AllFoods = () => {
     </Helmet>
   );
 };
- */
+
 
