@@ -1,4 +1,3 @@
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const items =
@@ -32,19 +31,17 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
 
-  reducers: { 
-
+  reducers: {
     // =========== add item ============
 
-     addItem(state, action) {
+    addItem(state, action) {
       const newItem = action.payload;
       const existingItem = state.cartItems.find(
         (item) => item.id === newItem.id
       );
       state.totalQuantity++;
 
-      if (!existingItem) { 
-
+      if (!existingItem) {
         // ===== note: if you use just redux you should not mute state array instead of clone the state array, but if you use redux toolkit that will not a problem because redux toolkit clone the array behind the scene
 
         state.cartItems.push({
@@ -72,11 +69,11 @@ const cartSlice = createSlice({
         state.totalAmount,
         state.totalQuantity
       );
-    }, 
+    },
 
     // ========= remove item ========
 
-     removeItem(state, action) {
+    removeItem(state, action) {
       const id = action.payload;
       const existingItem = state.cartItems.find((item) => item.id === id);
       state.totalQuantity--;
@@ -103,7 +100,7 @@ const cartSlice = createSlice({
 
     //============ delete item ===========
 
-     deleteItem(state, action) {
+    deleteItem(state, action) {
       const id = action.payload;
       const existingItem = state.cartItems.find((item) => item.id === id);
 
@@ -127,4 +124,3 @@ const cartSlice = createSlice({
 
 export const cartActions = cartSlice.actions;
 export default cartSlice;
-

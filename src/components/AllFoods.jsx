@@ -43,15 +43,15 @@ export const AllFoods = () => {
         <Container>
           <Row>
             <Col lg="6" md="6" sm="6" xs="12">
-              <div className="search__widget d-flex align-items-center justify-content-between ">
+              <div className="search__widget d-flex align-items-center justify-content-between">
                 <input
                   type="text"
-                  placeholder="I'm looking for...."
+                  placeholder="Estoy buscando...."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <span>
-                  <i class="ri-search-line"></i>
+                  <i className="ri-search-line"></i>
                 </span>
               </div>
             </Col>
@@ -59,10 +59,10 @@ export const AllFoods = () => {
               <div className="sorting__widget text-end">
                 <select className="w-50">
                   <option>Default</option>
-                  <option value="ascending">Alphabetically, A-Z</option>
-                  <option value="descending">Alphabetically, Z-A</option>
-                  <option value="high-price">High Price</option>
-                  <option value="low-price">Low Price</option>
+                  <option value="ascending">Alfabeticamente, A-Z</option>
+                  <option value="descending">Alfabeticamente, Z-A</option>
+                  <option value="high-price">Precio mas Alto</option>
+                  <option value="low-price">Precio mas Bajo</option>
                 </select>
               </div>
             </Col>
