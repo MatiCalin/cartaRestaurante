@@ -5,7 +5,7 @@ export const CarouselHome = () => {
 
     return (
 
-        <div>
+        <div className='CarouselContainer'>
           <Carousel fade>
             <Carousel.Item>
               <img
