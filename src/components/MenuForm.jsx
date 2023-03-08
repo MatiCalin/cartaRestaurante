@@ -9,6 +9,7 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
   const [estado, setEstado] = useState('');
   const [precio, setPrecio] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [imagenUrl, setImagenUrl] = useState('');
 
   useEffect(() => {
     if (menu) {
@@ -17,12 +18,14 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
       setEstado(menu.estado);
       setPrecio(menu.precio);
       setCategoria(menu.categoria);
+      setImagenUrl(menu.imagenUrl);
     } else {
       setNombre('');
       setDetalle('');
       setEstado('');
       setPrecio('');
       setCategoria('');
+      setImagenUrl('');
     }
   }, [menu]);
 
@@ -34,6 +37,7 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
       estado,
       precio,
       categoria,
+      imagenUrl,
     };
     onSubmit(newMenu);
   };
@@ -99,6 +103,15 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
               <option value="categoria 4">categoria 4</option>
               </Form.Control>
           </Form.Group>
+          <Form.Group controlId="imagenUrl">
+            <Form.Label>Imagen URL:</Form.Label>
+            <Form.Control
+              type="text"
+              value={this.state.imageUrl}
+              onChange={(e) => this.setState({ imageUrl: e.target.value })}
+            />
+          </Form.Group>
+          
           <Button variant="primary" type="submit">
             Guardar
           </Button>

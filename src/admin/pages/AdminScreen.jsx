@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import MenuTable from "../../components/MenuTable";
 import MenuForm from "../../components/MenuForm";
-import './css/StylesAdm.css'
+import './css/admin.css'
+import { AdminListUser } from "../../components/AdminListUser";
 
 export const AdminScreen = () => {
     const [menus, setMenus] = useState([]);
@@ -57,7 +58,9 @@ export const AdminScreen = () => {
             onDelete={handleDeleteMenu}
             onEdit={handleEditMenu}
             />
+            
             </div>
+            
           
         </div>
       );
