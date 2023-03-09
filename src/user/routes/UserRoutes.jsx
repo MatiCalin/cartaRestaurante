@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { ErrorScreen } from "../../404/pages/ErrorScreen";
+import { ErrorScreen } from "../../error 404/pages/ErrorScreen";
 import { Footer } from "../../ui/components/Footer";
 import {  NavbarC } from "../../ui/components/NavBar";
 import { HomeScreen } from "../pages/HomeScreen";

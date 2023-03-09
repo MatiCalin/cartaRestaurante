@@ -20,6 +20,9 @@ export const LoginScreen = () => {
         password,
       });
 
+      //guardamos token en localStorage
+      localStorage.setItem("token", resp.data.token);
+
       if(resp.data.rol === "usuario") {
         navigate("/home")
       } else {
