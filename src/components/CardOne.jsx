@@ -11,32 +11,36 @@ export const CardOne = () => {
       <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
         <ShoppingCartIcon/>
         <Card.Body>
-          <Card.Title>Haz tu Pedido</Card.Title>
-          <Button variant="secondary">Pedidos</Button>
+          <Button variant="secondary">
+            <a href='http://localhost:3000/menu' style={{color:'white', textDecoration:'none',}} >Haz tu Pedido</a>
+          </Button>
         </Card.Body>
       </Card>
 
       <Card className='CardOne-Subcontainer'  style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
         <UserIcon/>
         <Card.Body>
-          <Card.Title>Staff</Card.Title>
-          <Button variant="secondary">Ve el staff</Button>
+          <Button variant="secondary">
+            <a href='http://localhost:3000/404' style={{color:'white', textDecoration:'none',}}>Nosotros</a>
+          </Button>
         </Card.Body>
       </Card>
 
       <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
         <MapPinIcon/>
         <Card.Body>
-          <Card.Title>Ubicacion</Card.Title>
-          <Button variant="secondary">Ubicacion</Button>
+          <Button variant="secondary">
+            <a href='http://localhost:3000/404' style={{color:'white', textDecoration:'none',}}>Ubicacion</a>
+          </Button>
         </Card.Body>
       </Card>
 
       <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
         <ChatBubbleBottomCenterTextIcon/>
         <Card.Body>
-          <Card.Title>Comentarios</Card.Title>
-          <Button variant="secondary">Comentarios</Button>
+          <Button variant="secondary">
+            <a href='http://localhost:3000/404' style={{color:'white', textDecoration:'none',}}>Comentarios</a>
+          </Button>
         </Card.Body>
       </Card>
     </Row>
