@@ -36,7 +36,7 @@ export const CardTwo = () => {
         {
           img: 'https://morixe.com.ar/files/recetas/thumbs/papascheddarmorixe03.jpg',
           title: 'Papas Fritas',
-          text: 'Porcion mediana de papas fritas con bacon y queso chedar, mas cebolla de verdeo.',
+          text: 'Porcion mediana de papas fritas con bacon y queso chedar.',
           text2: '$900',
           button: 'comprar',
         },
