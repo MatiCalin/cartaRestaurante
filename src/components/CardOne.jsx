@@ -11,8 +11,8 @@ export const CardOne = () => {
       <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
         <ShoppingCartIcon/>
         <Card.Body>
-          <Card.Title>Completa tu Orden</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
+          <Card.Title>Haz tu Pedido</Card.Title>
+          <Button variant="secondary">Pedidos</Button>
         </Card.Body>
       </Card>
 
@@ -20,7 +20,7 @@ export const CardOne = () => {
         <UserIcon/>
         <Card.Body>
           <Card.Title>Staff</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
+          <Button variant="secondary">Ve el staff</Button>
         </Card.Body>
       </Card>
 
@@ -28,7 +28,7 @@ export const CardOne = () => {
         <MapPinIcon/>
         <Card.Body>
           <Card.Title>Ubicacion</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
+          <Button variant="secondary">Ubicacion</Button>
         </Card.Body>
       </Card>
 
@@ -36,7 +36,7 @@ export const CardOne = () => {
         <ChatBubbleBottomCenterTextIcon/>
         <Card.Body>
           <Card.Title>Comentarios</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
+          <Button variant="secondary">Comentarios</Button>
         </Card.Body>
       </Card>
     </Row>

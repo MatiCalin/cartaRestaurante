@@ -20,8 +20,27 @@
     transition: linear 0.2s;
     color:coral ;
 }
-
-
-
+/* -----------------   CardTwo ----------------------- */ 
+.CardTwo-Container{
+  text-align: center;
+}
+.lines-effect{
+  display: inline-block;
+  position: relative;
+}
+.lines-effect::after, .lines-effect::before{
+  content: '';
+  position: absolute;
+  width: 450px;
+  height: 2px;
+  background-color: currentColor;
+  top: 0.6em;
+}
+.lines-effect::before{
+  left: -460px;
+}
+.lines-effect::after{
+  right: -460px;
+}
 
 

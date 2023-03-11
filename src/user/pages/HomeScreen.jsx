@@ -1,6 +1,7 @@
 import React from 'react';
 import { CarouselHome } from '../../components/CarouselHome';
 import { CardOne } from '../../components/CardOne';
+import { CardTwo } from '../../components/CardTwo';
 import "../pages/HomeScreen.css";
 
 export const HomeScreen = () => {
@@ -8,6 +9,7 @@ export const HomeScreen = () => {
     <>
     <div>
      <CarouselHome/>
+     <CardTwo/>
      <CardOne/> 
     </div>
     </>
