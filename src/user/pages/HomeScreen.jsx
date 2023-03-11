@@ -7,7 +7,7 @@ import "../pages/HomeScreen.css";
 export const HomeScreen = () => {
   return (
     <>
-    <div>
+    <div className='Principal-container'>
      <CarouselHome/>
      <CardTwo/>
      <CardOne/> 

@@ -36,7 +36,7 @@ export const CardTwo = () => {
         {
           img: 'https://morixe.com.ar/files/recetas/thumbs/papascheddarmorixe03.jpg',
           title: 'Papas Fritas',
-          text: 'Porcion mediana de papas fritas con bacon y queso chedar.',
+          text: 'Porcion mediana de papas fritas con bacon y queso chedar, mas cebolla de verdeo.',
           text2: '$900',
           button: 'comprar',
         },
@@ -51,7 +51,7 @@ export const CardTwo = () => {
 
     return(
         <>
-        <div className='CardTwo-Container'>
+        <div className='CardTwo-Lines'>
             <h2 className='lines-effect' > PROMOCIONES DEL MES </h2>
         </div>
 
@@ -65,7 +65,7 @@ export const CardTwo = () => {
                     <Card.Title>{food.title}</Card.Title>
                     <Card.Text> {food.text} </Card.Text>
                     <Card.Text> {food.text2} </Card.Text>
-                    <Button variant="light">{food.button}</Button>
+                    <Button variant="light"> <a href='http://localhost:3000/menu' style={{color:'black', textDecoration:'none'}} > {food.button} </a> </Button>
                   </Card.Body>
                 </Card>
               </Col>

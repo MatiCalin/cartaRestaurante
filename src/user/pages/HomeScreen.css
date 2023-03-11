@@ -20,9 +20,19 @@
     transition: linear 0.2s;
     color:coral ;
 }
+@media (max-width: 390px){
+  .CardOne-Container{
+    margin:0px;
+    padding:0px;
+    padding-left:25%;
+    display:block;
+    float:none;
+    text-align:center;  
+  }  
+}
 /* -----------------   CardTwo ----------------------- */ 
-.CardTwo-Container{
-  text-align: center;
+.CardTwo-Lines{
+  text-align: center; 
 }
 .lines-effect{
   display: inline-block;
@@ -31,38 +41,35 @@
 .lines-effect::after, .lines-effect::before{
   content: '';
   position: absolute;
-  width: 450px;
+  width: 90%;
   height: 2px;
   background-color: currentColor;
   top: 0.6em;
 }
 .lines-effect::before{
-  left: -460px;
+  left: -100%;
 }
 .lines-effect::after{
-  right: -460px;
-}
-.cardtwo-container{
-  width: 100%;
-  margin-left: 15px;
-  text-align: center;
+  right: -100%;
 }
 .cardimage{
   display: flex;
   width: 100%;
-  max-height: 12rem;
+  max-height: 10rem;
 }
 .card-food{
+  text-align: center; 
   display: flex;
-
-  max-height: 30rem;
+  max-height: 25rem;
   width: 80%;
   transform: translateY(-15px);
   box-shadow: 0 10px 14px rgba(0, 0, 0.5);
   color: white;
 }
-/* .card-food:hover{
-  color:coral ;
-  transition: linear 0.3s;
-} */
+@media (max-width: 1200px){
+  .lines-effect::after, .lines-effect::before{
+    transform: scale(0);
+  }  
+}
+
 
