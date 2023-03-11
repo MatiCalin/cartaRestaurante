@@ -1,6 +1,6 @@
 /* -----------------   Carousel ----------------------- */ 
 .CarouselContainer{
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 .cover-image{
     display: flex;
@@ -9,7 +9,7 @@
 }
 /* -----------------   CardOne ----------------------- */ 
 .CardOne-Container{
-    margin-top: 40px;
+    margin-top: 20px;
     justify-content: center;
     text-align: center;
     display: flex;   
@@ -42,5 +42,27 @@
 .lines-effect::after{
   right: -460px;
 }
+.cardtwo-container{
+  width: 100%;
+  margin-left: 15px;
+  text-align: center;
+}
+.cardimage{
+  display: flex;
+  width: 100%;
+  max-height: 12rem;
+}
+.card-food{
+  display: flex;
 
+  max-height: 30rem;
+  width: 80%;
+  transform: translateY(-15px);
+  box-shadow: 0 10px 14px rgba(0, 0, 0.5);
+  color: white;
+}
+/* .card-food:hover{
+  color:coral ;
+  transition: linear 0.3s;
+} */
 
