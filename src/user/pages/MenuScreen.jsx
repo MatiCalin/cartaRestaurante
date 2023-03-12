@@ -1,7 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Menu from '../../components/Menu';
+
+
+import "../pages/HomeScreen.css";
 
 export const MenuScreen = () => {
   return (
-    <div>MenuScreen</div>
-  )
+    <>
+    <div className='Principal-container'>
+<Menu />
+
+
+    </div>
+    </>
+  );
 }
+
