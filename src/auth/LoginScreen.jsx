@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import "./css/login.css";
+import "../auth/pages/css/login.css";
 import Alert from "react-bootstrap/Alert";
 
 export const LoginScreen = () => {
