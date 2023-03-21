@@ -1,6 +1,8 @@
-.footerSection {
-   
+.footerSection {  
    background-color: rgba(41, 39, 39, 0.738);
+   position: absolute;
+   bottom: 0;
+   width: 100%;
 }
 
 .footerItems {
@@ -50,4 +52,38 @@
     text-align: left;
     font-size: 1rem;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+@media screen and (max-width: 600px) {
+    .footerSection {
+        padding-top: 0.5rem ;
+    }
+
+    .footerItems {
+        display: flex;
+        flex-direction: column;
+        top: auto;
+
+    }
+
+    .secondCol {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1190px) {
+    .footerItems {
+        display: flex;
+        flex-direction: column;
+        top: auto;
+        margin-top: 0.5rem;
+    }
+
+    .footerItems .faBrands{
+        height: 2rem;
+        padding-top: 0.5rem;
+    }
+    .secondCol img{
+        object-fit: contain;
+    }
 }

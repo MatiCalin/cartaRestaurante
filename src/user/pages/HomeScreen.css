@@ -1,44 +1,75 @@
+/* -----------------   Carousel ----------------------- */ 
+.CarouselContainer{
+  margin-bottom: 50px;
+}
 .cover-image{
-    display: block;
+    display: flex;
     width: 100%;
-    max-height: 30rem;
+    max-height: 35rem;
 }
-.cardimage{
-    width: 100px;
-    max-height: 100px;
-}
-.cardtwo-container{
-    margin-top: 30px;
-    width: 80%;
-    margin-left: 15%;
-    text-align: center;
-}
+/* -----------------   CardOne ----------------------- */ 
 .CardOne-Container{
-    margin-top: 30px;
+    margin-top: 20px;
     justify-content: center;
     text-align: center;
     display: flex;   
 }
-.card-food{
-    width: 60%;
-    transform: translateY(-15px);
-    box-shadow: 0 12px 16px rgb(242,179,124);
-}
-.card-food:hover{
-    color:coral ;
-}
 .CardOne-Subcontainer:hover{
     transform: translateY(-5px);
     box-shadow: 0 12px 16px rgba(0, 0, 0.2);
+    transition: linear 0.2s;
     color:coral ;
 }
-.CardOne-Subcontainer img{
-    width: 100%;
-    height: 13rem;
-} 
+@media (max-width: 390px){
+  .CardOne-Container{
+    margin:0px;
+    padding:0px;
+    padding-left:25%;
+    display:block;
+    float:none;
+    text-align:center;  
+  }  
+}
+/* -----------------   CardTwo ----------------------- */ 
+.CardTwo-Lines{
+  text-align: center; 
+}
+.lines-effect{
+  display: inline-block;
+  position: relative;
+}
+.lines-effect::after, .lines-effect::before{
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 2px;
+  background-color: currentColor;
+  top: 0.6em;
+}
+.lines-effect::before{
+  left: -100%;
+}
+.lines-effect::after{
+  right: -100%;
+}
+.cardimage{
+  display: flex;
+  width: 100%;
+  max-height: 10rem;
+}
+.card-food{
+  text-align: center; 
+  display: flex;
+  max-height: 25rem;
+  width: 80%;
+  transform: translateY(-15px);
+  box-shadow: 0 10px 14px rgba(0, 0, 0.5);
+  color: white;
+}
+@media (max-width: 1200px){
+  .lines-effect::after, .lines-effect::before{
+    transform: scale(0);
+  }  
+}
 
 
-
-
-
-/* PARA LAS IMAGENES DE COMIDA puedo usar: <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt="" style="width: 80px;"> */
