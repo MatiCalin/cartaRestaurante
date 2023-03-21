@@ -13,6 +13,7 @@ export const AdminScreen = () => {
   };
 
   return (
+    
     <div className="contenedor">
       <div className='contenedor-titulo-imagen'>
       <h1>Administracion</h1>
