@@ -55,6 +55,11 @@
 .lines-effect::after{
   right: -100%;
 }
+.cardtwo-container{
+  justify-content: center;
+  text-align: center;
+  display: flex;   
+}
 .cardimage{
   display: flex;
   width: 100%;
@@ -74,5 +79,21 @@
     transform: scale(0);
   }  
 }
+/* -----------------   CardThree ----------------------- */ 
+.ContainerCardThree{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+.CardThree{
+  text-align: center;
+  width: 80%;
 
-
+  font-family: 'Ubuntu', sans-serif;
+}
+.CardThree Button:hover { 
+  transform: translateY(-3px);
+}
+.CardThree h1{
+  color:coral ;
+}
