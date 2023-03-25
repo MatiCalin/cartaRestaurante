@@ -1,12 +1,38 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink, useNavigate,  } from "react-router-dom";
+import menuApi from "../../api/menuApi";
 import "./css/navBar.css";
 
 export const NavbarC = () => {
   
+  const [verificarAdmin, setVerificarAdmin] = useState(false)
 
+  //mostrar navbar segun rol
+  const verificarRol = async () => {
+    try {
+      const resp = await menuApi.get("admin/nav");
+      
+      if (resp.data.rol === "admin"){
+        setVerificarAdmin(true);
+        return
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+  useEffect(() => {
+    verificarRol()
+  }, [])
+  
+  
+  
 
   return (
     <div className="navBar w-100">
@@ -58,6 +84,16 @@ export const NavbarC = () => {
                   >
                     Sobre nosotros
                   </NavLink>
+
+                {verificarAdmin && 
+                <NavLink
+                className={({ isActive }) =>
+                  `nav-item nav-link ${isActive ? "active" : ""}`
+                }
+                to="/administration"
+              >
+                Administracion
+              </NavLink> }
                 </div>
                   
                 
