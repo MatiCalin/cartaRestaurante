@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../proyectoadmin"
+		},
+		{
+			"path": "../../../../proyectoadmin/proyectoadmin"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "proyectoadmin"
+	}
+}

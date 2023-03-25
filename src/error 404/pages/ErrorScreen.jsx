@@ -14,7 +14,7 @@ export const ErrorScreen = () => {
         
         <h2 className='py-2'>Lo siento, la pagina que buscas no se ha encontrado</h2>
         
-        <Link to="/login">
+        <Link to="/">
         <img src="https://assets.codepen.io/5647096/backToTheHomepage.png" alt="Back to the Homepage" className='w-50'/>
         </Link>
       

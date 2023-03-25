@@ -9,33 +9,84 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
   const [estado, setEstado] = useState('');
   const [precio, setPrecio] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [menus, setMenus] = useState([]); // Estado para almacenar los menús
 
   useEffect(() => {
     if (menu) {
-      setNombre(menu.nombre);
-      setDetalle(menu.detalle);
+      setNombre(menu.nombre.trim());
+      setDetalle(menu.detalle.trim());
       setEstado(menu.estado);
       setPrecio(menu.precio);
       setCategoria(menu.categoria);
+      setImageUrl(menu.imageUrl.trim());
     } else {
       setNombre('');
       setDetalle('');
       setEstado('');
       setPrecio('');
       setCategoria('');
+      setImageUrl('');
     }
   }, [menu]);
 
+  function resetModal() {
+    setNombre('');
+    setDetalle('');
+    setEstado('');
+    setPrecio('');
+    setCategoria('');
+    setImageUrl('');
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (nombre.length > 16) {
+      alert('El nombre no debe tener más de 16 caracteres');
+      resetModal();
+      return;
+    }
+    const detalleTrim = detalle.trim();
+    if (detalle.length > 30) {
+      alert('El detalle no debe tener más de 30 caracteres');
+      resetModal();
+      return;
+    }
+    if (!nombre || !detalle || !categoria || !estado || !imageUrl) {
+      alert('Por favor completa todos los campos');
+      resetModal();
+      return;
+    }
+    const regex = /^\d{1,5}(\.\d{1,2})?$/;
+    if (!regex.test(precio) || precio <= 0) {
+      alert(
+        'Por favor ingrese un precio válido mayor a 0 y con un máximo de 5 dígitos.'
+      );
+      resetModal();
+      return;
+    }
+
     const newMenu = {
       nombre,
       detalle,
       estado,
       precio,
       categoria,
+      imageUrl,
     };
+
+    // Verificar si el menú ya existe en la lista
+    const menuExist = menus.find((menu) => menu.nombre === nombre && menu.detalle === detalle);
+    if (menuExist) {
+      alert('El menú ya existe en la lista');
+      resetModal();
+      return;
+    }
+
+    // Agregar el nuevo menú a la lista
+    setMenus((prevMenus) => [...prevMenus, newMenu]);
     onSubmit(newMenu);
+    resetModal();
   };
   
 
@@ -99,6 +150,16 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
               <option value="categoria 4">categoria 4</option>
               </Form.Control>
           </Form.Group>
+          <Form.Group controlId="formImageUrl">
+            <Form.Label>URL de imagen</Form.Label>
+            <Form.Control type="text"
+              placeholder="Ingrese la URL de la imagen"
+              value={imageUrl} 
+              onChange={(e) => setImageUrl(e.target.value)} />
+          </Form.Group>
+
+
+          
           <Button variant="primary" type="submit">
             Guardar
           </Button>
