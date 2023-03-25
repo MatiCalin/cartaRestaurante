@@ -1,7 +1,30 @@
-import React from 'react'
+import React from 'react';
+import Menu from '../../components/Menu';
 
-export const MenuScreen = () => {
+
+import "../pages/HomeScreen.css";
+
+export const MenuScreen = ({
+  allProducts,
+	setAllProducts,
+	total,
+	countProducts,
+	setCountProducts,
+	setTotal
+}) => {
   return (
-    <div>MenuScreen</div>
-  )
+    <>
+    <div className='Principal-container'>
+      <Menu
+        allProducts={allProducts}
+        setAllProducts={setAllProducts}
+        total={total}
+        setTotal={setTotal}
+        countProducts={countProducts}
+        setCountProducts={setCountProducts}
+      />
+    </div>
+    </>
+  );
 }
+
