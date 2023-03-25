@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-//import "../auth/pages/css/Register.css";
+import "./css/registro.css";
+import axios from "axios";
 
 export const RegisterScreen = () => {
   const initialValues = { username: "", email: "", password: "" };
@@ -17,6 +18,16 @@ export const RegisterScreen = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0) {
+      axios
+        .post("http://localhost:4003/auth/new", formValues)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   useEffect(() => {
@@ -85,10 +96,9 @@ export const RegisterScreen = () => {
             />
           </div>
           <p>{formErrors.password}</p>
-          <button className="fluid ui button blue">Submit</button>
+          <button className="fluid ui button blue registrobtn">Submit</button>
         </div>
       </form>
     </div>
   );
-}
-
+};
