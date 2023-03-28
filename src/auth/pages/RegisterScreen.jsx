@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-//import "../auth/pages/css/Register.css";
+import "./css/registro.css";
+import axios from "axios";
 
 export const RegisterScreen = () => {
   const initialValues = { username: "", email: "", password: "" };
@@ -17,6 +18,17 @@ export const RegisterScreen = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+
+    if (Object.keys(formErrors).length === 0) {
+      axios
+        .post("http://localhost:4003/auth/new", formValues)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   useEffect(() => {
@@ -29,25 +41,25 @@ export const RegisterScreen = () => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.username) {
-      errors.username = "Username is required!";
+      errors.username = "El nombre de usuario es obligatorio!";
     }
     if (!values.email) {
-      errors.email = "Email is required!";
+      errors.email = "El Email is obligatorio!";
     } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
+      errors.email = "El email no es valido!";
     }
     if (!values.password) {
-      errors.password = "Password is required";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
+      errors.password = "La contraseña es obligatoria";
+    } else if (values.password.length < 5) {
+      errors.password = "La contraseña debe tener al menos 5 caracteres";
     } else if (values.password.length > 10) {
-      errors.password = "Password cannot exceed more than 10 characters";
+      errors.password = "La contraseña no puede superar los 10 caracteres";
     }
     return errors;
   };
 
   return (
-    <div className="container">
+    <div className="container registerContainer">
       <form onSubmit={handleSubmit}>
         <h1>Registro de usuario</h1>
         <div className="ui divider"></div>
@@ -85,7 +97,7 @@ export const RegisterScreen = () => {
             />
           </div>
           <p>{formErrors.password}</p>
-          <button className="fluid ui button blue">Submit</button>
+          <button className="fluid ui button blue registrobtn">Submit</button>
         </div>
       </form>
     </div>
