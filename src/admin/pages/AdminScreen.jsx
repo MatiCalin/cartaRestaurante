@@ -21,7 +21,7 @@ export const AdminScreen = () => {
     try {
       const resp = await menuApi.get("admin/verificar");
       
-      console.log(resp);
+      
       
       
     } catch (error) {

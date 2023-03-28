@@ -1,9 +1,17 @@
 import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
+import  { productos } from '../data';
 
 
-export const CardTwo = () => {
-    
+export const CardTwo = ({
+  allProducts,
+	setAllProducts,
+	total,
+	countProducts,
+	setCountProducts,
+	setTotal
+}) => {
+
     const array = [
         {
           img: 'https://eldiariony.com/wp-content/uploads/sites/2/2022/09/Hamburguesa-con-queso-shutterstock_215936923.jpg?quality=75&strip=all&w=1200',
@@ -50,12 +58,11 @@ export const CardTwo = () => {
     ]
 
     return(
-        <>
-        <div className='CardTwo-Lines'>
-            <h2 className='lines-effect' > PROMOCIONES DEL MES </h2>
-        </div>
+      <div className='CardTwo-Lines'>
+          <>
 
-        <div >
+
+      <div >
           <Row xs={1} md={3} className="g-4" style={{ margin: '5rem' }}>
             {array.map(( food ) => (
               <Col className='cardtwo-container'>
@@ -68,10 +75,50 @@ export const CardTwo = () => {
                     <Button variant="light"> <a href='http://localhost:3000/menu' style={{color:'black', textDecoration:'none'}} > {food.button} </a> </Button>
                   </Card.Body>
                 </Card>
+          {
+            productos.map(menu => (
+                <Col key={menu.id}>
+                  {
+                    menu.promotion 
+                    ? (
+                    <Card className='card-food border-light secondary' bg='dark'>
+                      <div className='offMenu'>
+                      {
+                          menu.promotion 
+                          ? `${ menu.off}%`
+                          : ''
+                      }   
+                      </div>
+                      <Card.Img className='cardimage flex-shrink-0 img-fluid rounded' variant="top" src= {menu.img}/>
+                      <Card.Body className='card-body'>
+                        <Card.Title>{menu.title}</Card.Title>
+                        <Card.Text> {menu.description} </Card.Text>
+                        <Card.Text>
+                            {
+                                menu.promotion 
+                                ? `$${menu.price * menu.off / 100}`
+                                : menu.price
+                            }    
+                        </Card.Text>
+                        <Button variant="light" 
+                        onClick={() => window.location='menu'}>
+                          Ir a menú
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                    )
+                    : ''
+                } 
+
               </Col>
             ))}
-          </Row>
-        </div>
+            </Col>
+        ))}
+        </Row>
+          
+          </div>
         </>
+        </div>
     );
+    
 }
