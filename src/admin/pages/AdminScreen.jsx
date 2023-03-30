@@ -43,7 +43,7 @@ export const AdminScreen = () => {
   return (
     <> 
     <NavbarC/>
-    <div className="contenedor">
+    <div className="adminContainer">
       <div className='contenedor-titulo-imagen'>
       <h1>Administracion</h1>
       <img 

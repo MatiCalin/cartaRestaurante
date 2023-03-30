@@ -17,7 +17,8 @@ width:25%;
 }
 .contenedor>div:hover{
     background-color: #3f4958;
-}
+} */
+
 .card-menu{
     padding:15px 20px;
 }
@@ -57,6 +58,7 @@ width:25%;
 .informacion button :hover{
     background-color: #2d4263;
 }
+*/
 
 .offMenu {
     color: #f0f0f0;
@@ -65,4 +67,4 @@ width:25%;
     position: absolute;
     margin: -10px 15px;
     text-shadow: 1px 1px rgba(22, 21, 21, 0.75);
-} */
+} 
