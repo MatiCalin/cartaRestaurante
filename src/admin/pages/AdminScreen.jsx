@@ -5,12 +5,19 @@ import FoodOrderTable from '../../components/FoodOrderTable';
 import AdminMenu from "../../components/AdminMenu";
 import './css/StylesAdm.css';
 
+
 export const AdminScreen = () => {
   const [activeComponent, setActiveComponent] = useState('admin'); // estado inicial 'admin'
 
   const handleButtonClick = (component) => {
     setActiveComponent(component);
   };
+
+  
+  
+
+
+
 
   return (
     <div className="contenedor">
