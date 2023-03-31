@@ -4,23 +4,47 @@ import UsersTable from '../../components/UsersTable';
 import FoodOrderTable from '../../components/FoodOrderTable';
 import AdminMenu from "../../components/AdminMenu";
 import './css/StylesAdm.css';
+import { NavbarC } from '../../ui/components/NavBar';
+import { useEffect } from 'react';
+import menuApi from '../../api/menuApi';
+import { useNavigate } from 'react-router-dom';
 
 
 export const AdminScreen = () => {
   const [activeComponent, setActiveComponent] = useState('admin'); // estado inicial 'admin'
+  const navigate = useNavigate();
 
   const handleButtonClick = (component) => {
     setActiveComponent(component);
   };
 
+  const verificarAdmin = async () => {
+    try {
+      const resp = await menuApi.get("admin/verificar");
+      
+      
+      
+      
+    } catch (error) {
+      if(error.response.status === 404){
+        navigate("/404");
+      }else if(error.response.status === 401){
+        navigate("/")
+      }
+    }
+    
+  }
+
+  useEffect(() => {
+    verificarAdmin()
+    
+  }, [])
   
-  
-
-
-
 
   return (
-    <div className="contenedor">
+    <> 
+    <NavbarC/>
+    <div className="adminContainer">
       <div className='contenedor-titulo-imagen'>
       <h1>Administracion</h1>
       <img 
@@ -40,6 +64,7 @@ export const AdminScreen = () => {
       {activeComponent === 'users' && <UsersTable />}
       {activeComponent === 'food' && <FoodOrderTable />}
     </div>
+        </>
   );
 };
 

@@ -94,7 +94,7 @@ export const LoginScreen = () => {
                 value={email}
                 onChange={(e) => setEmail (e.target.value)}
               />
-              <Form.Text className="text-muted">
+              <Form.Text className=" text-light">
                 Recuerde que debe ser el mismo con el que se registró.
               </Form.Text>
               {errorEmail ? (
@@ -112,7 +112,7 @@ export const LoginScreen = () => {
                 name="contraseña"
                 value={password}
                 onChange={(e) => setPassword (e.target.value)}
-                // required
+                required
               />
               {errorContraseña ? (
                 <Alert variant="danger" className="mt-1">
@@ -125,9 +125,7 @@ export const LoginScreen = () => {
                 <small>Olvidé mi contraseña</small>
               </Link>
             </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check" required />
-            </Form.Group>
+            
             <Button variant="primary" type="submit">
               Ingresar
             </Button>
@@ -137,10 +135,10 @@ export const LoginScreen = () => {
           </Form>
         </div>
 
-        <div class="air air1"></div>
-        <div class="air air2"></div>
-        <div class="air air3"></div>
-        <div class="air air4"></div>
+        <div className="air air1"></div>
+        <div className="air air2"></div>
+        <div className="air air3"></div>
+        <div className="air air4"></div>
       </section>
     </div>
   );
