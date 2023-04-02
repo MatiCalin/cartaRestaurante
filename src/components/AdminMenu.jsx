@@ -2,62 +2,68 @@ import React, { useState } from "react";
 import MenuTable from './MenuTable'
 import MenuForm from './MenuForm'
 
-
-
 function AdminMenu () {
     const [menus, setMenus] = useState([]);
     
-      const [showModal, setShowModal] = useState(false);
-      const [selectedMenu, setSelectedMenu] = useState(null);
+    // Define los estados para el Modal
+    const [showModal, setShowModal] = useState(false);
+    const [selectedMenu, setSelectedMenu] = useState(null);
     
-      const handleAddMenu = (newMenu) => {
-        setMenus([...menus, newMenu]);
+    // Función para agregar un nuevo menú
+    const handleAddMenu = (newMenu) => {
+        setMenus(prevMenus => [...prevMenus, newMenu]);
         setShowModal(false);
-      };
+    };
     
-      const handleUpdateMenu = (updatedMenu) => {
+    // Función para actualizar un menú existente
+    const handleUpdateMenu = (updatedMenu) => {
         const updatedMenus = menus.map((menu) =>
           menu.id === updatedMenu.id ? updatedMenu : menu
         );
         setMenus(updatedMenus);
         setShowModal(false);
-      };
+    };
     
-      const handleDeleteMenu = (id) => {
-        const filteredMenus = menus.filter((menu) => menu.id !== id);
-        setMenus(filteredMenus);
-      };
+    // Función para eliminar un menú
+    const handleDeleteMenu = () => {
+      
+
+    };
     
-      const handleEditMenu = (menu) => {
+    // Función para editar un menú
+    const handleEditMenu = (menu) => {
         setSelectedMenu(menu);
         setShowModal(true);
-      };
+    };
     
-      const handleCloseModal = () => {
+    // Función para cerrar el Modal
+    const handleCloseModal = () => {
         setSelectedMenu(null);
         setShowModal(false);
-      };
-      
-      return (
+    };
+    
+    
+    
+    return (
         <div className="contenedor">
-          <div className="table-responsive">
-          <MenuForm
-            show={showModal}
-            onHide={handleCloseModal}
-            onSubmit={selectedMenu ? handleUpdateMenu : handleAddMenu}
-            menu={selectedMenu}
-            />
-          <MenuTable
-            menus={menus}
-            onDelete={handleDeleteMenu}
-            onEdit={handleEditMenu}
-            />
-            
+            <div className="table-responsive">
+                {/* Muestra el formulario de los menús */}
+                <MenuForm
+                    show={showModal}
+                    onHide={handleCloseModal}
+                    onSubmit={selectedMenu ? handleUpdateMenu : handleAddMenu}
+                    menu={selectedMenu}
+                />
+                
+                {/* Muestra la tabla de los menús */}
+                <MenuTable
+                    menus={menus}
+                    onDelete={handleDeleteMenu}
+                    onEdit={handleEditMenu}
+                />
             </div>
-            
-          
         </div>
-      );
-    }
+    );
+}
 
-    export default AdminMenu;
+export default AdminMenu;

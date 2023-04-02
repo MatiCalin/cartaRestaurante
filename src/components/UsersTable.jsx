@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Table, Button, Modal } from "react-bootstrap";
+import menuApi from "../api/menuApi";
+import { useEffect } from 'react';
 
 function UsersTable() {
-  const [users, setUsers] = useState([
-    { id: 1, name: "Juan", active: true },
-    { id: 2, name: "Pedro", active: true },
-    { id: 3, name: "Maria", active: false },
-  ]);
+  const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -29,6 +27,22 @@ function UsersTable() {
     setSelectedUser(null);
   };
 
+
+  // Mandar usuarios a DB  
+  const cargarUser = async() => {
+    try {
+      const resp = await menuApi.get ("/admin/Usuarios");
+      setUsers(resp.data.Usuarios);
+    } catch (error) {
+      console.log(error)
+    };
+  };
+  
+  useEffect(() => {
+    cargarUser ();
+  }, []);                 
+
+
   return (
     <div className="container mt-4">
       <h2>Usuarios</h2>
@@ -37,14 +51,17 @@ function UsersTable() {
           <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Activo</th>
+            <th>Email</th>
+            <th>Estado</th>
           </tr>
         </thead>
+          
         <tbody>
           {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
+            <tr key={user._id}>
+              <td>{user._id}</td>
               <td>{user.name}</td>
+              <td>{user.email}</td>
               <td>
                 <Button
                   variant={user.active ? "success" : "danger"}
@@ -79,4 +96,3 @@ function UsersTable() {
 }
 
 export default UsersTable;
-

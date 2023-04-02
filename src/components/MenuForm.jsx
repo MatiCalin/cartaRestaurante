@@ -1,68 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import menuApi from '../api/menuApi';
+
+const CATEGORIAS = [
+  'categoria 1',
+  'categoria 2',
+  'categoria 3',
+  'categoria 4'
+];
 
 function MenuForm({ show, onHide, onSubmit, menu }) {
-  const [nombre, setNombre] = useState('');
-  const [detalle, setDetalle] = useState('');
-  const [estado, setEstado] = useState('');
-  const [precio, setPrecio] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [menus, setMenus] = useState([]); // Estado para almacenar los menús
-
-  useEffect(() => {
-    if (menu) {
-      setNombre(menu.nombre.trim());
-      setDetalle(menu.detalle.trim());
-      setEstado(menu.estado);
-      setPrecio(menu.precio);
-      setCategoria(menu.categoria);
-      setImageUrl(menu.imageUrl.trim());
-    } else {
-      setNombre('');
-      setDetalle('');
-      setEstado('');
-      setPrecio('');
-      setCategoria('');
-      setImageUrl('');
-    }
-  }, [menu]);
-
-  function resetModal() {
-    setNombre('');
-    setDetalle('');
-    setEstado('');
-    setPrecio('');
-    setCategoria('');
-    setImageUrl('');
-  }
+  const [formValues, setFormValues] = useState({
+    nombre: '',
+    detalle: '',
+    estado: '',
+    precio: '',
+    categoria: '',
+    imageUrl: ''
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const { nombre, detalle, categoria, estado, imageUrl, precio } = formValues;
+
+    if (!nombre || !detalle || !categoria || !estado || !imageUrl || !precio) {
+      alert('Por favor completa todos los campos');
+      return;
+    }
+
     if (nombre.length > 16) {
       alert('El nombre no debe tener más de 16 caracteres');
-      resetModal();
       return;
     }
-    const detalleTrim = detalle.trim();
+
     if (detalle.length > 30) {
       alert('El detalle no debe tener más de 30 caracteres');
-      resetModal();
       return;
     }
-    if (!nombre || !detalle || !categoria || !estado || !imageUrl) {
-      alert('Por favor completa todos los campos');
-      resetModal();
-      return;
-    }
+
     const regex = /^\d{1,5}(\.\d{1,2})?$/;
     if (!regex.test(precio) || precio <= 0) {
       alert(
         'Por favor ingrese un precio válido mayor a 0 y con un máximo de 5 dígitos.'
       );
-      resetModal();
       return;
     }
 
@@ -72,24 +54,42 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
       estado,
       precio,
       categoria,
-      imageUrl,
+      imageUrl
     };
 
-    // Verificar si el menú ya existe en la lista
-    const menuExist = menus.find((menu) => menu.nombre === nombre && menu.detalle === detalle);
-    if (menuExist) {
-      alert('El menú ya existe en la lista');
-      resetModal();
-      return;
-    }
-
-    // Agregar el nuevo menú a la lista
-    setMenus((prevMenus) => [...prevMenus, newMenu]);
     onSubmit(newMenu);
-    resetModal();
+    setFormValues({
+      nombre: '',
+      detalle: '',
+      estado: '',
+      precio: '',
+      categoria: '',
+      imageUrl: ''
+    });
+    guardarMenusDB (nombre, detalle, estado, precio, categoria, imageUrl)
+  };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
   };
   
-
+// mandar menus al DB
+  const guardarMenusDB = async (nombre, detalle, estado, precio, categoria, imageUrl) => {
+    try {
+          const resp = await menuApi.post("/admin/new", {
+            nombre,
+            detalle,
+            estado,
+            precio,
+            categoria,
+            imageUrl,
+          });
+          console.log(resp)
+    } catch (error) {
+      console.log("error")
+    
+    }
+  };
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -102,8 +102,9 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
             <Form.Control
               type="text"
               placeholder="Ingresa el nombre"
-              value={nombre}
-              onChange={(event) => setNombre(event.target.value)}
+              name="nombre"
+              value={formValues.nombre}
+              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group controlId="detalle">
@@ -111,16 +112,18 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
             <Form.Control
               type="text"
               placeholder="Ingresa el detalle"
-              value={detalle}
-              onChange={(event) => setDetalle(event.target.value)}
+              name="detalle"
+              value={formValues.detalle}
+              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group controlId="estado">
             <Form.Label>Estado</Form.Label>
             <Form.Control
               as="select"
-              value={estado}
-              onChange={(event) => setEstado(event.target.value)}
+              name="estado"
+              value={formValues.estado}
+              onChange={handleChange}
             >
               <option value="">Seleccione una opción</option>
               <option value="Activo">Activo</option>
@@ -132,30 +135,34 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
             <Form.Control
               type="number"
               placeholder="Ingresa el precio"
-              value={precio}
-              onChange={(event) => setPrecio(event.target.value)}
+              name="precio"
+              value={formValues.precio}
+              onChange={handleChange}
             />
-            </Form.Group>
+          </Form.Group>
           <Form.Group controlId="categoria">
             <Form.Label>Categoría</Form.Label>
-            <Form.Control
-              as="select"              
-              value={categoria}
-              onChange={(event) => setCategoria(event.target.value)}
-              >
-              <option value="">Seleccione una opción</option>
-              <option value="categoria 1">categoria 1</option>
-              <option value="categoria 2">categoria 2</option>
-              <option value="categoria 3">categoria 3</option>
-              <option value="categoria 4">categoria 4</option>
-              </Form.Control>
-          </Form.Group>
+              <Form.Control
+              as="select"    
+              name="categoria"          
+              value={formValues.categoria}
+              onChange={handleChange}>
+                <option value="">Seleccione una opción</option>
+                  {CATEGORIAS.map((categoria) => (
+                <option key={categoria} value={categoria}>
+                  {categoria}
+                </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+
           <Form.Group controlId="formImageUrl">
             <Form.Label>URL de imagen</Form.Label>
             <Form.Control type="text"
               placeholder="Ingrese la URL de la imagen"
-              value={imageUrl} 
-              onChange={(e) => setImageUrl(e.target.value)} />
+              name="imageUrl"
+              value={formValues.imageUrl} 
+              onChange={handleChange} />
           </Form.Group>
 
 

@@ -1,7 +1,5 @@
 import React from 'react';
 import Menu from '../../components/Menu';
-
-
 import "../pages/HomeScreen.css";
 
 export const MenuScreen = ({
@@ -13,6 +11,8 @@ export const MenuScreen = ({
 	setTotal
 }) => {
   return (
+    
+  
     <>
     <div className='Principal-container'>
       <Menu
