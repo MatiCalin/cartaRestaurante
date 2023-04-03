@@ -10,7 +10,7 @@ export const CardOne = () => {
     <>
       <div className='CardOne-Container'>
         <Row xs={1} md={3} className="g-4">
-          <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
+          <Card className='CardOne-Subcontainer' style={{ width: '11rem', maxHeight: '15rem', margin: '1rem' }}>
             <ShoppingCartIcon />
             <Card.Body>
               <Button variant="secondary">
@@ -19,7 +19,7 @@ export const CardOne = () => {
             </Card.Body>
           </Card>
 
-          <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
+          <Card className='CardOne-Subcontainer' style={{ width: '11rem', maxHeight: '15rem', margin: '1rem' }}>
             <UserIcon />
             <Card.Body>
               <Button variant="secondary">
@@ -28,7 +28,7 @@ export const CardOne = () => {
             </Card.Body>
           </Card>
 
-          <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
+          <Card className='CardOne-Subcontainer' style={{ width: '11rem', maxHeight: '15rem', margin: '1rem' }}>
             <ChatBubbleBottomCenterTextIcon />
             <Card.Body>
               <Button variant="secondary">

@@ -1,21 +1,42 @@
 import React from "react";
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import "./css/registro.css";
 import axios from "axios";
+=======
+import menuApi from "../../api/menuApi";
+import { useNavigate } from "react-router-dom";
+import "./css/registro.css";
+>>>>>>> acbf130584181451d90491500d6efe0e8f4dbe02
 
 export const RegisterScreen = () => {
-  const initialValues = { username: "", email: "", password: "" };
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("false");
+  const [msgError, setMsgError] = useState("");
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
+  const sendRegister = async(name, email, password) => {
+    try {
+      const resp = await menuApi.post("/auth/new", {
+        name,
+        email,
+        password,
+      });
+      
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
+      
+    } catch ({response}) {
+      
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     if (Object.keys(formErrors).length === 0) {
@@ -29,38 +50,35 @@ export const RegisterScreen = () => {
         });
     }
   };
+=======
+>>>>>>> acbf130584181451d90491500d6efe0e8f4dbe02
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
-  const validate = (values) => {
-    const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.username) {
-      errors.username = "Username is required!";
-    }
-    if (!values.email) {
-      errors.email = "Email is required!";
-    } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
-    } else if (values.password.length > 10) {
-      errors.password = "Password cannot exceed more than 10 characters";
-    }
-    return errors;
-  };
+    //validaciones
+
+    // if (!name || !email || !password) {
+    //   setError(true);
+    //   setMsgError("Todos los campos son obligatorios")
+    //   setTimeout(() => {
+    //     setError(false);
+    //   }, 4000);
+    // } else if (email.match(/([a-z]\w+@[a-z]+\.[a-z]{2,5})/)) {
+    //   setError(true);
+    //   setMsgError("El email ingresado no es valido")
+    //   setTimeout(() => {
+    //     setError(false);
+    //   }, 4000);
+    // } 
+
+    sendRegister(name,email, password);
+
+  }
+  
 
   return (
-    <div className="container">
+    <div className="container registerContainer">
       <form onSubmit={handleSubmit}>
         <h1>Registro de usuario</h1>
+        {/* {error ? <div className="errorStyle"><h3 >{msgError}</h3></div> : ""} */}
         <div className="ui divider"></div>
         <div className="ui form">
           <div className="field">
@@ -69,33 +87,39 @@ export const RegisterScreen = () => {
               type="text"
               name="username"
               placeholder="Username"
-              value={formValues.username}
-              onChange={handleChange}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <p>{formErrors.username}</p>
+          
           <div className="field">
             <label>Email</label>
             <input
               type="text"
               name="email"
               placeholder="Email"
-              value={formValues.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              
             />
           </div>
-          <p>{formErrors.email}</p>
+          
           <div className="field">
             <label>Contraseña</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              
             />
           </div>
+<<<<<<< HEAD
           <p>{formErrors.password}</p>
+=======
+          
+>>>>>>> acbf130584181451d90491500d6efe0e8f4dbe02
           <button className="fluid ui button blue registrobtn">Submit</button>
         </div>
       </form>

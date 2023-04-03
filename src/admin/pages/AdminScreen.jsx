@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import menuApi from '../../api/menuApi';
 import { useNavigate } from 'react-router-dom';
 
+
 export const AdminScreen = () => {
   const [activeComponent, setActiveComponent] = useState('admin'); // estado inicial 'admin'
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const AdminScreen = () => {
     try {
       const resp = await menuApi.get("admin/verificar");
       
-      console.log(resp);
+      
       
       
     } catch (error) {
@@ -43,7 +44,7 @@ export const AdminScreen = () => {
   return (
     <> 
     <NavbarC/>
-    <div className="contenedor">
+    <div className="adminContainer">
       <div className='contenedor-titulo-imagen'>
       <h1>Administracion</h1>
       <img 
