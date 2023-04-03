@@ -84,7 +84,7 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
             categoria,
             imageUrl,
           });
-          console.log(resp)
+          //console.log(resp)
     } catch (error) {
       console.log("error")
     

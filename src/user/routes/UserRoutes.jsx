@@ -7,6 +7,7 @@ import { Footer } from "../../ui/components/Footer";
 import { NavbarC } from "../../ui/components/NavBar";
 import { HomeScreen } from "../pages/HomeScreen";
 import { MenuScreen } from "../pages/MenuScreen";
+import Pedido from "../../components/Pedido";
 
 export const UserRoutes = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -49,6 +50,19 @@ export const UserRoutes = () => {
             />
           }
         />
+      <Route
+          path="/pedidos"
+          element={
+              <Pedido
+                  allProducts={allProducts}
+                  setAllProducts={setAllProducts}
+                  total={total}
+                  setTotal={setTotal}
+                  countProducts={countProducts}
+                  setCountProducts={setCountProducts}
+              />
+          }
+      />
         <Route
           path="/administration"
           element={

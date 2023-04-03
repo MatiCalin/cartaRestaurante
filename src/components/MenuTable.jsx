@@ -23,7 +23,7 @@ function MenuTable() {
 
   const handleUpdateMenu = (id, updatedMenu) => {
     const updatedMenus = menus.map((menu) =>
-      menu.id === id ? { ...updatedMenu, id } : menu
+      menu._id === id ? { ...updatedMenu, id } : menu
     );
     setMenus(updatedMenus);
     setShowModal(false);
@@ -40,7 +40,7 @@ function MenuTable() {
       }).then(async (willDelete) => {
         if (willDelete) {
           const resp = await menuApi.delete(`/admin/eliminar/${id}`);
-          console.log(resp)
+          //console.log(resp)
           const updatedMenus = menus.filter((menu) => menu._id !== id);
           setMenus(updatedMenus);
           await Swal('¡El menú ha sido eliminado!', {

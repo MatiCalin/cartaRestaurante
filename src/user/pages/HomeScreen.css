@@ -58,22 +58,38 @@
 .cardtwo-container{
   justify-content: center;
   text-align: center;
-  display: flex;   
+  display: flex;
 }
+.cardtwo-margin { margin-bottom: 100px !important; }
 .cardimage{
   display: flex;
   width: 100%;
   max-height: 10rem;
 }
+.container-card-food { margin: 0 auto; }
 .card-food{
   text-align: center; 
   display: flex;
-  max-height: 25rem;
+  min-height: 25rem;
   width: 80%;
   transform: translateY(-15px);
-  box-shadow: 0 10px 14px rgba(0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0.5);
   color: white;
+  margin: 0 auto;
 }
+.card-body {
+    height: 15rem !important;
+}
+.card-body > p {
+    color: coral !important;
+    padding: 10px 15px;
+}
+.card-body > .price-food {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #f0f0f0 !important;
+}
+
 @media (max-width: 1200px){
   .lines-effect::after, .lines-effect::before{
     transform: scale(0);
