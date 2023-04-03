@@ -50,6 +50,12 @@ export const NavbarC = ({
     setAllProducts(resultado);
   };
 
+  // Generar pedido
+  const generarPedido = () => {
+    setActive(!active);
+    navigate('/pedidos');
+  }
+
   // Reiniciar el carrito a valor cero
   const vaciarCarrito = () => {
     Swal({
@@ -228,9 +234,9 @@ export const NavbarC = ({
                       <div className="btn-cart-event">
                         <button
                             className="btn-generar-pedido"
-                            onClick={() => navigate('/pedidos')}
+                            onClick={() => generarPedido()}
                         >
-                          Generar Pedido
+                          Generar pedido
                         </button>
                         <button
                             className="btn-clear-all"

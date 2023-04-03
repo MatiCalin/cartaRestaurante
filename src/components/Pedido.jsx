@@ -8,9 +8,8 @@ const Pedido = ({
     allProducts,
     setAllProducts,
     total,
-    countProducts,
-    setCountProducts,
-    setTotal
+    setTotal,
+    setCountProducts
 }) => {
 
     const [numPedido, setNumPedido] = useState([]);
@@ -44,7 +43,6 @@ const Pedido = ({
             "codePedido": numPedido
         })
             .then(res => {
-                /*console.log(res.data.ok)*/
                 if (res.data.ok) {
                     Swal({
                         title: "¡Pedido exitoso!",
@@ -67,6 +65,28 @@ const Pedido = ({
             })
     }
 
+    // Reiniciar el carrito a valor cero
+    const vaciarCarrito = () => {
+        Swal({
+            title: "¿Vaciar carrito?",
+            text: "Esta acción limpiará todos los menús seleccionados",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    Swal("¡Carrito limpio! carga nuevos menús :)", {
+                        icon: "success",
+                    });
+                    setAllProducts([]);
+                    setTotal(0);
+                    setCountProducts(0);
+                } else {
+                    Swal("¡Tú carrito sigue intacto! puedes cargar más menús o confirma el pedido :)");
+                }
+            });
+    };
     return (
         <div className='container'>
             <Row xs={1} md={3} className="w-75" style={{ marginTop: '8rem' }}>
@@ -129,12 +149,18 @@ const Pedido = ({
                           <hr/>
                           {
                               allProducts.length ?
-                                  <div>
+                                  <div className="btn-cart-event">
                                       <button
                                           className="btn-confirmar-pedido"
                                           onClick={() => confirmarPedido()}
                                       >
                                           Confirmar pedido
+                                      </button>
+                                      <button
+                                          className="btn-clear-pedido"
+                                          onClick={() => vaciarCarrito()}
+                                      >
+                                          Vaciar carrito
                                       </button>
                                   </div>
                                   : ''
