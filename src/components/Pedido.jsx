@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Button, Card, Row} from "react-bootstrap";
+import {Row} from "react-bootstrap";
 import './Pedido.css';
+import axios from "axios";
+import Swal from 'sweetalert';
 
 const Pedido = ({
     allProducts,
@@ -27,6 +29,43 @@ const Pedido = ({
         setPedido()
     ), []);
 
+    const confirmarPedido = async () => {
+        await axios.post("http://localhost:4003/admin/pedidoNew", {
+            "usuario": atob(localStorage.getItem('usr')),
+            "fecha": Date.now(),
+            "menu": allProducts.map((pedido) => (
+                {
+                    "_id": pedido._id,
+                    "precio": pedido.precio,
+                    "quantity": pedido.quantity
+                }
+            )),
+            "estado": "pendiente",
+            "codePedido": numPedido
+        })
+            .then(res => {
+                /*console.log(res.data.ok)*/
+                if (res.data.ok) {
+                    Swal({
+                        title: "¡Pedido exitoso!",
+                        icon: "success",
+                        buttons: "OK!",
+                    }).then(() => {
+                        window.location = '/home'
+                    });
+                }
+            })
+            .catch(res => {
+                Swal({
+                    title: "¡Oops!",
+                    text: "Surgió un error inesperado, por favor, contacte con el administrador del sitio",
+                    icon: "error",
+                    buttons: "OK!",
+                }).then(() => {
+                    window.location = '/home'
+                });
+            })
+    }
 
     return (
         <div className='container'>
@@ -45,11 +84,19 @@ const Pedido = ({
                       <div className="table-responsive">
                           <table className="table table-bordered table-striped ">
                               <thead className="table-dark">
-                                  <tr>
-                                      <th>Producto</th>
-                                      <th className="text-center">Cantidad</th>
-                                      <th className="text-center">Precio</th>
-                                  </tr>
+                              {
+                                  allProducts.length ?
+                                      <tr>
+                                          <th>Menú</th>
+                                          <th className="text-center">Cantidad</th>
+                                          <th className="text-center">Precio</th>
+                                      </tr>
+                                      :
+                                      <tr>
+                                          <th colSpan="3" className="text-center">Menús</th>
+                                      </tr>
+                              }
+
                               </thead>
                               <tbody>
                               {
@@ -63,17 +110,21 @@ const Pedido = ({
                                       ))
                                       :
                                       <tr>
-                                          <td colspan="3" className="text-center">Sin pedidos</td>
+                                          <td colspan="3" className="text-center">Sin pedidos :( </td>
                                       </tr>
                               }
 
                               </tbody>
-                              <tfoot className="table-dark">
-                              <tr>
-                                  <td colspan="2">Total a pagar</td>
-                                  <td className="text-center">$ {total}</td>
-                              </tr>
-                              </tfoot>
+                              {
+                                  allProducts.length ?
+                                      <tfoot className="table-dark">
+                                      <tr>
+                                          <td colSpan="2">Total a pagar</td>
+                                          <td className="text-center">$ {total}</td>
+                                      </tr>
+                                      </tfoot>
+                                      :''
+                              }
                           </table>
                           <hr/>
                           {
@@ -81,6 +132,7 @@ const Pedido = ({
                                   <div>
                                       <button
                                           className="btn-confirmar-pedido"
+                                          onClick={() => confirmarPedido()}
                                       >
                                           Confirmar pedido
                                       </button>

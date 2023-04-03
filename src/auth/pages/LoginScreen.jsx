@@ -22,6 +22,7 @@ export const LoginScreen = () => {
 
       //guardamos token en localStorage
       localStorage.setItem("token", resp.data.token);
+      localStorage.setItem("usr", btoa(resp.data.name));
 
       if(resp.data.rol === "usuario") {
         navigate("/home")

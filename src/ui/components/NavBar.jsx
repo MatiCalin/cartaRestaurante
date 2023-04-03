@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import menuApi from "../../api/menuApi";
 import "./css/navBar.css";
-import Pedido from "../../components/Pedido";
+import Swal from 'sweetalert';
 
 export const NavbarC = ({
   allProducts,
@@ -52,9 +52,25 @@ export const NavbarC = ({
 
   // Reiniciar el carrito a valor cero
   const vaciarCarrito = () => {
-    setAllProducts([]);
-    setTotal(0);
-    setCountProducts(0);
+    Swal({
+      title: "¿Vaciar carrito?",
+      text: "Esta acción limpiará todos los menús seleccionados",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          Swal("¡Carrito limpio! carga nuevos menús :)", {
+            icon: "success",
+          });
+          setAllProducts([]);
+          setTotal(0);
+          setCountProducts(0);
+        } else {
+          Swal("¡Tú carrito sigue intacto! puedes cargar más menús o confirma el pedido :)");
+        }
+      });
   };
 
   return (
