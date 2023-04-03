@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Table, Button, Modal } from "react-bootstrap";
+import menuApi from "../api/menuApi";
+import {logDOM} from "@testing-library/react";
 
-function FoodOrderTable() {
-  const [orders, setOrders] = useState([
-    { id: 1, name: "Pizza", status: "Pendiente" },
-    { id: 2, name: "Hamburguesa", status: "Realizado" },
-    { id: 3, name: "Ensalada", status: "Pendiente" },
-  ]);
+const FoodOrderTable = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [orders, setOrders] = useState([]);
+
+  const cargarPedidos = async () => {
+    try {
+      const resp = await menuApi.get('/admin/pedidos');
+      setOrders(resp.data.pedidos)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    cargarPedidos();
+  }, []);
 
   const handleStatusChange = (id) => {
     setSelectedOrder(id);
@@ -23,10 +34,10 @@ function FoodOrderTable() {
 
   const handleConfirmStatusChange = () => {
     const updatedOrders = orders.map((order) =>
-      order.id === selectedOrder
+      order._id === selectedOrder
         ? {
             ...order,
-            status: order.status === "Pendiente" ? "Realizado" : "Pendiente",
+            estado: order.estado === "pendiente" ? "realizado" : "pendiente",
           }
         : order
     );
@@ -35,42 +46,63 @@ function FoodOrderTable() {
   };
 
   const handleDeleteOrder = (id) => {
-    const updatedOrders = orders.filter((order) => order.id !== id);
+    const updatedOrders = orders.filter((order) => order._id !== id);
     setOrders(updatedOrders);
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 pb-5" style={{marginBottom: '150px'}}>
       <h2>Pedidos</h2>
       <Table className="table-color td" bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Comida</th>
+            <th>Pedido #</th>
+            <th>Menús</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
             <th>Estado</th>
             <th>Acciones</th>
-            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>{order.name}</td>
-              <td>{order.status}</td>
+            <tr key={order._id}>
+              <td><span className="badge text-bg-dark">{order.codePedido}</span></td>
               <td>
-                <Button
-                  variant={order.status === "Pendiente" ? "success" : "warning"}
-                  onClick={() => handleStatusChange(order.id)}
-                >
-                  {order.status === "Pendiente" ? "Realizado" : "Pendiente"}
-                </Button>
+                <ul>
+                  {order.menus.map(pedido => (
+                      <li>{pedido.nombre}</li>
+                  ))}
+                </ul>
               </td>
               <td>
-                <Button variant="danger" onClick={() => handleDeleteOrder(order.id)}>
+                {order.menus.map(pedido => (
+                    <li>{pedido.quantity}</li>
+                ))}
+              </td>
+              <td>
+                {order.menus.map(pedido => (
+                    <li>$ {pedido.quantity * pedido.precio}</li>
+                ))}
+              </td>
+              <td>{order.estado}</td>
+              <td>
+                <Button
+                    className="btn btn-sm"
+                    variant={order.estado === "pendiente" ? "success" : "warning"}
+                    onClick={() => handleStatusChange(order._id)}
+                >
+                  {order.estado === "pendiente" ? "realizado" : "pendiente"}
+                </Button>
+                {' '}
+                <Button
+                    className="btn btn-sm"
+                    variant="danger"
+                    onClick={() => handleDeleteOrder(order._id)}>
                   Eliminar
                 </Button>
               </td>
+
             </tr>
           ))}
         </tbody>

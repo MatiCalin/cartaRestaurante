@@ -1,5 +1,6 @@
 .footerSection {  
-   background-color: rgba(41, 39, 39, 0.738);
+   background-color: rgba(32, 28, 28, 1);
+    color: #908686;
    position: absolute;
    bottom: 0;
    width: 100%;
@@ -26,6 +27,12 @@
 .faBrands {
     font-size: 3rem;
     color: #222;
+}
+
+.instagramIcon,
+.whatsappIcon,
+.twitterIcon {
+    color: #4c4747;
 }
 
 .instagramIcon:hover {

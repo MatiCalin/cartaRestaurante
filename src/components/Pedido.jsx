@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Row} from "react-bootstrap";
 import './Pedido.css';
-import axios from "axios";
 import Swal from 'sweetalert';
+import menuApi from "../api/menuApi";
 
 const Pedido = ({
     allProducts,
@@ -29,12 +29,13 @@ const Pedido = ({
     ), []);
 
     const confirmarPedido = async () => {
-        await axios.post("http://localhost:4003/admin/pedidoNew", {
+        await menuApi.post("http://localhost:4003/admin/pedidoNew", {
             "usuario": atob(localStorage.getItem('usr')),
             "fecha": Date.now(),
-            "menu": allProducts.map((pedido) => (
+            "menus": allProducts.map((pedido) => (
                 {
                     "_id": pedido._id,
+                    "nombre": pedido.nombre,
                     "precio": pedido.precio,
                     "quantity": pedido.quantity
                 }
@@ -88,7 +89,7 @@ const Pedido = ({
             });
     };
     return (
-        <div className='container'>
+        <div className='container mb-5'>
             <Row xs={1} md={3} className="w-75" style={{ marginTop: '8rem' }}>
                 <div className="w-100">
                     {

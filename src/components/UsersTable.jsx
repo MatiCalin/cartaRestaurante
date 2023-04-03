@@ -16,7 +16,7 @@ function UsersTable() {
 
   const handleModalConfirm = () => {
     const updatedUsers = users.map((user) =>
-      user.id === selectedUser.id ? { ...user, active: !user.active } : user
+      user._id === selectedUser._id ? { ...user, active: !user.active } : user
     );
     setUsers(updatedUsers);
     setShowModal(false);
@@ -44,7 +44,7 @@ function UsersTable() {
 
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 pb-5" style={{marginBottom: '150px'}}>
       <h2>Usuarios</h2>
       <Table className="table-color td" bordered hover >
         <thead>

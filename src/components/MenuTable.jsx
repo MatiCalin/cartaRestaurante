@@ -7,18 +7,30 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import menuApi from '../api/menuApi';
 import Swal from 'sweetalert';
+import CategoryForm from "./CategoryForm";
 
 function MenuTable() {
   const [menus, setMenus] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  // Define los estados para el Modal
   const [showModal, setShowModal] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(null);
-  
+
+  const [showModalCat, setShowModalCat] = useState(false);
+  const [selectedCat, setSelectedCat] = useState(null);
 
   const handleAddMenu = (newMenu) => {
     const newId = menus.length + 1;
     const updatedMenus = [...menus, { ...newMenu, id: newId }];
     setMenus(updatedMenus);
     setShowModal(false);
+  };
+  const handleAddCat = (newCategory) => {
+    const newId = categories.length + 1;
+    const updatedCategories = [...categories, { ...newCategory, id: newId }];
+    setCategories(updatedCategories);
+    setShowModalCat(false);
   };
 
   const handleUpdateMenu = (id, updatedMenu) => {
@@ -27,6 +39,14 @@ function MenuTable() {
     );
     setMenus(updatedMenus);
     setShowModal(false);
+  };
+
+  const handleUpdateCat = (id, updatedCategory) => {
+    const updatedCategories = categories.map((cat) =>
+        cat._id === id ? { ...updatedCategory, id } : cat
+    );
+    setCategories(updatedCategories);
+    setShowModalCat(false);
   };
 
   const handleDeleteMenu = async(id) => {
@@ -67,6 +87,16 @@ function MenuTable() {
     setShowModal(false);
   };
 
+  const handleEditCat = (cat) => {
+    setSelectedCat(cat);
+    setShowModalCat(true);
+  };
+
+  const handleCloseModalCat = () => {
+    setSelectedCat(null);
+    setShowModalCat(false);
+  };
+
   const cargarMenus = async () => {
     try {
       const resp = await menuApi.get('/admin/Menus');
@@ -80,40 +110,41 @@ function MenuTable() {
     cargarMenus();
   }, []);
   return (
-    <Container>
+    <Container style={{marginBottom: '150px'}}>
       <h2>Menús</h2>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
+      <Button className="me-2" variant="primary" onClick={() => setShowModal(true)}>
         Agregar Menú
+      </Button>
+      <Button variant="primary" onClick={() => setShowModalCat(true)}>
+        Agregar Categoría
       </Button>
       <Row>
         <Col>
           <Table bordered hover className="table-color">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Detalle</th>
-                <th>Estado</th>
-                <th>Precio</th>
-                <th>Categoría</th>
-                <th>Acciones</th>
+                <th className='text-center'>Estado</th>
+                <th style={{minWidth: '120px', textAlign: 'center'}}>Precio</th>
+                <th className='text-center'>Categoría</th>
+                <th style={{minWidth: '150px', textAlign: 'center'}}>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {menus.map((menu) => (
                 <tr key={menu._id}>
-                  <td>{menu._id}</td>
                   <td>{menu.nombre}</td>
                   <td>{menu.detalle}</td>
-                  <td>{menu.estado}</td>
-                  <td>{menu.precio}</td>
-                  <td>{menu.categoria}</td>
-                  <td>
-                    <Button variant="primary" onClick={() => handleEditMenu(menu)}>
+                  <td className='text-center'>{menu.estado === 'activo' ? <span className='badge text-bg-success'>Activo</span> : <span className='badge text-bg-danger'>Inactivo</span>}</td>
+                  <td className='text-center'>$ {menu.precio}</td>
+                  <td className='text-center'>{menu.categorias.nombre}</td>
+                  <td className='text-center'>
+                    <Button className="btn btn-sm" variant="primary" onClick={() => handleEditMenu(menu._id)}>
                       Editar
                     </Button>
                     {' '}
-                    <Button variant="danger" onClick={() => handleDeleteMenu(menu._id)}>
+                    <Button className="btn btn-sm" variant="danger" onClick={() => handleDeleteMenu(menu._id)}>
                       Eliminar
                     </Button>
                   </td>
@@ -126,8 +157,14 @@ function MenuTable() {
       <MenuForm
         show={showModal}
         onHide={handleCloseModal}
-        onSubmit={selectedMenu ? handleUpdateMenu.bind(null, selectedMenu.id) : handleAddMenu}
+        onSubmit={selectedMenu ? handleUpdateMenu.bind(null, selectedMenu._id) : handleAddMenu}
         menu={selectedMenu}
+      />
+      <CategoryForm
+          showCat={showModalCat}
+          onHideCat={handleCloseModalCat}
+          onSubmitCat={selectedCat ? handleUpdateCat.bind(null, selectedCat._id) : handleAddCat}
+          category={selectedCat}
       />
     </Container>
   );

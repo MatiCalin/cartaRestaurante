@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import menuApi from '../api/menuApi';
-
-const CATEGORIAS = [
-  'categoria 1',
-  'categoria 2',
-  'categoria 3',
-  'categoria 4'
-];
 
 function MenuForm({ show, onHide, onSubmit, menu }) {
   const [formValues, setFormValues] = useState({
@@ -17,15 +10,15 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
     detalle: '',
     estado: '',
     precio: '',
-    categoria: '',
+    categorias: '',
     imageUrl: ''
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { nombre, detalle, categoria, estado, imageUrl, precio } = formValues;
+    const { nombre, detalle, estado, precio, categorias, imageUrl } = formValues;
 
-    if (!nombre || !detalle || !categoria || !estado || !imageUrl || !precio) {
+    if (!nombre || !detalle || !estado || !precio || !categorias || !imageUrl ) {
       alert('Por favor completa todos los campos');
       return;
     }
@@ -53,7 +46,7 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
       detalle,
       estado,
       precio,
-      categoria,
+      categorias,
       imageUrl
     };
 
@@ -63,10 +56,10 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
       detalle: '',
       estado: '',
       precio: '',
-      categoria: '',
+      categorias: '',
       imageUrl: ''
     });
-    guardarMenusDB (nombre, detalle, estado, precio, categoria, imageUrl)
+    guardarMenusDB (nombre, detalle, estado, precio, categorias, imageUrl)
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -74,22 +67,35 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
   };
   
 // mandar menus al DB
-  const guardarMenusDB = async (nombre, detalle, estado, precio, categoria, imageUrl) => {
+  const guardarMenusDB = async (nombre, detalle, estado, precio, categorias, imageUrl) => {
     try {
           const resp = await menuApi.post("/admin/new", {
             nombre,
             detalle,
             estado,
             precio,
-            categoria,
-            imageUrl,
+            categorias,
+            imageUrl
           });
-          //console.log(resp)
     } catch (error) {
       console.log("error")
     
     }
   };
+  const [categorias, setCategorias] = useState([]);
+
+  // Cargar Categorías
+  const getCategorias = async () => {
+    await menuApi.get("http://localhost:4003/admin/Categorias")
+        .then((respuesta) => {
+          setCategorias(respuesta.data.categorias);
+        })
+  };
+
+  useEffect(() => {
+    getCategorias();
+  }, [])
+
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -126,8 +132,8 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
               onChange={handleChange}
             >
               <option value="">Seleccione una opción</option>
-              <option value="Activo">Activo</option>
-              <option value="Inactivo">Inactivo</option>
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="precio">
@@ -144,14 +150,14 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
             <Form.Label>Categoría</Form.Label>
               <Form.Control
               as="select"    
-              name="categoria"          
+              name="categorias"
               value={formValues.categoria}
               onChange={handleChange}>
-                <option value="">Seleccione una opción</option>
-                  {CATEGORIAS.map((categoria) => (
-                <option key={categoria} value={categoria}>
-                  {categoria}
-                </option>
+              <option value="">Seleccione una opción</option>
+                {categorias.map((categoria) => (
+                  <option key={categoria._id} value={categoria._id}>
+                {categoria.nombre}
+              </option>
             ))}
           </Form.Control>
         </Form.Group>
@@ -164,8 +170,6 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
               value={formValues.imageUrl} 
               onChange={handleChange} />
           </Form.Group>
-
-
           
           <Button variant="primary" type="submit">
             Guardar

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Menu.css'
 import { Button, Card, Row } from 'react-bootstrap';
-import axios from "axios";
+import menuApi from "../api/menuApi";
 
 const Menu = ({
     allProducts,
@@ -18,7 +18,7 @@ const Menu = ({
 
     // Cargar Productos
     const getProductos = async () => {
-        await axios.get("http://localhost:4003/admin/menus")
+        await menuApi.get("http://localhost:4003/admin/Menus")
             .then((respuesta) => {
                 setProductos(respuesta.data.menus);
                 setAllProd(respuesta.data.menus);
@@ -27,7 +27,7 @@ const Menu = ({
 
     // Cargar Categorías
     const getCategorias = async () => {
-        await axios.get("http://localhost:4003/admin/Categorias")
+        await menuApi.get("http://localhost:4003/admin/Categorias")
             .then((respuesta) => {
                 setCategorias(respuesta.data.categorias);
             })
@@ -107,6 +107,7 @@ const Menu = ({
                             </Card.Body>
                             <Card.Footer>
                                 {
+
                                     menu.categorias.estado === 'activo'
                                         ? <Button variant="light" onClick={() => agregarProducto(menu)} >Añadir al carrito</Button>
                                         : <Button variant="light" disabled>Producto no disponible</Button>
