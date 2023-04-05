@@ -100,7 +100,7 @@ export const NavbarC = ({
                   className={({ isActive }) =>
                     `nav-item nav-link ${isActive ? "active" : ""}`
                   }
-                  to=""
+                  to="/nosotros"
                 >
                   Sobre nosotros
                 </NavLink>

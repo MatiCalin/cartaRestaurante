@@ -4,7 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram , faWhatsapp , faTwitter} from "@fortawesome/free-brands-svg-icons";
+import { faInstagram , faWhatsapp , faTwitter , faPaypal} from "@fortawesome/free-brands-svg-icons";
+import {  faMoneyBill1 , faCreditCard } from '@fortawesome/free-regular-svg-icons';
 import "./css/footer.css";
 
 
@@ -16,13 +17,13 @@ export const Footer = () => {
           <Col>
           <ul className="footerItems">
             <li>
-                <Link to={"https://www.facebook.com/"}>
+                <Link to={"https://www.instagram.com/"}>
                     <FontAwesomeIcon icon={faInstagram} className="faBrands instagramIcon"/>
                 
                 </Link>
             </li>
             <li>
-                <Link to={"https://www.facebook.com/"}>
+                <Link to={"https://www.whatsapp.com/"}>
                 <FontAwesomeIcon icon={faWhatsapp} className="faBrands whatsappIcon"/>
                 </Link>
             </li>
@@ -42,7 +43,14 @@ export const Footer = () => {
             />
           </Col>
           <Col className="thirdCol"> 
-            <div className="mt-1">Medios de pago</div>
+            <div className="mt-1">Medios de pago
+            
+            </div>
+            <div >
+            <FontAwesomeIcon icon={faMoneyBill1} className="faRegular cashIcon" />
+            <FontAwesomeIcon icon={faCreditCard} className="faRegular creditCardIcon" />
+            <FontAwesomeIcon icon={faPaypal} className="faRegular payPalIcon" />
+            </div>
             <div className="mt-1">Suscribite a nuestro newsletter y enterate nuestras promociones</div>
           </Col>
         </Row>
