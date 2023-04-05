@@ -14,12 +14,8 @@ export const NavbarC = ({
   setCountProducts,
   setTotal,
 }) => {
-<<<<<<< HEAD
-  const navigate = useNavigate();
-=======
   console.log(allProducts);
   const [verificarAdmin, setVerificarAdmin] = useState(true);
->>>>>>> acbf130584181451d90491500d6efe0e8f4dbe02
 
   //mostrar navbar segun rol
 
@@ -30,11 +26,8 @@ export const NavbarC = ({
       if (resp.data.rol === "admin") {
         setVerificarAdmin(true);
         return;
-<<<<<<< HEAD
-=======
       } else {
         setVerificarAdmin(false);
->>>>>>> acbf130584181451d90491500d6efe0e8f4dbe02
       }
     } catch (error) {
       console.log(error);
@@ -45,11 +38,8 @@ export const NavbarC = ({
     verificarRol();
   }, []);
 
-<<<<<<< HEAD
-=======
   const navigate = useNavigate();
 
->>>>>>> acbf130584181451d90491500d6efe0e8f4dbe02
   const [active, setActive] = useState(false);
 
   const EliminarProducto = (menu) => {
@@ -88,7 +78,6 @@ export const NavbarC = ({
                   to="/home"
                 >
                   Home
-<<<<<<< HEAD
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
@@ -209,8 +198,8 @@ export const NavbarC = ({
                   <p className="cart-empty">El carrito está vacío</p>
                 )}
               </div>
-=======
                 </NavLink>
+                
                 <NavLink
                   className={({ isActive }) =>
                     `nav-item nav-link ${isActive ? "active" : ""} ms-auto`
@@ -334,7 +323,6 @@ export const NavbarC = ({
                   )}
                 </div>
               ) : null}
->>>>>>> acbf130584181451d90491500d6efe0e8f4dbe02
             </Nav>
           </Navbar.Collapse>
         </Container>
