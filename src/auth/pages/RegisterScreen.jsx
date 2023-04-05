@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "./css/registro.css";
+import axios from "axios";
 import menuApi from "../../api/menuApi";
 import { useNavigate } from "react-router-dom";
 import "./css/registro.css";
@@ -31,6 +33,19 @@ export const RegisterScreen = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0) {
+      axios
+        .post("http://localhost:4003/auth/new", formValues)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }; 
 
     //validaciones
 
@@ -48,17 +63,18 @@ export const RegisterScreen = () => {
     //   }, 4000);
     // } 
 
-    sendRegister(name,email, password);
+    sendRegister(name, email, password);
 
-  }
+  } 
   
 
-  return (
+   return (
+    
     <div className="container registerContainer">
       <form onSubmit={handleSubmit}>
         <h1>Registro de usuario</h1>
-        {/* {error ? <div className="errorStyle"><h3 >{msgError}</h3></div> : ""} */}
-        <div className="ui divider"></div>
+        {/* {{error ? <div className="errorStyle"><h3 >{msgError}</h3></div> : ""} } */}
+         <div className="ui divider"></div>
         <div className="ui form">
           <div className="field">
             <label>Nombre de Usuario</label>
@@ -94,11 +110,13 @@ export const RegisterScreen = () => {
               
             />
           </div>
+          <p>{formErrors.password}</p>
           
           <button className="fluid ui button blue registrobtn">Submit</button>
         </div>
       </form>
     </div>
+    
   );
-}
-
+}; 
+ 
