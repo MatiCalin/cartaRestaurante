@@ -7,18 +7,13 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import menuApi from '../api/menuApi';
 import Swal from 'sweetalert';
-import CategoryForm from "./CategoryForm";
 
 function MenuTable() {
   const [menus, setMenus] = useState([]);
-  const [categories, setCategories] = useState([]);
 
   // Define los estados para el Modal
   const [showModal, setShowModal] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(null);
-
-  const [showModalCat, setShowModalCat] = useState(false);
-  const [selectedCat, setSelectedCat] = useState(null);
 
   const handleAddMenu = (newMenu) => {
     const newId = menus.length + 1;
@@ -26,27 +21,13 @@ function MenuTable() {
     setMenus(updatedMenus);
     setShowModal(false);
   };
-  const handleAddCat = (newCategory) => {
-    const newId = categories.length + 1;
-    const updatedCategories = [...categories, { ...newCategory, id: newId }];
-    setCategories(updatedCategories);
-    setShowModalCat(false);
-  };
 
-  const handleUpdateMenu = (id, updatedMenu) => {
+  const handleUpdateMenu = (_id, updatedMenu) => {
     const updatedMenus = menus.map((menu) =>
-      menu._id === id ? { ...updatedMenu, id } : menu
+        (menu._id === _id) ? { ...updatedMenu, _id } : menu
     );
     setMenus(updatedMenus);
     setShowModal(false);
-  };
-
-  const handleUpdateCat = (id, updatedCategory) => {
-    const updatedCategories = categories.map((cat) =>
-        cat._id === id ? { ...updatedCategory, id } : cat
-    );
-    setCategories(updatedCategories);
-    setShowModalCat(false);
   };
 
   const handleDeleteMenu = async(id) => {
@@ -60,7 +41,6 @@ function MenuTable() {
       }).then(async (willDelete) => {
         if (willDelete) {
           const resp = await menuApi.delete(`/admin/eliminar/${id}`);
-          //console.log(resp)
           const updatedMenus = menus.filter((menu) => menu._id !== id);
           setMenus(updatedMenus);
           await Swal('¡El menú ha sido eliminado!', {
@@ -87,16 +67,6 @@ function MenuTable() {
     setShowModal(false);
   };
 
-  const handleEditCat = (cat) => {
-    setSelectedCat(cat);
-    setShowModalCat(true);
-  };
-
-  const handleCloseModalCat = () => {
-    setSelectedCat(null);
-    setShowModalCat(false);
-  };
-
   const cargarMenus = async () => {
     try {
       const resp = await menuApi.get('/admin/Menus');
@@ -114,9 +84,6 @@ function MenuTable() {
       <h2>Menús</h2>
       <Button className="me-2" variant="primary" onClick={() => setShowModal(true)}>
         Agregar Menú
-      </Button>
-      <Button variant="primary" onClick={() => setShowModalCat(true)}>
-        Agregar Categoría
       </Button>
       <Row>
         <Col>
@@ -157,14 +124,8 @@ function MenuTable() {
       <MenuForm
         show={showModal}
         onHide={handleCloseModal}
-        onSubmit={selectedMenu ? handleUpdateMenu.bind(null, selectedMenu._id) : handleAddMenu}
+        onSubmit={selectedMenu ? handleUpdateMenu.bind(null, selectedMenu) : handleAddMenu}
         menu={selectedMenu}
-      />
-      <CategoryForm
-          showCat={showModalCat}
-          onHideCat={handleCloseModalCat}
-          onSubmitCat={selectedCat ? handleUpdateCat.bind(null, selectedCat._id) : handleAddCat}
-          category={selectedCat}
       />
     </Container>
   );

@@ -71,18 +71,18 @@ const FoodOrderTable = () => {
               <td>
                 <ul>
                   {order.menus.map(pedido => (
-                      <li>{pedido.nombre}</li>
+                      <li key={pedido._id}>{pedido.nombre}</li>
                   ))}
                 </ul>
               </td>
               <td>
                 {order.menus.map(pedido => (
-                    <li>{pedido.quantity}</li>
+                    <li key={pedido._id}>{pedido.quantity}</li>
                 ))}
               </td>
               <td>
                 {order.menus.map(pedido => (
-                    <li>$ {pedido.quantity * pedido.precio}</li>
+                    <li key={pedido._id}>$ {pedido.quantity * pedido.precio}</li>
                 ))}
               </td>
               <td>{order.estado}</td>

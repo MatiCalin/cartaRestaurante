@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import menuApi from '../api/menuApi';
 
-function MenuForm({ show, onHide, onSubmit, menu }) {
+const MenuForm = ({ show, onHide, onSubmit, menu }) => {
   const [formValues, setFormValues] = useState({
     nombre: '',
     detalle: '',
@@ -59,7 +59,13 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
       categorias: '',
       imageUrl: ''
     });
-    guardarMenusDB (nombre, detalle, estado, precio, categorias, imageUrl)
+
+    if(menu === null) {
+      guardarMenusDB(nombre, detalle, estado, precio, categorias, imageUrl)
+    } else {
+      modificarMenusDB(nombre, detalle, estado, precio, categorias, imageUrl, menu)
+    }
+
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -82,7 +88,46 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
     
     }
   };
+  // modificar menus al DB
+  const modificarMenusDB = async (nombre, detalle, estado, precio, categorias, imageUrl, _id) => {
+    try {
+      const resp = await menuApi.put("/admin/editar", {
+        nombre,
+        detalle,
+        estado,
+        precio,
+        categorias,
+        imageUrl,
+        _id
+      });
+    } catch (error) {
+      console.log("error")
+    }
+  };
   const [categorias, setCategorias] = useState([]);
+
+  // Cargar menús por ID
+  const getProducts = async () => {
+    await menuApi.get("http://localhost:4003/admin/menus")
+        .then((respuesta) => {
+         try {
+           const data = respuesta.data.menus;
+           const resp = data.filter((prod) => prod._id === menu);
+
+           setFormValues({
+             nombre: resp[0].nombre,
+             detalle: resp[0].detalle,
+             estado: resp[0].estado,
+             precio: resp[0].precio,
+             categorias: resp[0].categorias,
+             imageUrl: resp[0].imageUrl
+           });
+
+         } catch (error) {
+           console.log(error)
+         }
+        })
+  }
 
   // Cargar Categorías
   const getCategorias = async () => {
@@ -93,9 +138,12 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
   };
 
   useEffect(() => {
+    if(menu) {
+      getProducts();
+    }
     getCategorias();
-  }, [])
-
+  }, [menu])
+  //console.log('formValues', formValues)
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -103,8 +151,8 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="nombre">
-            <Form.Label>Nombre</Form.Label>
+          <Form.Group controlId="nombre" className="mb-3">
+            <Form.Label>• Nombre</Form.Label>
             <Form.Control
               type="text"
               placeholder="Ingresa el nombre"
@@ -113,18 +161,19 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="detalle">
-            <Form.Label>Detalle</Form.Label>
+          <Form.Group controlId="detalle" className="mb-3">
+            <Form.Label>• Detalle</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Ingresa el detalle"
-              name="detalle"
-              value={formValues.detalle}
-              onChange={handleChange}
+                as="textarea"
+                rows="2"
+                placeholder="Ingresa el detalle"
+                name="detalle"
+                value={formValues.detalle}
+                onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="estado">
-            <Form.Label>Estado</Form.Label>
+          <Form.Group controlId="estado" className="mb-3">
+            <Form.Label>• Estado</Form.Label>
             <Form.Control
               as="select"
               name="estado"
@@ -136,8 +185,8 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
               <option value="inactivo">Inactivo</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="precio">
-            <Form.Label>Precio</Form.Label>
+          <Form.Group controlId="precio" className="mb-3">
+            <Form.Label>• Precio</Form.Label>
             <Form.Control
               type="number"
               placeholder="Ingresa el precio"
@@ -146,8 +195,8 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="categoria">
-            <Form.Label>Categoría</Form.Label>
+          <Form.Group controlId="categoria" className="mb-3">
+            <Form.Label>• Categoría</Form.Label>
               <Form.Control
               as="select"    
               name="categorias"
@@ -162,15 +211,19 @@ function MenuForm({ show, onHide, onSubmit, menu }) {
           </Form.Control>
         </Form.Group>
 
-          <Form.Group controlId="formImageUrl">
-            <Form.Label>URL de imagen</Form.Label>
+          <Form.Group controlId="formImageUrl" className="mb-3">
+            <Form.Label>• URL de imagen</Form.Label>
             <Form.Control type="text"
               placeholder="Ingrese la URL de la imagen"
               name="imageUrl"
-              value={formValues.imageUrl} 
+              value={formValues.imageUrl}
               onChange={handleChange} />
           </Form.Group>
-          
+
+          <Form.Group>
+            <img src={formValues.imageUrl} alt={formValues.nombre} className="img-thumbnail" />
+          </Form.Group>
+
           <Button variant="primary" type="submit">
             Guardar
           </Button>
