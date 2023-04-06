@@ -33,18 +33,7 @@ export const RegisterScreen = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-    if (Object.keys(formErrors).length === 0) {
-      axios
-        .post("http://localhost:4003/auth/new", formValues)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    
   }; 
 
     //validaciones
@@ -65,7 +54,7 @@ export const RegisterScreen = () => {
 
     sendRegister(name, email, password);
 
-  } 
+   
   
 
    return (
@@ -110,7 +99,7 @@ export const RegisterScreen = () => {
               
             />
           </div>
-          <p>{formErrors.password}</p>
+          {/* <p>{formErrors.password}</p> */}
           
           <button className="fluid ui button blue registrobtn">Submit</button>
         </div>
@@ -118,5 +107,5 @@ export const RegisterScreen = () => {
     </div>
     
   );
-}; 
+   }; 
  
