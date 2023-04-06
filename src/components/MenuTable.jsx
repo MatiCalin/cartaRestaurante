@@ -78,7 +78,7 @@ function MenuTable() {
 
   useEffect(() => {
     cargarMenus();
-  }, []);
+  }, [menus]);
   return (
     <Container style={{marginBottom: '150px'}}>
       <h2>Menús</h2>
@@ -100,7 +100,7 @@ function MenuTable() {
             </thead>
             <tbody>
               {menus.map((menu) => (
-                <tr key={menu._id}>
+                <tr key={menu._id + 1}>
                   <td>{menu.nombre}</td>
                   <td>{menu.detalle}</td>
                   <td className='text-center'>{menu.estado === 'activo' ? <span className='badge text-bg-success'>Activo</span> : <span className='badge text-bg-danger'>Inactivo</span>}</td>

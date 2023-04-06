@@ -143,7 +143,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
     }
     getCategorias();
   }, [menu])
-  //console.log('formValues', formValues)
+
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -198,16 +198,19 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
           <Form.Group controlId="categoria" className="mb-3">
             <Form.Label>• Categoría</Form.Label>
               <Form.Control
-              as="select"    
+              as="select"
               name="categorias"
-              value={formValues.categoria}
+              value={formValues.categorias._id}
               onChange={handleChange}>
               <option value="">Seleccione una opción</option>
                 {categorias.map((categoria) => (
-                  <option key={categoria._id} value={categoria._id}>
-                {categoria.nombre}
-              </option>
-            ))}
+                    <option
+                        key={categoria._id}
+                        value={categoria._id}
+                    >
+                      {categoria.nombre}
+                    </option>
+                ))}
           </Form.Control>
         </Form.Group>
 
