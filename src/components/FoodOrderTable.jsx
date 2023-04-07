@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Table, Button, Modal } from "react-bootstrap";
 import menuApi from "../api/menuApi";
-import {logDOM} from "@testing-library/react";
 
 const FoodOrderTable = () => {
 
@@ -32,7 +31,7 @@ const FoodOrderTable = () => {
     setSelectedOrder(null);
   };
 
-  const handleConfirmStatusChange = () => {
+  const handleConfirmStatusChange = async () => {
     const updatedOrders = orders.map((order) =>
       order._id === selectedOrder
         ? {
@@ -42,8 +41,22 @@ const FoodOrderTable = () => {
         : order
     );
     setOrders(updatedOrders);
+    editOrder(updatedOrders, selectedOrder)
     handleCloseModal();
   };
+
+  const editOrder = async (order, _id) => {
+    try {
+      const orderFilter = await order.filter((order) => order._id === _id);
+
+      await menuApi.put("/admin/pedidos", {
+        orderFilter,
+        _id
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleDeleteOrder = (id) => {
     const updatedOrders = orders.filter((order) => order._id !== id);
@@ -51,48 +64,78 @@ const FoodOrderTable = () => {
   };
 
   return (
-    <div className="container mt-4 pb-5" style={{marginBottom: '150px'}}>
+    <div className="container mt-4 pb-5 verticalHeight">
       <h2>Pedidos</h2>
-      <Table className="table-color td" bordered hover>
+      <Table className="table-color td" bordered hover responsive>
         <thead>
           <tr>
-            <th>Pedido #</th>
-            <th>Menús</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th className="text-center col-md-1">Pedido</th>
+            <th className="col-md-4">Menús</th>
+            <th className="text-center col-md-1">Fecha</th>
+            <th className="text-center col-md-1">Cantidad</th>
+            <th className="text-center col-md-1">Precio</th>
+            <th className="text-center col-md-1">Usuario</th>
+            <th className="text-center col-md-1">Estado</th>
+            <th className="text-center col-md-2">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order._id}>
-              <td><span className="badge text-bg-dark">{order.codePedido}</span></td>
+            <tr key={order._id} className="text-bg-dark">
+              <td className="text-center">
+                <span className="badge">
+                  {order.codePedido}
+                </span>
+              </td>
               <td>
-                <ul>
+                <ul className="list-unstyled pt-3">
                   {order.menus.map(pedido => (
-                      <li key={pedido._id}>{pedido.nombre}</li>
+                      <li key={pedido._id}>
+                        » {pedido.nombre}
+                      </li>
                   ))}
                 </ul>
               </td>
-              <td>
-                {order.menus.map(pedido => (
-                    <li key={pedido._id}>{pedido.quantity}</li>
-                ))}
+              <td className="text-center">
+                <span className="badge bg-light text-dark p-2">
+                  {new Date(order.fecha).toLocaleDateString('es-AR')}
+                </span>
               </td>
-              <td>
-                {order.menus.map(pedido => (
-                    <li key={pedido._id}>$ {pedido.quantity * pedido.precio}</li>
-                ))}
+              <td className="text-center">
+                <ul className="list-unstyled pt-3">
+                  {order.menus.map(pedido => (
+                      <li key={pedido._id}>
+                        {pedido.quantity}
+                      </li>
+                  ))}
+                </ul>
               </td>
-              <td>{order.estado}</td>
-              <td>
+              <td className="text-center">
+                <ul className="list-unstyled pt-3">
+                  {order.menus.map(pedido => (
+                      <li key={pedido._id}>$ {pedido.quantity * pedido.precio}</li>
+                  ))}
+                </ul>
+              </td>
+              <td className="text-center">
+                <span className="badge bg-light text-dark p-2" title={order.usuario.email}>
+                  {order.usuario.name}
+                </span>
+              </td>
+              <td
+                  className={order.estado === 'pendiente'
+                      ? "bg-danger text-white text-center"
+                      : "bg-success text-white text-center"}
+              >
+                {order.estado === "pendiente" ? "Pendiente" : "Realizado"}
+              </td>
+              <td className="text-center">
                 <Button
                     className="btn btn-sm"
-                    variant={order.estado === "pendiente" ? "success" : "warning"}
+                    variant={order.estado === "pendiente" ? "primary" : "warning"}
                     onClick={() => handleStatusChange(order._id)}
                 >
-                  {order.estado === "pendiente" ? "realizado" : "pendiente"}
+                  {order.estado === "pendiente" ? "Realizado" : "Pendiente"}
                 </Button>
                 {' '}
                 <Button
@@ -116,10 +159,16 @@ const FoodOrderTable = () => {
           ¿Está seguro de que desea cambiar el estado del pedido seleccionado?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button
+              variant="secondary"
+              onClick={handleCloseModal}
+          >
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleConfirmStatusChange}>
+          <Button
+              variant="primary"
+              onClick={handleConfirmStatusChange}
+          >
             Confirmar
           </Button>
         </Modal.Footer>

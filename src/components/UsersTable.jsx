@@ -44,26 +44,31 @@ function UsersTable() {
 
 
   return (
-    <div className="container mt-4 pb-5" style={{marginBottom: '150px'}}>
+    <div className="container mt-4 pb-5 verticalHeight">
       <h2>Usuarios</h2>
       <Table className="table-color td" bordered hover >
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
+            <th className="text-center">Nombre</th>
             <th>Email</th>
-            <th>Estado</th>
+            <th className="text-center">Estado</th>
           </tr>
         </thead>
           
         <tbody>
           {users.map((user) => (
-            <tr key={user._id}>
-              <td>{user._id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
+            <tr key={user._id} className="text-bg-dark">
               <td>
+                <span className="badge">
+                  {user._id}
+                </span>
+              </td>
+              <td className="text-center">{user.name}</td>
+              <td>{user.email}</td>
+              <td className="text-center">
                 <Button
+                    className="btn btn-sm"
                   variant={user.active ? "success" : "danger"}
                   onClick={() => handleToggleActive(user)}
                 >

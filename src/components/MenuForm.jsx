@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import menuApi from '../api/menuApi';
 
 const MenuForm = ({ show, onHide, onSubmit, menu }) => {
+
   const [formValues, setFormValues] = useState({
     nombre: '',
     detalle: '',
@@ -28,8 +29,8 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
       return;
     }
 
-    if (detalle.length > 30) {
-      alert('El detalle no debe tener más de 30 caracteres');
+    if (detalle.length > 93) {
+      alert('El detalle no debe tener más de 93 caracteres');
       return;
     }
 
@@ -83,6 +84,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
             categorias,
             imageUrl
           });
+
     } catch (error) {
       console.log("error")
     
@@ -100,6 +102,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
         imageUrl,
         _id
       });
+
     } catch (error) {
       console.log("error")
     }
@@ -111,17 +114,17 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
     await menuApi.get("http://localhost:4003/admin/menus")
         .then((respuesta) => {
          try {
-           const data = respuesta.data.menus;
-           const resp = data.filter((prod) => prod._id === menu);
+            const data = respuesta.data.menus;
+            const resp = data.filter((prod) => prod._id === menu);
 
-           setFormValues({
-             nombre: resp[0].nombre,
-             detalle: resp[0].detalle,
-             estado: resp[0].estado,
-             precio: resp[0].precio,
-             categorias: resp[0].categorias,
-             imageUrl: resp[0].imageUrl
-           });
+            setFormValues({
+              nombre: (menu !== null ? resp[0].nombre : ''),
+              detalle: (menu !== null ? resp[0].detalle : ''),
+              estado: (menu !== null ? resp[0].estado : ''),
+              precio: (menu !== null ? resp[0].precio : ''),
+              categorias: (menu !== null ? resp[0].categorias : ''),
+              imageUrl: (menu !== null ? resp[0].imageUrl : '')
+            });
 
          } catch (error) {
            console.log(error)
@@ -138,9 +141,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
   };
 
   useEffect(() => {
-    if(menu) {
-      getProducts();
-    }
+    getProducts()
     getCategorias();
   }, [menu])
 
@@ -157,6 +158,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
               type="text"
               placeholder="Ingresa el nombre"
               name="nombre"
+              maxLength="16"
               value={formValues.nombre}
               onChange={handleChange}
             />
@@ -168,9 +170,11 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
                 rows="2"
                 placeholder="Ingresa el detalle"
                 name="detalle"
+                maxLength="93"
                 value={formValues.detalle}
                 onChange={handleChange}
             />
+
           </Form.Group>
           <Form.Group controlId="estado" className="mb-3">
             <Form.Label>• Estado</Form.Label>
@@ -226,10 +230,12 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
           <Form.Group>
             <img src={formValues.imageUrl} alt={formValues.nombre} className="img-thumbnail" />
           </Form.Group>
+          <div className="d-grid gap-2">
+            <Button variant="primary size='sm'" type="submit">
+              Guardar
+            </Button>
+          </div>
 
-          <Button variant="primary" type="submit">
-            Guardar
-          </Button>
         </Form>
       </Modal.Body>
     </Modal>

@@ -1,7 +1,7 @@
 .footerSection {  
    background-color: rgba(32, 28, 28, 1);
     color: #908686;
-   position: absolute;
+   /*position: absolute;*/
    bottom: 0;
    width: 100%;
 }

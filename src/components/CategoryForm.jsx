@@ -49,6 +49,7 @@ const CategoryForm = ({ show, onHide, onSubmit, category }) => {
                 nombre,
                 estado
             });
+
         } catch (error) {
             console.log(error);
         }
@@ -61,6 +62,7 @@ const CategoryForm = ({ show, onHide, onSubmit, category }) => {
                 estado,
                 _id
             });
+
         } catch (error) {
             console.log(error)
         }
@@ -75,8 +77,8 @@ const CategoryForm = ({ show, onHide, onSubmit, category }) => {
                     const resp = data.filter((cat) => cat._id === category);
 
                     setFormValues({
-                        nombre: resp[0].nombre,
-                        estado: resp[0].estado
+                        nombre: (category !== null ? resp[0].nombre : ''),
+                        estado: (category !== null ? resp[0].estado : '')
                     });
 
                 } catch(error) {
@@ -86,9 +88,7 @@ const CategoryForm = ({ show, onHide, onSubmit, category }) => {
     }
 
     useEffect(() => {
-        if(category) {
-            getCategories();
-        }
+        getCategories();
     }, [category])
 
     return (
@@ -122,9 +122,11 @@ const CategoryForm = ({ show, onHide, onSubmit, category }) => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
-                        Guardar
-                    </Button>
+                    <div className="d-grid gap-2">
+                        <Button variant="primary size='sm'" type="submit">
+                            Guardar
+                        </Button>
+                    </div>
                 </Form>
             </Modal.Body>
         </Modal>

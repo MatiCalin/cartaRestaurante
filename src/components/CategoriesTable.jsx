@@ -22,6 +22,11 @@ const CategoriesTable = () => {
         setShowModal(false);
     };
 
+    const handleAddCategoryShow = () => {
+        setSelectedCategory(null);
+        setShowModal(true);
+    }
+
     const handleUpdateCategory = (_id, updatedCategory) => {
         const updatedCategories = categories.map((cat) =>
             (cat._id === _id) ? { ...updatedCategory, _id }: cat
@@ -48,7 +53,7 @@ const CategoriesTable = () => {
                     const respuesta = await menuApi.delete(`/admin/categoria/${id}`);
                     const updatedCategories = categories.filter((cat) => cat._id !== id);
                     setCategories(updatedCategories);
-                    console.log('respuesta', respuesta)
+
                     if(!respuesta.data.ok) {
                         await Swal( {
                             title: respuesta.data.msg,
@@ -57,7 +62,7 @@ const CategoriesTable = () => {
                         return;
                     }
                     await Swal( {
-                        title: '¡La categoría ha sido eliminada!',
+                        title: respuesta.data.msg,
                         icon: 'success',
                     });
                 } else {
@@ -67,6 +72,7 @@ const CategoriesTable = () => {
                     });
                 }
             });
+            setCategories(categories);
         } catch (error) {
             console.log(error);
         }
@@ -92,9 +98,9 @@ const CategoriesTable = () => {
     }, [categories]);
 
     return (
-        <Container style={{marginBottom: '150px'}}>
+        <Container className="verticalHeight">
             <h2>Categorías</h2>
-            <Button className="me-2" variant="primary" onClick={() => setShowModal(true)}>
+            <Button className="me-2" variant="primary" onClick={() => handleAddCategoryShow()}>
                 Agregar Categoría
             </Button>
             <Row>
@@ -102,15 +108,15 @@ const CategoriesTable = () => {
                     <Table bordered hover className="table-color">
                         <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th style={{width: '200px', textAlign: 'center'}}>Estado</th>
-                            <th style={{width: '200px', textAlign: 'center'}}>Acciones</th>
+                            <th className='col-md-9'>Nombre</th>
+                            <th className='text-center col-md-1'>Estado</th>
+                            <th className='text-center col-md-2'>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
                         {
                             categories.map((cat) => (
-                                <tr key={cat._id + 1}>
+                                <tr key={cat._id + 1} className="text-bg-dark">
                                     <td>{cat.nombre}</td>
                                     <td className='text-center'>
                                         {cat.estado === 'activo'

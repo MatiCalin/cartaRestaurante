@@ -57,6 +57,11 @@ function MenuTable() {
     }
   };
 
+  const handleAddMenuShow = () => {
+    setSelectedMenu(null);
+    setShowModal(true);
+  }
+
   const handleEditMenu = (menu) => {
     setSelectedMenu(menu);
     setShowModal(true);
@@ -80,32 +85,36 @@ function MenuTable() {
     cargarMenus();
   }, [menus]);
   return (
-    <Container style={{marginBottom: '150px'}}>
+    <Container className="verticalHeight">
       <h2>Menús</h2>
-      <Button className="me-2" variant="primary" onClick={() => setShowModal(true)}>
+      <Button className="me-2" variant="primary" onClick={() => handleAddMenuShow()}>
         Agregar Menú
       </Button>
       <Row>
         <Col>
-          <Table bordered hover className="table-color">
+          <Table bordered hover className="table-color" responsive>
             <thead>
               <tr>
-                <th>Nombre</th>
-                <th>Detalle</th>
-                <th className='text-center'>Estado</th>
-                <th style={{minWidth: '120px', textAlign: 'center'}}>Precio</th>
-                <th className='text-center'>Categoría</th>
-                <th style={{minWidth: '150px', textAlign: 'center'}}>Acciones</th>
+                <th className='col-md-2'>Nombre</th>
+                <th className='col-md-5'>Detalle</th>
+                <th className='text-center col-md-1'>Estado</th>
+                <th className='text-center col-md-1'>Precio</th>
+                <th className='text-center col-md-1'>Categoría</th>
+                <th className='text-center col-md-2'>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {menus.map((menu) => (
-                <tr key={menu._id + 1}>
+                <tr key={menu._id + 1} className="text-bg-dark">
                   <td>{menu.nombre}</td>
                   <td>{menu.detalle}</td>
                   <td className='text-center'>{menu.estado === 'activo' ? <span className='badge text-bg-success'>Activo</span> : <span className='badge text-bg-danger'>Inactivo</span>}</td>
                   <td className='text-center'>$ {menu.precio}</td>
-                  <td className='text-center'>{menu.categorias.nombre}</td>
+                  <td className='text-center'>
+                    <span className='badge bg-light text-black p-2'>
+                      {menu.categorias.nombre}
+                    </span>
+                  </td>
                   <td className='text-center'>
                     <Button className="btn btn-sm" variant="primary" onClick={() => handleEditMenu(menu._id)}>
                       Editar

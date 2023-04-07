@@ -25,6 +25,7 @@ const Pedido = ({
     }
 
     useEffect(() => (
+        window.scrollTo(0, 0),
         setPedido()
     ), []);
 
@@ -89,7 +90,7 @@ const Pedido = ({
             });
     };
     return (
-        <div className='container mb-5'>
+        <div className='container mb-5 verticalHeight'>
             <Row xs={1} md={3} className="w-75" style={{ marginTop: '8rem' }}>
                 <div className="w-100">
                     {
