@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Table, Button, Modal } from "react-bootstrap";
 import menuApi from "../api/menuApi";
+import Swal from "sweetalert";
 
 const FoodOrderTable = () => {
 
@@ -19,7 +20,7 @@ const FoodOrderTable = () => {
 
   useEffect(() => {
     cargarPedidos();
-  }, []);
+  }, [orders]);
 
   const handleStatusChange = (id) => {
     setSelectedOrder(id);
@@ -58,10 +59,43 @@ const FoodOrderTable = () => {
     }
   }
 
-  const handleDeleteOrder = (id) => {
-    const updatedOrders = orders.filter((order) => order._id !== id);
-    setOrders(updatedOrders);
-  };
+  const handleDeleteOrder = async (id) => {
+    try {
+      await Swal({
+        title: '¿Está seguro?',
+        text: 'Una vez eliminado, ¡no podrá recuperar esta categoría!',
+        icon: 'warning',
+        buttons: ['Cancelar', 'Eliminar'],
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const respuesta = await menuApi.delete(`/admin/pedido/${id}`);
+          const updatedOrders = orders.filter((order) => order._id !== id);
+          setOrders(updatedOrders);
+
+          if(!respuesta.data.ok) {
+            await Swal( {
+              title: respuesta.data.msg,
+              icon: 'error',
+            });
+            return;
+          }
+          await Swal( {
+            title: respuesta.data.msg,
+            icon: 'success',
+          });
+        } else {
+          await Swal( {
+            title: '¡La eliminación ha sido cancelada!',
+            icon: 'error',
+          });
+        }
+      });
+      setOrders(orders);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="container mt-4 pb-5 verticalHeight">
