@@ -114,6 +114,12 @@ const FoodOrderTable = () => {
           </tr>
         </thead>
         <tbody>
+
+        { orders.length === 0 &&
+          <tr>
+            <td colSpan="8" className="text-center text-bg-dark">Sin pedidos</td>
+          </tr>
+        }
           {orders.map((order) => (
             <tr key={order._id} className="text-bg-dark">
               <td className="text-center">
