@@ -1,13 +1,12 @@
-import React from "react";
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useState } from "react"; 
+import { Route, Routes } from "react-router-dom"; 
 import { AdminScreen } from "../../admin/pages/AdminScreen";
 import { ErrorScreen } from "../../error 404/pages/ErrorScreen";
 import { Footer } from "../../ui/components/Footer";
 import { NavbarC } from "../../ui/components/NavBar";
+import { MenuScreen } from "../pages/MenuScreen";  
 import { HomeScreen } from "../pages/HomeScreen";
-import { MenuScreen } from "../pages/MenuScreen";
-import { ErrorScreen } from "../../error 404/pages/ErrorScreen"
+import { AboutUsScreen } from "../pages/AboutUsScreen";
 
 export const UserRoutes = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -50,10 +49,23 @@ export const UserRoutes = () => {
             />
           }
         />
-        <Route
+         <Route
           path="/administration"
           element={
             <AdminScreen
+              allProducts={allProducts}
+              setAllProducts={setAllProducts}
+              total={total}
+              setTotal={setTotal}
+              countProducts={countProducts}
+              setCountProducts={setCountProducts}
+            />
+          }
+        />
+        <Route
+          path="/nosotros"
+          element={
+            <AboutUsScreen
               allProducts={allProducts}
               setAllProducts={setAllProducts}
               total={total}
@@ -69,4 +81,5 @@ export const UserRoutes = () => {
       <Footer />
     </div>
   );
-};
+};  
+ 
