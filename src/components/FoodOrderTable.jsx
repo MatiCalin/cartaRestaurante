@@ -98,7 +98,7 @@ const FoodOrderTable = () => {
   }
 
   return (
-    <div className="container mt-4 pb-5 verticalHeight">
+    <div className="container mt-4 pb-5 ">
       <h2>Pedidos</h2>
       <Table className="table-color td" bordered hover responsive>
         <thead>

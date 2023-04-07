@@ -85,7 +85,7 @@ function MenuTable() {
     cargarMenus();
   }, [menus]);
   return (
-    <Container className="verticalHeight">
+    <Container>
       <h2>Menús</h2>
       <Button className="me-2" variant="primary" onClick={() => handleAddMenuShow()}>
         Agregar Menú
