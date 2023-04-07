@@ -5,6 +5,8 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./css/login.css";
 import Alert from "react-bootstrap/Alert";
 import menuApi from "../../api/menuApi";
+import Modal from "react-bootstrap/Modal";
+
 
 export const LoginScreen = () => {
 
@@ -12,6 +14,9 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [msgError, setMsgError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  
 
   const startLogin = async(email, password) =>{
     try {
@@ -25,9 +30,15 @@ export const LoginScreen = () => {
       localStorage.setItem("usr", btoa(resp.data.name));
 
       if(resp.data.rol === "usuario") {
-        navigate("/home")
+        setTimeout(() => {
+          navigate("/home")
+        }, 3000)
+        
+       
       } else {
-        navigate("/administration")
+        setTimeout(() => {
+          navigate("/administration")
+        }, 3000)
       };
 
       
@@ -38,11 +49,14 @@ export const LoginScreen = () => {
         setError(false);
       }, 4000)
       
-    }
+    } 
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Mostrar el modal
+  setShowModal(true);
 
     //inicioValidaciones
     if (email.trim() === "") {
@@ -85,6 +99,16 @@ export const LoginScreen = () => {
             alt=""
             className="w-25 h-25"
           />
+          <Modal show={showModal} onHide={() => setShowModal(false)} centered className="loadingModal">
+  <Modal.Body className="loadingModalBody">
+  <div className="loading-container">
+  <div className="spinner"></div>
+  <div className="spinner-center"></div>
+  <div className="loading-text text-light">Cargando...</div>
+</div>
+  </Modal.Body>
+</Modal>
+
           <Form onSubmit={handleSubmit} className="px-3 my-1 ">
             <Form.Group className="mb-2" controlId="formBasicEmail">
               <Form.Label>Correo electrónico</Form.Label>
@@ -130,6 +154,7 @@ export const LoginScreen = () => {
             <Button variant="primary" type="submit">
               Ingresar
             </Button>
+            
             <Link to="/register" className="px-3 text-decoration-none">
               ¿No tenes cuenta aún?
             </Link>

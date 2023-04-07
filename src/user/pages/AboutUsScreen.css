@@ -1,0 +1,59 @@
+.aboutBody {
+    min-height: 100vh;
+    background-color: #F8F8F8;
+	font-family: Arial, sans-serif;
+}
+
+.aboutUs {
+    font-size: 2rem;
+    color: #333333;
+    text-align: center;
+    position: relative;
+    top: 6rem;
+    margin-top: 1rem;
+    
+}
+
+.aboutUsSubtitle {
+    font-size: 2rem;
+    color: #333333;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.aboutUsBody {
+    font-size: 24px;
+    color: #666666;
+    text-align: center;
+    
+}
+
+.aboutUsUl {
+    font-size: 24px;
+    color: #666666;
+    text-align: center;
+    margin-top: 50px;
+    list-style: none;
+    padding: 0;
+}
+
+.aboutUsLi {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.aboutUsLi>img {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin-top: 50px;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 365px) {
+    .aboutUs>img {
+        width: 20rem;
+    }
+}
