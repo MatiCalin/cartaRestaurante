@@ -1,6 +1,6 @@
-.footerSection {  
+.footerSection {
    background-color: rgba(41, 39, 39, 0.738);
-   position: relative;
+   color: #908686;
    bottom: 0;
    width: 100%;
 }
@@ -47,7 +47,7 @@
 
 .thirdCol {
     display: flex;
-    padding-top: 1rem;
+    padding-top: 1.5rem;
     flex-direction: column;
     text-align: left;
     font-size: 1rem;
