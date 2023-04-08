@@ -23,7 +23,7 @@ export const RegisterScreen = () => {
       });
 
       setTimeout(() => {
-        navigate("/home");
+        navigate("/");
       }, 3000);
     } catch ({ response }) {}
   };
@@ -68,11 +68,11 @@ export const RegisterScreen = () => {
   //   setTimeout(() => {
   //     setError(false);
   //   }, 4000);}
+  sendRegister(name, email, password);
   };
 
   
 
-  sendRegister(name, email, password);
 
   return (
     <div className="register">
