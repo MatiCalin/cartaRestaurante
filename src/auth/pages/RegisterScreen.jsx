@@ -5,6 +5,7 @@ import axios from "axios";
 import menuApi from "../../api/menuApi";
 import { useNavigate } from "react-router-dom";
 import "./css/registro.css";
+import Swal from 'sweetalert';
 
 export const RegisterScreen = () => {
   const [name, setName] = useState("");
@@ -22,7 +23,16 @@ export const RegisterScreen = () => {
         password,
       });
 
+      Swal({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Te has registrado correctamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+
       setTimeout(() => {
+       
         navigate("/");
       }, 3000);
     } catch ({ response }) {}
