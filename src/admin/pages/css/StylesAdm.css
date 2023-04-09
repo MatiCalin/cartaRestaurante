@@ -12,17 +12,20 @@
     height: 100px;
 }
 .gradient-button {
-    background: linear-gradient(to right, #5b0101, #840f0f, #b41212, #c41111, #c10c0c, #e71010);
-    border: none;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
+  background: linear-gradient(to right, #a01818, #b71515, #ef1212 );
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: all 2s ease-in-out;
+  cursor: pointer;
+    
   }
   
   .gradient-button:hover {
     background: linear-gradient(to right, #e71010, #c10c0c, #c41111, #b41212, #840f0f, #5b0101);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
   }
   .contenedor-titulo-imagen {
     display: flex;
@@ -57,7 +60,7 @@
   
  
   .table-hover tbody tr:hover td {
-    color: red;
+    color: #d82727;
   }
   
   

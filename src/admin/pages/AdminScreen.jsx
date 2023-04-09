@@ -8,6 +8,7 @@ import { NavbarC } from '../../ui/components/NavBar';
 import { useEffect } from 'react';
 import menuApi from '../../api/menuApi';
 import { useNavigate } from 'react-router-dom';
+import CategoriesTable from "../../components/CategoriesTable";
 
 
 export const AdminScreen = () => {
@@ -54,13 +55,15 @@ export const AdminScreen = () => {
         ></img>
         </div>
 <div className="button-container">
-  <Button variant="primary" className="gradient-button" onClick={() => handleButtonClick('admin')}>Menus</Button>
-  <Button variant="primary" className="gradient-button" onClick={() => handleButtonClick('users')}>Usuarios</Button>
-  <Button variant="primary" className="gradient-button" onClick={() => handleButtonClick('food')}>Pedidos</Button>
+  <Button variant="danger" className="gradient-button" onClick={() => handleButtonClick('admin')}>Menús</Button>
+  <Button variant="danger" className="gradient-button" onClick={() => handleButtonClick('categories')}>Categorías</Button>
+  <Button variant="danger" className="gradient-button" onClick={() => handleButtonClick('users')}>Usuarios</Button>
+  <Button variant="danger" className="gradient-button" onClick={() => handleButtonClick('food')}>Pedidos</Button>
 </div>
 
 
       {activeComponent === 'admin' && <AdminMenu />}
+      {activeComponent === 'categories' && <CategoriesTable />}
       {activeComponent === 'users' && <UsersTable />}
       {activeComponent === 'food' && <FoodOrderTable />}
     </div>
