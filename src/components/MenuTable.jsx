@@ -10,9 +10,10 @@ import Swal from 'sweetalert';
 
 function MenuTable() {
   const [menus, setMenus] = useState([]);
+
+  // Define los estados para el Modal
   const [showModal, setShowModal] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(null);
-  
 
   const handleAddMenu = (newMenu) => {
     const newId = menus.length + 1;
@@ -21,9 +22,9 @@ function MenuTable() {
     setShowModal(false);
   };
 
-  const handleUpdateMenu = (id, updatedMenu) => {
+  const handleUpdateMenu = (_id, updatedMenu) => {
     const updatedMenus = menus.map((menu) =>
-      menu.id === id ? { ...updatedMenu, id } : menu
+        (menu._id === _id) ? { ...updatedMenu, _id } : menu
     );
     setMenus(updatedMenus);
     setShowModal(false);
@@ -40,7 +41,6 @@ function MenuTable() {
       }).then(async (willDelete) => {
         if (willDelete) {
           const resp = await menuApi.delete(`/admin/eliminar/${id}`);
-          console.log(resp)
           const updatedMenus = menus.filter((menu) => menu._id !== id);
           setMenus(updatedMenus);
           await Swal('¡El menú ha sido eliminado!', {
@@ -56,6 +56,11 @@ function MenuTable() {
       console.log(error);
     }
   };
+
+  const handleAddMenuShow = () => {
+    setSelectedMenu(null);
+    setShowModal(true);
+  }
 
   const handleEditMenu = (menu) => {
     setSelectedMenu(menu);
@@ -78,42 +83,44 @@ function MenuTable() {
 
   useEffect(() => {
     cargarMenus();
-  }, []);
+  }, [menus]);
   return (
     <Container>
       <h2>Menús</h2>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
+      <Button className="me-2" variant="primary" onClick={() => handleAddMenuShow()}>
         Agregar Menú
       </Button>
       <Row>
         <Col>
-          <Table bordered hover className="table-color">
+          <Table bordered hover className="table-color" responsive>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Detalle</th>
-                <th>Estado</th>
-                <th>Precio</th>
-                <th>Categoría</th>
-                <th>Acciones</th>
+                <th className='col-md-2'>Nombre</th>
+                <th className='col-md-5'>Detalle</th>
+                <th className='text-center col-md-1'>Estado</th>
+                <th className='text-center col-md-1'>Precio</th>
+                <th className='text-center col-md-1'>Categoría</th>
+                <th className='text-center col-md-2'>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {menus.map((menu) => (
-                <tr key={menu._id}>
-                  <td>{menu._id}</td>
+                <tr key={menu._id + 1} className="text-bg-dark">
                   <td>{menu.nombre}</td>
                   <td>{menu.detalle}</td>
-                  <td>{menu.estado}</td>
-                  <td>{menu.precio}</td>
-                  <td>{menu.categoria}</td>
-                  <td>
-                    <Button variant="primary" onClick={() => handleEditMenu(menu)}>
+                  <td className='text-center'>{menu.estado === 'activo' ? <span className='badge text-bg-success'>Activo</span> : <span className='badge text-bg-danger'>Inactivo</span>}</td>
+                  <td className='text-center'>$ {menu.precio}</td>
+                  <td className='text-center'>
+                    <span className='badge bg-light text-black p-2'>
+                      {menu.categorias.nombre}
+                    </span>
+                  </td>
+                  <td className='text-center'>
+                    <Button className="btn btn-sm" variant="primary" onClick={() => handleEditMenu(menu._id)}>
                       Editar
                     </Button>
                     {' '}
-                    <Button variant="danger" onClick={() => handleDeleteMenu(menu._id)}>
+                    <Button className="btn btn-sm" variant="danger" onClick={() => handleDeleteMenu(menu._id)}>
                       Eliminar
                     </Button>
                   </td>
@@ -126,7 +133,7 @@ function MenuTable() {
       <MenuForm
         show={showModal}
         onHide={handleCloseModal}
-        onSubmit={selectedMenu ? handleUpdateMenu.bind(null, selectedMenu.id) : handleAddMenu}
+        onSubmit={selectedMenu ? handleUpdateMenu.bind(null, selectedMenu) : handleAddMenu}
         menu={selectedMenu}
       />
     </Container>

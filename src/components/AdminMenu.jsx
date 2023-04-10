@@ -4,11 +4,11 @@ import MenuForm from './MenuForm'
 
 function AdminMenu () {
     const [menus, setMenus] = useState([]);
-    
+
     // Define los estados para el Modal
     const [showModal, setShowModal] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState(null);
-    
+
     // Función para agregar un nuevo menú
     const handleAddMenu = (newMenu) => {
         setMenus(prevMenus => [...prevMenus, newMenu]);
@@ -26,10 +26,8 @@ function AdminMenu () {
     
     // Función para eliminar un menú
     const handleDeleteMenu = () => {
-      
-
     };
-    
+
     // Función para editar un menú
     const handleEditMenu = (menu) => {
         setSelectedMenu(menu);
@@ -41,9 +39,7 @@ function AdminMenu () {
         setSelectedMenu(null);
         setShowModal(false);
     };
-    
-    
-    
+
     return (
         <div className="contenedor">
             <div className="table-responsive">
@@ -54,7 +50,7 @@ function AdminMenu () {
                     onSubmit={selectedMenu ? handleUpdateMenu : handleAddMenu}
                     menu={selectedMenu}
                 />
-                
+
                 {/* Muestra la tabla de los menús */}
                 <MenuTable
                     menus={menus}

@@ -5,6 +5,7 @@ import axios from "axios";
 import menuApi from "../../api/menuApi";
 import { useNavigate } from "react-router-dom";
 import "./css/registro.css";
+import Swal from 'sweetalert';
 
 export const RegisterScreen = () => {
   const [name, setName] = useState("");
@@ -22,39 +23,73 @@ export const RegisterScreen = () => {
         password,
       });
 
+      Swal({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Te has registrado correctamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+
       setTimeout(() => {
-        navigate("/home");
+       
+        navigate("/");
       }, 3000);
     } catch ({ response }) {}
   };
+
+  // const checkEmailExists = async (email) => {
+  //   try {
+  //     const response = await menuApi.get(`/auth/check-email/${email}`);
+  //     return response.data.exists;
+  //   } catch (error) {
+      
+    
+  //   }
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
+    // const emailExists =  checkEmailExists(email);
+    //validaciones
 
-  //validaciones
-
+  // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   // if (!name || !email || !password) {
   //   setError(true);
   //   setMsgError("Todos los campos son obligatorios")
   //   setTimeout(() => {
   //     setError(false);
   //   }, 4000);
-  // } else if (email.match(/([a-z]\w+@[a-z]+\.[a-z]{2,5})/)) {
+  // } else if (!emailRegex.test(email)) {
   //   setError(true);
   //   setMsgError("El email ingresado no es valido")
   //   setTimeout(() => {
   //     setError(false);
   //   }, 4000);
-  // }
-
+  // } else if (password.length < 5){
+  //   setError(true);
+  //   setMsgError("La contraseña debe ser mayor a 5 caracteres")
+  //   setTimeout(() => {
+  //     setError(false);
+  //   }, 4000);
+  // } else if (emailExists) {
+  //   setError(true);
+  //   setMsgError("El correo electrónico ya está registrado");
+  //   setTimeout(() => {
+  //     setError(false);
+  //   }, 4000);}
   sendRegister(name, email, password);
+  };
+
+  
+
 
   return (
     <div className="register">
       <div className="container registerContainer">
         <form onSubmit={handleSubmit} className="registerFormback">
           <h1 className="registerTitle">Registro de usuario</h1>
-          {/* {{error ? <div className="errorStyle"><h3 >{msgError}</h3></div> : ""} } */}
+           {/* {error ? <div className="errorStyle"><h3 >{msgError}</h3></div> : ""}   */}
 
           <div className="ui form registerForm">
             <div className="field py-2 formField">
@@ -89,7 +124,7 @@ export const RegisterScreen = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            {/* <p>{formErrors.password}</p> */}
+            
 
             <button className="my-2 fluid ui button blue registrobtn">
               Enviar
