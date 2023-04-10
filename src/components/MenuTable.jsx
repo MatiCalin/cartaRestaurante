@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import MenuForm from './MenuForm';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import menuApi from '../api/menuApi';
-import Swal from 'sweetalert';
+import React, { useState, useEffect } from "react";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import MenuForm from "./MenuForm";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import menuApi from "../api/menuApi";
+import Swal from "sweetalert";
 
 function MenuTable() {
   const [menus, setMenus] = useState([]);
@@ -24,31 +24,31 @@ function MenuTable() {
 
   const handleUpdateMenu = (_id, updatedMenu) => {
     const updatedMenus = menus.map((menu) =>
-        (menu._id === _id) ? { ...updatedMenu, _id } : menu
+      menu._id === _id ? { ...updatedMenu, _id } : menu
     );
     setMenus(updatedMenus);
     setShowModal(false);
   };
 
-  const handleDeleteMenu = async(id) => {
+  const handleDeleteMenu = async (id) => {
     try {
       await Swal({
-        title: '¿Está seguro?',
-        text: 'Una vez eliminado, ¡no podrá recuperar este menú!',
-        icon: 'warning',
-        buttons: ['Cancelar', 'Eliminar'],
+        title: "¿Está seguro?",
+        text: "Una vez eliminado, ¡no podrá recuperar este menú!",
+        icon: "warning",
+        buttons: ["Cancelar", "Eliminar"],
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
           const resp = await menuApi.delete(`/admin/eliminar/${id}`);
           const updatedMenus = menus.filter((menu) => menu._id !== id);
           setMenus(updatedMenus);
-          await Swal('¡El menú ha sido eliminado!', {
-            icon: 'success',
+          await Swal("¡El menú ha sido eliminado!", {
+            icon: "success",
           });
         } else {
-          await Swal('¡La eliminación ha sido cancelada!', {
-            icon: 'error',
+          await Swal("¡La eliminación ha sido cancelada!", {
+            icon: "error",
           });
         }
       });
@@ -60,7 +60,7 @@ function MenuTable() {
   const handleAddMenuShow = () => {
     setSelectedMenu(null);
     setShowModal(true);
-  }
+  };
 
   const handleEditMenu = (menu) => {
     setSelectedMenu(menu);
@@ -74,8 +74,8 @@ function MenuTable() {
 
   const cargarMenus = async () => {
     try {
-      const resp = await menuApi.get('/admin/Menus');
-      setMenus(resp.data.menus)
+      const resp = await menuApi.get("/admin/Menus");
+      setMenus(resp.data.menus);
     } catch (error) {
       console.log(error);
     }
@@ -86,8 +86,12 @@ function MenuTable() {
   }, [menus]);
   return (
     <Container>
-      <h2 className='p-2 my-2'>Menús</h2>
-      <Button className="me-2" variant="primary" onClick={() => handleAddMenuShow()}>
+      <h2 className="p-2 my-2">Menús</h2>
+      <Button
+        className="me-2"
+        variant="primary"
+        onClick={() => handleAddMenuShow()}
+      >
         Agregar Menú
       </Button>
       <Row>
@@ -95,12 +99,12 @@ function MenuTable() {
           <Table bordered hover className="table-color" responsive>
             <thead>
               <tr>
-                <th className='col-md-2'>Nombre</th>
-                <th className='col-md-5'>Detalle</th>
-                <th className='text-center col-md-1'>Estado</th>
-                <th className='text-center col-md-1'>Precio</th>
-                <th className='text-center col-md-1'>Categoría</th>
-                <th className='text-center col-md-2'>Acciones</th>
+                <th className="col-md-2">Nombre</th>
+                <th className="col-md-5">Detalle</th>
+                <th className="text-center col-md-1">Estado</th>
+                <th className="text-center col-md-1">Precio</th>
+                <th className="text-center col-md-1">Categoría</th>
+                <th className="text-center col-md-2">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -108,19 +112,32 @@ function MenuTable() {
                 <tr key={menu._id + 1} className="text-bg-dark">
                   <td>{menu.nombre}</td>
                   <td>{menu.detalle}</td>
-                  <td className='text-center'>{menu.estado === 'activo' ? <span className='badge text-bg-success'>Activo</span> : <span className='badge text-bg-danger'>Inactivo</span>}</td>
-                  <td className='text-center'>$ {menu.precio}</td>
-                  <td className='text-center'>
-                    <span className='badge bg-light text-black p-2'>
+                  <td className="text-center">
+                    {menu.estado === "activo" ? (
+                      <span className="badge text-bg-success">Activo</span>
+                    ) : (
+                      <span className="badge text-bg-danger">Inactivo</span>
+                    )}
+                  </td>
+                  <td className="text-center">$ {menu.precio}</td>
+                  <td className="text-center">
+                    <span className="badge bg-light text-black p-2">
                       {menu.categorias.nombre}
                     </span>
                   </td>
-                  <td className='text-center'>
-                    <Button className="btn btn-sm" variant="primary" onClick={() => handleEditMenu(menu._id)}>
+                  <td className="text-center">
+                    <Button
+                      className="btn btn-sm"
+                      variant="primary"
+                      onClick={() => handleEditMenu(menu._id)}
+                    >
                       Editar
-                    </Button>
-                    {' '}
-                    <Button className="btn btn-sm" variant="danger" onClick={() => handleDeleteMenu(menu._id)}>
+                    </Button>{" "}
+                    <Button
+                      className="btn btn-sm"
+                      variant="danger"
+                      onClick={() => handleDeleteMenu(menu._id)}
+                    >
                       Eliminar
                     </Button>
                   </td>
@@ -133,7 +150,11 @@ function MenuTable() {
       <MenuForm
         show={showModal}
         onHide={handleCloseModal}
-        onSubmit={selectedMenu ? handleUpdateMenu.bind(null, selectedMenu) : handleAddMenu}
+        onSubmit={
+          selectedMenu
+            ? handleUpdateMenu.bind(null, selectedMenu)
+            : handleAddMenu
+        }
         menu={selectedMenu}
       />
     </Container>

@@ -1,49 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import menuApi from '../api/menuApi';
-import Swal from 'sweetalert2';
-
+import React, { useEffect, useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import menuApi from "../api/menuApi";
+import Swal from "sweetalert2";
 
 const MenuForm = ({ show, onHide, onSubmit, menu }) => {
-
   const [formValues, setFormValues] = useState({
-    nombre: '',
-    detalle: '',
-    estado: '',
-    precio: '',
-    categorias: '',
-    imageUrl: ''
+    nombre: "",
+    detalle: "",
+    estado: "",
+    precio: "",
+    categorias: "",
+    imageUrl: "",
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { nombre, detalle, estado, precio, categorias, imageUrl } = formValues;
+    const { nombre, detalle, estado, precio, categorias, imageUrl } =
+      formValues;
 
-    if (!nombre || !detalle || !estado || !precio || !categorias || !imageUrl ) {
+    if (!nombre || !detalle || !estado || !precio || !categorias || !imageUrl) {
       Swal.fire({
-        title: 'Error',
-        text: 'Por favor completa todos los campos',
-        icon: 'error',
+        title: "Error",
+        text: "Por favor completa todos los campos",
+        icon: "error",
       });
       return;
     }
 
     if (nombre.length > 16) {
       Swal.fire({
-        title: 'Error',
-        text: 'El nombre no debe tener más de 16 caracteres',
-        icon: 'error',
+        title: "Error",
+        text: "El nombre no debe tener más de 16 caracteres",
+        icon: "error",
       });
       return;
     }
 
     if (detalle.length > 93) {
       Swal.fire({
-        title: 'Error',
-        text: 'El detalle no debe tener más de 93 caracteres',
-        icon: 'error',
+        title: "Error",
+        text: "El detalle no debe tener más de 93 caracteres",
+        icon: "error",
       });
       return;
     }
@@ -51,13 +50,12 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
     const regex = /^\d{1,5}(\.\d{1,2})?$/;
     if (!regex.test(precio) || precio <= 0) {
       Swal.fire({
-        title: 'Error',
-        text: 'Por favor ingrese un precio válido mayor a 0 y con un máximo de 5 dígitos.',
-        icon: 'error',
+        title: "Error",
+        text: "Por favor ingrese un precio válido mayor a 0 y con un máximo de 5 dígitos.",
+        icon: "error",
       });
       return;
     }
-    
 
     const newMenu = {
       nombre,
@@ -65,50 +63,70 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
       estado,
       precio,
       categorias,
-      imageUrl
+      imageUrl,
     };
 
     onSubmit(newMenu);
     setFormValues({
-      nombre: '',
-      detalle: '',
-      estado: '',
-      precio: '',
-      categorias: '',
-      imageUrl: ''
+      nombre: "",
+      detalle: "",
+      estado: "",
+      precio: "",
+      categorias: "",
+      imageUrl: "",
     });
 
-    if(menu === null) {
-      guardarMenusDB(nombre, detalle, estado, precio, categorias, imageUrl)
+    if (menu === null) {
+      guardarMenusDB(nombre, detalle, estado, precio, categorias, imageUrl);
     } else {
-      modificarMenusDB(nombre, detalle, estado, precio, categorias, imageUrl, menu)
+      modificarMenusDB(
+        nombre,
+        detalle,
+        estado,
+        precio,
+        categorias,
+        imageUrl,
+        menu
+      );
     }
-
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
-  
-// mandar menus al DB
-  const guardarMenusDB = async (nombre, detalle, estado, precio, categorias, imageUrl) => {
-    try {
-          const resp = await menuApi.post("/admin/new", {
-            nombre,
-            detalle,
-            estado,
-            precio,
-            categorias,
-            imageUrl
-          });
 
+  // mandar menus al DB
+  const guardarMenusDB = async (
+    nombre,
+    detalle,
+    estado,
+    precio,
+    categorias,
+    imageUrl
+  ) => {
+    try {
+      const resp = await menuApi.post("/admin/new", {
+        nombre,
+        detalle,
+        estado,
+        precio,
+        categorias,
+        imageUrl,
+      });
     } catch (error) {
-      console.log("error")
-    
+      console.log("error");
     }
   };
   // modificar menus al DB
-  const modificarMenusDB = async (nombre, detalle, estado, precio, categorias, imageUrl, _id) => {
+  const modificarMenusDB = async (
+    nombre,
+    detalle,
+    estado,
+    precio,
+    categorias,
+    imageUrl,
+    _id
+  ) => {
     try {
       const resp = await menuApi.put("/admin/editar", {
         nombre,
@@ -117,55 +135,53 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
         precio,
         categorias,
         imageUrl,
-        _id
+        _id,
       });
-
     } catch (error) {
-      console.log("error")
+      console.log("error");
     }
   };
   const [categorias, setCategorias] = useState([]);
 
   // Cargar menús por ID
   const getProducts = async () => {
-    await menuApi.get("http://localhost:4003/admin/menus")
-        .then((respuesta) => {
-         try {
-            const data = respuesta.data.menus;
-            const resp = data.filter((prod) => prod._id === menu);
+    await menuApi.get("http://localhost:4003/admin/menus").then((respuesta) => {
+      try {
+        const data = respuesta.data.menus;
+        const resp = data.filter((prod) => prod._id === menu);
 
-            setFormValues({
-              nombre: (menu !== null ? resp[0].nombre : ''),
-              detalle: (menu !== null ? resp[0].detalle : ''),
-              estado: (menu !== null ? resp[0].estado : ''),
-              precio: (menu !== null ? resp[0].precio : ''),
-              categorias: (menu !== null ? resp[0].categorias : ''),
-              imageUrl: (menu !== null ? resp[0].imageUrl : '')
-            });
-
-         } catch (error) {
-           console.log(error)
-         }
-        })
-  }
+        setFormValues({
+          nombre: menu !== null ? resp[0].nombre : "",
+          detalle: menu !== null ? resp[0].detalle : "",
+          estado: menu !== null ? resp[0].estado : "",
+          precio: menu !== null ? resp[0].precio : "",
+          categorias: menu !== null ? resp[0].categorias : "",
+          imageUrl: menu !== null ? resp[0].imageUrl : "",
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
 
   // Cargar Categorías
   const getCategorias = async () => {
-    await menuApi.get("http://localhost:4003/admin/Categorias")
-        .then((respuesta) => {
-          setCategorias(respuesta.data.categorias);
-        })
+    await menuApi
+      .get("http://localhost:4003/admin/Categorias")
+      .then((respuesta) => {
+        setCategorias(respuesta.data.categorias);
+      });
   };
 
   useEffect(() => {
-    getProducts()
+    getProducts();
     getCategorias();
-  }, [menu])
+  }, [menu]);
 
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>{menu ? 'Editar Menú' : 'Agregar Menú'}</Modal.Title>
+        <Modal.Title>{menu ? "Editar Menú" : "Agregar Menú"}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -183,15 +199,14 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
           <Form.Group controlId="detalle" className="mb-3">
             <Form.Label>• Detalle</Form.Label>
             <Form.Control
-                as="textarea"
-                rows="2"
-                placeholder="Ingresa el detalle"
-                name="detalle"
-                maxLength="93"
-                value={formValues.detalle}
-                onChange={handleChange}
+              as="textarea"
+              rows="2"
+              placeholder="Ingresa el detalle"
+              name="detalle"
+              maxLength="93"
+              value={formValues.detalle}
+              onChange={handleChange}
             />
-
           </Form.Group>
           <Form.Group controlId="estado" className="mb-3">
             <Form.Label>• Estado</Form.Label>
@@ -218,45 +233,48 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
           </Form.Group>
           <Form.Group controlId="categoria" className="mb-3">
             <Form.Label>• Categoría</Form.Label>
-              <Form.Control
+            <Form.Control
               as="select"
               name="categorias"
               value={formValues.categorias._id}
-              onChange={handleChange}>
+              onChange={handleChange}
+            >
               <option value="">Seleccione una opción</option>
-                {categorias.map((categoria) => (
-                    <option
-                        key={categoria._id}
-                        value={categoria._id}
-                    >
-                      {categoria.nombre}
-                    </option>
-                ))}
-          </Form.Control>
-        </Form.Group>
+              {categorias.map((categoria) => (
+                <option key={categoria._id} value={categoria._id}>
+                  {categoria.nombre}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
 
           <Form.Group controlId="formImageUrl" className="mb-3">
             <Form.Label>• URL de imagen</Form.Label>
-            <Form.Control type="text"
+            <Form.Control
+              type="text"
               placeholder="Ingrese la URL de la imagen"
               name="imageUrl"
               value={formValues.imageUrl}
-              onChange={handleChange} />
+              onChange={handleChange}
+            />
           </Form.Group>
 
           <Form.Group>
-            <img src={formValues.imageUrl} alt={formValues.nombre} className="img-thumbnail" />
+            <img
+              src={formValues.imageUrl}
+              alt={formValues.nombre}
+              className="img-thumbnail"
+            />
           </Form.Group>
           <div className="d-grid gap-2">
             <Button variant="primary size='sm'" type="submit">
               Guardar
             </Button>
           </div>
-
         </Form>
       </Modal.Body>
     </Modal>
   );
-}
+};
 
 export default MenuForm;

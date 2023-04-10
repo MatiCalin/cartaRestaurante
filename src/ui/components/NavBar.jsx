@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import menuApi from "../../api/menuApi";
 import "./css/navBar.css";
-import Swal from 'sweetalert';
+import Swal from "sweetalert";
 
 export const NavbarC = ({
   allProducts,
@@ -53,8 +53,8 @@ export const NavbarC = ({
   // Generar pedido
   const generarPedido = () => {
     setActive(!active);
-    navigate('/pedidos');
-  }
+    navigate("/pedidos");
+  };
 
   // Reiniciar el carrito a valor cero
   const vaciarCarrito = () => {
@@ -64,19 +64,20 @@ export const NavbarC = ({
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-      .then((willDelete) => {
-        if (willDelete) {
-          Swal("¡Carrito limpio! carga nuevos menús :)", {
-            icon: "success",
-          });
-          setAllProducts([]);
-          setTotal(0);
-          setCountProducts(0);
-        } else {
-          Swal("¡Tú carrito sigue intacto! puedes cargar más menús o confirma el pedido :)");
-        }
-      });
+    }).then((willDelete) => {
+      if (willDelete) {
+        Swal("¡Carrito limpio! carga nuevos menús :)", {
+          icon: "success",
+        });
+        setAllProducts([]);
+        setTotal(0);
+        setCountProducts(0);
+      } else {
+        Swal(
+          "¡Tú carrito sigue intacto! puedes cargar más menús o confirma el pedido :)"
+        );
+      }
+    });
   };
 
   return (
@@ -110,14 +111,18 @@ export const NavbarC = ({
                 >
                   Nuestros menus
                 </NavLink>
-                <NavLink
-                  className={({ isActive }) =>
-                    `nav-item nav-link ${isActive ? "active" : ""}`
-                  }
-                  to="/pedidos"
-                >
-                  Pedidos
-                </NavLink>
+                {!verificarAdmin ? (
+                  <NavLink
+                    className={({ isActive }) =>
+                      `nav-item nav-link ${isActive ? "active" : ""}`
+                    }
+                    to="/pedidos"
+                  >
+                    Pedidos
+                  </NavLink>
+                ) : (
+                  ""
+                )}
                 <NavLink
                   className={({ isActive }) =>
                     `nav-item nav-link ${isActive ? "active" : ""}`
@@ -178,20 +183,22 @@ export const NavbarC = ({
                   {allProducts.length ? (
                     <>
                       <div className="cart-empty-container">
-                        <div className="container-cart-products-title">Carrito de compras</div>
+                        <div className="container-cart-products-title">
+                          Carrito de compras
+                        </div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="icon-close"
-                            onClick={() => setActive(!active)}
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="icon-close"
+                          onClick={() => setActive(!active)}
                         >
                           <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M6 18L18 6M6 6l12 12"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
                           />
                         </svg>
                       </div>
@@ -233,38 +240,38 @@ export const NavbarC = ({
                       </div>
                       <div className="btn-cart-event">
                         <button
-                            className="btn-generar-pedido"
-                            onClick={() => generarPedido()}
+                          className="btn-generar-pedido"
+                          onClick={() => generarPedido()}
                         >
                           Generar pedido
                         </button>
                         <button
-                            className="btn-clear-all"
-                            onClick={() => vaciarCarrito()}
+                          className="btn-clear-all"
+                          onClick={() => vaciarCarrito()}
                         >
                           Vaciar carrito
                         </button>
                       </div>
                     </>
                   ) : (
-                      <div className="cart-empty-container">
-                        <span className="cart-empty">El carrito está vacío</span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="icon-close"
-                            onClick={() => setActive(!active)}
-                        >
-                          <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </div>
+                    <div className="cart-empty-container">
+                      <span className="cart-empty">El carrito está vacío</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="icon-close"
+                        onClick={() => setActive(!active)}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </div>
                   )}
                 </div>
               ) : null}

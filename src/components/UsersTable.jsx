@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Table, Button, Modal } from "react-bootstrap";
 import menuApi from "../api/menuApi";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 function UsersTable() {
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-
 
   const handleToggleActive = async (user) => {
     const updatedUser = { ...user, active: !user.active };
@@ -33,32 +32,29 @@ function UsersTable() {
     }
   };
 
-
   const handleModalClose = () => {
     setShowModal(false);
     setSelectedUser(null);
   };
 
-
-  // Mandar usuarios a DB  
-  const cargarUser = async() => {
+  // Mandar usuarios a DB
+  const cargarUser = async () => {
     try {
-      const resp = await menuApi.get ("/admin/Usuarios");
+      const resp = await menuApi.get("/admin/Usuarios");
       setUsers(resp.data.Usuarios);
     } catch (error) {
-      console.log(error)
-    };
+      console.log(error);
+    }
   };
-  
-  useEffect(() => {
-    cargarUser ();
-  }, []);                 
 
+  useEffect(() => {
+    cargarUser();
+  }, []);
 
   return (
     <div className="container mt-4 pb-5 verticalHeight">
       <h2>Usuarios</h2>
-      <Table className="table-color td" bordered hover >
+      <Table className="table-color td" bordered hover>
         <thead>
           <tr>
             <th>ID</th>
@@ -67,20 +63,18 @@ function UsersTable() {
             <th className="text-center">Estado</th>
           </tr>
         </thead>
-          
+
         <tbody>
           {users.map((user) => (
             <tr key={user._id} className="text-bg-dark">
               <td>
-                <span className="badge">
-                  {user._id}
-                </span>
+                <span className="badge">{user._id}</span>
               </td>
               <td className="text-center">{user.name}</td>
               <td>{user.email}</td>
               <td className="text-center">
                 <Button
-                    className="btn btn-sm"
+                  className="btn btn-sm"
                   variant={user.active ? "success" : "danger"}
                   onClick={() => handleToggleActive(user)}
                 >
@@ -97,7 +91,8 @@ function UsersTable() {
           <Modal.Title>Confirmar acción</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          ¿Está seguro que desea cambiar el estado para el usuario "{selectedUser?.name}"?
+          ¿Está seguro que desea cambiar el estado para el usuario "
+          {selectedUser?.name}"?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>

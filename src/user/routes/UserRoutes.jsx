@@ -50,19 +50,19 @@ export const UserRoutes = () => {
             />
           }
         />
-      <Route
+        <Route
           path="/pedidos"
           element={
-              <Pedido
-                  allProducts={allProducts}
-                  setAllProducts={setAllProducts}
-                  total={total}
-                  setTotal={setTotal}
-                  countProducts={countProducts}
-                  setCountProducts={setCountProducts}
-              />
+            <Pedido
+              allProducts={allProducts}
+              setAllProducts={setAllProducts}
+              total={total}
+              setTotal={setTotal}
+              countProducts={countProducts}
+              setCountProducts={setCountProducts}
+            />
           }
-      />
+        />
         <Route
           path="/administration"
           element={

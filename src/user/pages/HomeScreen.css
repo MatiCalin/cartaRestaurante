@@ -1,75 +1,80 @@
 /* -----------------   Carousel ----------------------- */
-.CarouselContainer{
+.CarouselContainer {
   margin-bottom: 50px;
 }
-.cover-image{
-    display: flex;
-    width: 100%;
-    height: 20rem;
-    object-fit: cover;
+.cover-image {
+  display: flex;
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
 }
-/* -----------------   CardOne ----------------------- */ 
-.CardOne-Container{
-    margin-top: 20px;
-    justify-content: center;
+/* -----------------   CardOne ----------------------- */
+.CardOne-Container {
+  margin-top: 2rem;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  position: relative;
+  margin-bottom: 120px;
+}
+.CardOne-Subcontainer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0.2);
+  transition: linear 0.2s;
+  color: coral;
+}
+@media (max-width: 390px) {
+  .CardOne-Container {
+    margin-top: 10rem;
+    padding: 0px;
+    padding-left: 30%;
+    display: block;
+    float: none;
     text-align: center;
-    display: flex;   
-    position: relative;
-    margin-bottom: 200px;
-}
-.CardOne-Subcontainer:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 12px 16px rgba(0, 0, 0.2);
-    transition: linear 0.2s;
-    color:coral ;
-}
-@media (max-width: 390px){
-  .CardOne-Container{
-    margin-top: 15rem;
-    padding:0px;
-    padding-left:25%;
-    display:block;
-    float:none;
-    text-align:center;  
     margin-bottom: 5rem;
-  }  
+  }
 }
-/* -----------------   CardTwo ----------------------- */ 
-.CardTwo-Lines{
-  text-align: center; 
+/* -----------------   CardTwo ----------------------- */
+.CardTwo-Lines {
+  text-align: center;
 }
-.lines-effect{
+.lines-effect {
   display: inline-block;
   position: relative;
 }
-.lines-effect::after, .lines-effect::before{
-  content: '';
+.lines-effect::after,
+.lines-effect::before {
+  content: "";
   position: absolute;
   width: 90%;
   height: 2px;
   background-color: currentColor;
   top: 0.6em;
 }
-.lines-effect::before{
+.lines-effect::before {
   left: -100%;
 }
-.lines-effect::after{
+.lines-effect::after {
   right: -100%;
 }
-.cardtwo-container{
+.cardtwo-container {
   justify-content: center;
   text-align: center;
   display: flex;
 }
-.cardtwo-margin { margin-bottom: 100px !important; }
-.cardimage{
+.cardtwo-margin {
+  margin-bottom: 100px !important;
+}
+.cardimage {
   display: flex;
   width: 100%;
   max-height: 10rem;
 }
-.container-card-food { margin: 0 auto; }
-.card-food{
-  text-align: center; 
+.container-card-food {
+  margin: 0 auto;
+}
+.card-food {
+  text-align: center;
   display: flex;
   min-height: 25rem;
   width: 80%;
@@ -79,38 +84,60 @@
   margin: 20px auto;
 }
 .card-body {
-    height: 15rem !important;
+  height: 15rem !important;
 }
 .card-body > p {
-    color: coral !important;
-    padding: 10px 15px;
+  color: coral !important;
+  padding: 10px 15px;
 }
 .card-body > .price-food {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #f0f0f0 !important;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #f0f0f0 !important;
 }
 
-@media (max-width: 1200px){
-  .lines-effect::after, .lines-effect::before{
+@media (max-width: 1200px) {
+  .lines-effect::after,
+  .lines-effect::before {
     transform: scale(0);
-  }  
+  }
 }
-/* -----------------   CardThree ----------------------- */ 
-.ContainerCardThree{
+/* -----------------   CardThree ----------------------- */
+.ContainerCardThree {
   display: flex;
   justify-content: center;
   margin-bottom: 60px;
 }
-.CardThree{
+.CardThree {
   text-align: center;
   width: 80%;
-
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
-.CardThree Button:hover { 
+.CardThree Button:hover {
   transform: translateY(-3px);
 }
-.CardThree h1{
-  color:coral ;
+.CardThree h1 {
+  color: coral;
+}
+
+@media screen and (max-width: 820px) {
+  .CardThree {
+    height: 22rem !important;
+  }
+}
+
+/* ------------------ Video ------------------------------*/
+.videoContainer {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+.homeVideo {
+  position: relative;
+}
+
+@media screen and (max-width: 360px) {
+  .homeVideo {
+    display: none;
+  }
 }

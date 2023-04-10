@@ -57,6 +57,7 @@ const FoodOrderTable = () => {
     } catch (error) {
       console.log(error)
     }
+    
   }
 
   const handleDeleteOrder = async (id) => {
