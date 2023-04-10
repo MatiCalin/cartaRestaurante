@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.verticalHeight {
+    height: 100vh;
+}
+
 @media screen and (max-width: 600px) {
     html {
         font-size: 10px;
@@ -12,7 +16,15 @@
 body {
     display: flex;
     flex-direction: column;
+    position: relative;
     min-height: 100vh;
+}
+
+.errorStyle {
+    background-color: red;
+    color: white;
+    text-align: center;
+    
 }
 
 

@@ -1,19 +1,100 @@
-html {
+.adminContainer {
     background-color: #001220;
-}
-.contenedor {
-    background-color: #001220;
+    color: aliceblue;
+    min-height: 100vh;
 }
 .imageAdm {
     width: 100px;
     height: 100px;
 }
-.table-color{  
-    background-color: rgb(151, 32, 48);    
-}
-@media screen and (max-width: 768px) {
-    .table-responsive {
-      width: 100%;
-      overflow-x: auto;
+.gradient-button {
+  background: linear-gradient(to right, #a01818, #b71515, #ef1212 );
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: all 2s ease-in-out;
+  cursor: pointer;
+    
+  }
+  
+  .gradient-button:hover {
+    background: linear-gradient(to right, #e71010, #c10c0c, #c41111, #b41212, #840f0f, #5b0101);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  }
+  .contenedor-titulo-imagen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+  }
+  
+  
+  
+
+  
+.table-color {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid ;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+
+  }
+
+  
+  .table-color th,
+  .table-color td {
+    color: aliceblue;
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+ 
+  .table-hover tbody tr:hover td {
+    color: #d82727;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .table-color thead {
+      display: none;
+    }
+    
+    .table-color tbody tr {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    .table-color tbody td:before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+    }
+    
+    .table-color tbody td {
+      display: block;
+      text-align: center;
+    }
+    
+    .table-color tbody td:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  @media screen and (max-width: 370px) {
+    .contenedor-titulo-imagen {
+      margin-top: 1rem !important;
     }
   }

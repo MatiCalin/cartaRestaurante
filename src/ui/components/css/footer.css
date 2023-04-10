@@ -1,5 +1,8 @@
-.footerSection {  
+.footerSection {
    background-color: rgba(41, 39, 39, 0.738);
+   color: #908686;
+   bottom: 0;
+   width: 100%;
 }
 
 .footerItems {
@@ -49,6 +52,23 @@
     text-align: left;
     font-size: 1rem;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.faRegular {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.cashIcon {
+    color: rgb(2, 74, 2);
+}
+
+.creditCardIcon {
+    color: rgb(153, 115, 17)
+}
+
+.payPalIcon {
+    color: rgb(33, 33, 117);
 }
 
 @media screen and (max-width: 600px) {

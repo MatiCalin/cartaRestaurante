@@ -1,45 +1,69 @@
-import React from 'react';
-import { Button, Card, Row } from 'react-bootstrap';
-import { ShoppingCartIcon, UserIcon, MapPinIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
+import React from "react";
+import { Button, Card, Row } from "react-bootstrap";
+import {
+  ShoppingCartIcon,
+  UserIcon,
+  MapPinIcon,
+  ChatBubbleBottomCenterTextIcon,
+} from "@heroicons/react/24/outline";
 
 export const CardOne = () => {
-
   return (
+    <>
+      <div className="CardOne-Container">
+        <Row xs={1} md={3} className="g-4">
+          <Card
+            className="CardOne-Subcontainer"
+            style={{ width: "10rem", maxHeight: "15rem", margin: "1rem" }}
+          >
+            <ShoppingCartIcon />
+            <Card.Body>
+              <Button variant="secondary">
+                <a
+                  href="http://localhost:3000/menu"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  Haz tu Pedido
+                </a>
+              </Button>
+            </Card.Body>
+          </Card>
 
-    <div className='CardOne-Container'>
-    <Row xs={2} md={3} className="g-4">
-      <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
-        <ShoppingCartIcon/>
-        <Card.Body>
-          <Card.Title>Completa tu Orden</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
+          <Card
+            className="CardOne-Subcontainer"
+            style={{ width: "10rem", maxHeight: "15rem", margin: "1rem" }}
+          >
+            <UserIcon />
+            <Card.Body>
+              <Button variant="secondary">
+                <a
+                  href="http://localhost:3000/nosotros"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  Nosotros
+                </a>
+              </Button>
+            </Card.Body>
+          </Card>
 
-      <Card className='CardOne-Subcontainer'  style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
-        <UserIcon/>
-        <Card.Body>
-          <Card.Title>Staff</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-
-      <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
-        <MapPinIcon/>
-        <Card.Body>
-          <Card.Title>Ubicacion</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-
-      <Card className='CardOne-Subcontainer' style={{ width: '12rem', maxHeight: '15rem', margin: '1rem' }}>
-        <ChatBubbleBottomCenterTextIcon/>
-        <Card.Body>
-          <Card.Title>Comentarios</Card.Title>
-          <Button variant="secondary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-    </Row>
-    </div>
+          <Card
+            className="CardOne-Subcontainer"
+            style={{ width: "10rem", maxHeight: "15rem", margin: "1rem" }}
+          >
+            <ChatBubbleBottomCenterTextIcon />
+            <Card.Body>
+              <Button variant="secondary">
+                <a
+                  href="http://localhost:3000/404"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  Comentarios
+                </a>
+              </Button>
+            </Card.Body>
+          </Card>
+        </Row>
+      </div>
+    </>
   );
-}
+};

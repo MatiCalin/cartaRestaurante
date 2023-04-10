@@ -4,48 +4,88 @@ import Form from "react-bootstrap/Form";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import "../auth/pages/css/login.css";
 import Alert from "react-bootstrap/Alert";
+import menuApi from "../../api/menuApi";
+import Modal from "react-bootstrap/Modal";
 
 export const LoginScreen = () => {
-  const [userLog, setUserLog] = useState({
-    email: "",
-    contraseña: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [msgError, setMsgError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const startLogin = async (email, password) => {
+    try {
+      const resp = await menuApi.post("/auth/", {
+        email,
+        password,
+      });
+
+      //guardamos token en localStorage
+      localStorage.setItem("token", resp.data.token);
+      localStorage.setItem("usr", btoa(resp.data.name));
+
+      if (resp.data.rol === "usuario") {
+        setTimeout(() => {
+          navigate("/home");
+        }, 3000);
+      } else {
+        setTimeout(() => {
+          navigate("/administration");
+        }, 3000);
+      }
+    } catch ({ response }) {
+      setError(true);
+      setMsgError(response.data.msg);
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Mostrar el modal
+    setShowModal(true);
+
+    //inicioValidaciones
+    if (email.trim() === "") {
+      setErrorEmail(true);
+      setTimeout(() => {
+        setErrorEmail(false);
+      }, 4000);
+    } else if (password.trim() === "") {
+      setErrorContraseña(true);
+      setTimeout(() => {
+        setErrorContraseña(false);
+      }, 4000);
+    } else if (email.match(/([a-z]\w+@[a-z]+\.[a-z]{2,5})/)) {
+    }
+    //finValidaciones
+
+    startLogin(email, password);
+  };
 
   const navigate = useNavigate();
 
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorContraseña, setErrorContraseña] = useState(false);
 
-  const inputChange = (e) => {
-    setUserLog({
-      ...userLog,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const onLoginSubmit = (e) => {
-    e.preventDefault();
-    if (userLog.email.trim() === "") {
-      setErrorEmail(true);
-      setTimeout(() => {
-        setErrorEmail(false);
-      }, 4000);
-    } else if (userLog.contraseña.trim() === "") {
-      setErrorContraseña(true);
-      setTimeout(() => {
-        setErrorContraseña(false);
-      }, 4000);
-    } else if (userLog.email.match(/([a-z]\w+@[a-z]+\.[a-z]{2,5})/)) {
-      navigate("/home");
-    }
-  };
-
   return (
-    <div className="">
+    <div>
       <section className="loginSection">
         <div className="text-center mt-5 py-1">
           <h1 className="text-light">¡Bienvenidos comensales!</h1>
         </div>
+
+        {error ? (
+          <div className="errorStyle">
+            <h3>{msgError}</h3>
+          </div>
+        ) : (
+          ""
+        )}
 
         <div className="d-flex align-items-center justify-content-center  text-light formulario-login">
           <img
@@ -53,17 +93,32 @@ export const LoginScreen = () => {
             alt=""
             className="w-25 h-25"
           />
-          <Form onSubmit={onLoginSubmit} className="px-3 my-1 ">
+          <Modal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+            centered
+            className="loadingModal"
+          >
+            <Modal.Body className="loadingModalBody">
+              <div className="loading-container">
+                <div className="spinner"></div>
+                <div className="spinner-center"></div>
+                <div className="loading-text text-light">Cargando...</div>
+              </div>
+            </Modal.Body>
+          </Modal>
+
+          <Form onSubmit={handleSubmit} className="px-3 my-1 ">
             <Form.Group className="mb-2" controlId="formBasicEmail">
               <Form.Label>Correo electrónico</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Ingrese su email"
                 name="email"
-                value={userLog.email}
-                onChange={inputChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <Form.Text className="text-muted">
+              <Form.Text className=" text-light">
                 Recuerde que debe ser el mismo con el que se registró.
               </Form.Text>
               {errorEmail ? (
@@ -79,9 +134,9 @@ export const LoginScreen = () => {
                 type="password"
                 placeholder="Ingrese su contraseña"
                 name="contraseña"
-                value={userLog.contraseña}
-                onChange={inputChange}
-                // required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               {errorContraseña ? (
                 <Alert variant="danger" className="mt-1">
@@ -90,26 +145,25 @@ export const LoginScreen = () => {
               ) : (
                 ""
               )}
-              <Link to="" className="pt-2 mt-3 text-decoration-none">
+              <Link to="/*" className="pt-2 mt-3 text-decoration-none">
                 <small>Olvidé mi contraseña</small>
               </Link>
             </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check" required />
-            </Form.Group>
+
             <Button variant="primary" type="submit">
               Ingresar
             </Button>
+
             <Link to="/register" className="px-3 text-decoration-none">
               ¿No tenes cuenta aún?
             </Link>
           </Form>
         </div>
 
-        <div class="air air1"></div>
-        <div class="air air2"></div>
-        <div class="air air3"></div>
-        <div class="air air4"></div>
+        <div className="air air1"></div>
+        <div className="air air2"></div>
+        <div className="air air3"></div>
+        <div className="air air4"></div>
       </section>
     </div>
   );

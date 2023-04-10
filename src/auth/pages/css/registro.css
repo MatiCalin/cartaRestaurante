@@ -1,0 +1,98 @@
+.register {
+  background-image: url(https://cdn.shopify.com/s/files/1/0003/1916/0381/articles/Captura_de_Pantalla_2022-11-09_a_la_s_13.45.22.png?v=1668024911);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur();
+  
+}
+
+.registerContainer {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 500px;
+  margin: auto;
+  
+    overflow: hidden;
+}
+
+.registerContainer > form {
+  width: 25rem;
+  border: 1px solid #dfdfdf;
+  padding: 20px;
+  border-radius: 5px;
+  color:#fff;
+  background:rgba(0,0,0,0.13);
+}
+
+  .registerFormBack input{
+  
+  background:rgba(0,0,0,0.2);
+  color:#fff;
+  border:0;
+}
+.registerFormBack input:focus,.registerFormBack input:active,.registerFormBack button:focus,.registerFormBack button:active{
+  outline:none;
+}
+
+.registerFormBack button:active{
+  background:#27ae60;
+}
+
+
+.registerTitle {
+  text-align: center;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.formField {
+  width: 22rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.registrobtn {
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 1.2rem;
+  height: 3rem;
+   outline: 0;
+  text-align: center;
+  width: 5rem;
+}
+
+.registrobtn:active {
+  background-color: #06b;
+}
+
+
+
+p {
+  color: red;
+}
+
+@media only screen and (max-width: 400px){
+  .formLabel {
+    display: none;
+    
+
+  }
+
+  .formField input {
+    text-align: center;
+    position: relative;
+    right: 20%;
+  }
+}

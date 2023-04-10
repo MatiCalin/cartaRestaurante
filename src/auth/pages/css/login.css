@@ -40,7 +40,7 @@
   }
 
 .formulario-login form{
-    z-index: 2000 ; 
+    z-index: 1050 ; 
 }
 
 .loginSection {
@@ -55,7 +55,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 200%;
+    width: 100%;
     height: 100%; 
     background: url("http://front-end-noobs.com/jecko/img/wave-mid.png");
     background-repeat: repeat no-repeat; 
@@ -112,7 +112,52 @@
     }
   }
 
+  /*MODAL*/
+
+  .loadingModal {
+    z-index: 3000;
+  }
+
+  .loadingModalBody{
+    background-color: #001220;
+  }
   
-
-
+  @keyframes spinner {
+    100% {
+      transform: rotate(3600deg);
+    }
+  }
+  
+  .loading-container {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .spinner {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: url('https://img.freepik.com/iconos-gratis/pizza_318-306666.jpg') center center;
+    background-size: contain;
+    transition-origin: 50% 50%;
+    animation: spinner 3s infinite alternate ease-in-out;
+  }
+  .spinner-center {
+    display: inline-block;
+    position: absolute;
+    margin-left: -100px;
+    width: 100px;
+    height: 100px;
+    background: url('http://i.imgur.com/u0BC2ZR.png') center center;
+    background-size: contain;
+    content: '';
+  }
+  
+  .loading-text {
+    position: relative;
+    z-index: 1;
+    font-size: 1.5rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin-left: 0.5em;
+  }
 
