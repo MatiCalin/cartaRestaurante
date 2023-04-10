@@ -146,7 +146,7 @@ export const LoginScreen = () => {
               ) : (
                 ""
               )}
-              <Link to="" className="pt-2 mt-3 text-decoration-none">
+              <Link to="/*" className="pt-2 mt-3 text-decoration-none">
                 <small>Olvidé mi contraseña</small>
               </Link>
             </Form.Group>

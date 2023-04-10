@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, Row } from 'react-bootstrap';
 import { ShoppingCartIcon, UserIcon, MapPinIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
-/* import GoogleMaps from "simple-react-google-maps"; */
+
 
 
 export const CardOne = () => {
@@ -23,7 +23,7 @@ export const CardOne = () => {
             <UserIcon />
             <Card.Body>
               <Button variant="secondary">
-                <a href='http://localhost:3000/404' style={{ color: 'white', textDecoration: 'none' }}>Nosotros</a>
+                <a href='http://localhost:3000/nosotros' style={{ color: 'white', textDecoration: 'none' }}>Nosotros</a>
               </Button>
             </Card.Body>
           </Card>

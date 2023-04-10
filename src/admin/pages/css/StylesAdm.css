@@ -1,11 +1,7 @@
-/* html {
-    background-color: #001220;
-} */
-
-  
 .adminContainer {
     background-color: #001220;
     color: aliceblue;
+    min-height: 100vh;
 }
 .imageAdm {
     width: 100px;
@@ -97,3 +93,8 @@
     margin-top: 20px;
   }
   
+  @media screen and (max-width: 370px) {
+    .contenedor-titulo-imagen {
+      margin-top: 1rem !important;
+    }
+  }

@@ -47,7 +47,7 @@ export const AdminScreen = () => {
     <NavbarC/>
     <div className="adminContainer">
       <div className='contenedor-titulo-imagen'>
-      <h1>Administracion</h1>
+      <h1 className='my-5'>Administracion</h1>
       <img 
         src="https://www.pngall.com/wp-content/uploads/12/Chef-PNG-Image-HD.png"
         alt=""

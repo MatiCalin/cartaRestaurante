@@ -86,7 +86,7 @@ function MenuTable() {
   }, [menus]);
   return (
     <Container>
-      <h2>Menús</h2>
+      <h2 className='p-2 my-2'>Menús</h2>
       <Button className="me-2" variant="primary" onClick={() => handleAddMenuShow()}>
         Agregar Menú
       </Button>

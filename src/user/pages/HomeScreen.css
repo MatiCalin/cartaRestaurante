@@ -5,7 +5,8 @@
 .cover-image{
     display: flex;
     width: 100%;
-    max-height: 35rem;
+    height: 20rem;
+    object-fit: cover;
 }
 /* -----------------   CardOne ----------------------- */ 
 .CardOne-Container{
@@ -24,13 +25,13 @@
 }
 @media (max-width: 390px){
   .CardOne-Container{
-    margin:0px;
+    margin-top: 15rem;
     padding:0px;
     padding-left:25%;
     display:block;
     float:none;
     text-align:center;  
-    margin-bottom: 200px;
+    margin-bottom: 5rem;
   }  
 }
 /* -----------------   CardTwo ----------------------- */ 
