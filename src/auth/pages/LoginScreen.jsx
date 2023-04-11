@@ -28,8 +28,11 @@ export const LoginScreen = () => {
       localStorage.setItem("usr", btoa(resp.data.name));
       
       if (resp.data.rol === "usuario") {
+        // Mostrar el modal
+    setShowModal(true);
         setTimeout(() => {
           navigate("/home");
+          
         }, 3000);
       } else {
         
@@ -40,6 +43,7 @@ export const LoginScreen = () => {
     } catch ({ response }) {
       setError(true);
       setMsgError(response.data.msg);
+      
       setTimeout(() => {
         setError(false);
       }, 4000);
@@ -52,8 +56,7 @@ export const LoginScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Mostrar el modal
-    setShowModal(true);
+    
 
     //inicioValidaciones
     if (email.trim() === "") {
@@ -61,14 +64,18 @@ export const LoginScreen = () => {
       setTimeout(() => {
         setErrorEmail(false);
       }, 4000);
+      return
     } else if (password.trim() === "") {
       setErrorContraseña(true);
       setTimeout(() => {
         setErrorContraseña(false);
       }, 4000);
+      return
     } else if (email.match(/([a-z]\w+@[a-z]+\.[a-z]{2,5})/)) {
     }
     //finValidaciones
+
+    
 
     startLogin(email, password);
   };
