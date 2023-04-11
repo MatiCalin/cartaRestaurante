@@ -27,7 +27,7 @@ const Pedido = ({
 
   const confirmarPedido = async () => {
     await menuApi
-      .post("http://localhost:4003/admin/pedidoNew", {
+      .post("/admin/pedidoNew", {
         usuario: atob(localStorage.getItem("usr")),
         fecha: Date.now(),
         menus: allProducts.map((pedido) => ({

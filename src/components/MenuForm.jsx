@@ -160,7 +160,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
 
   // Cargar menús por ID
   const getProducts = async () => {
-    await menuApi.get("http://localhost:4003/admin/menus").then((respuesta) => {
+    await menuApi.get("/admin/menus").then((respuesta) => {
       try {
         const data = respuesta.data.menus;
         const resp = data.filter((prod) => prod._id === menu);
@@ -182,7 +182,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
   // Cargar Categorías
   const getCategorias = async () => {
     await menuApi
-      .get("http://localhost:4003/admin/Categorias")
+      .get("/admin/Categorias")
       .then((respuesta) => {
         setCategorias(respuesta.data.categorias);
       });

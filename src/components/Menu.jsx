@@ -18,7 +18,7 @@ const Menu = ({
 
   // Cargar Productos
   const getProductos = async () => {
-    await menuApi.get("http://localhost:4003/admin/Menus").then((respuesta) => {
+    await menuApi.get("/admin/Menus").then((respuesta) => {
       setProductos(respuesta.data.menus);
       setAllProd(respuesta.data.menus);
     });
@@ -27,7 +27,7 @@ const Menu = ({
   // Cargar Categorías
   const getCategorias = async () => {
     await menuApi
-      .get("http://localhost:4003/admin/Categorias")
+      .get("/admin/Categorias")
       .then((respuesta) => {
         setCategorias(respuesta.data.categorias);
       });

@@ -68,7 +68,7 @@ const CategoryForm = ({ show, onHide, onSubmit, category }) => {
   // Cargar menús por ID
   const getCategories = async () => {
     await menuApi
-      .get("http://localhost:4003/admin/categorias")
+      .get("/admin/categorias")
       .then((respuesta) => {
         try {
           const data = respuesta.data.categorias;
