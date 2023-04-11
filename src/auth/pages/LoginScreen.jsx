@@ -35,7 +35,8 @@ export const LoginScreen = () => {
           
         }, 3000);
       } else {
-        
+         // Mostrar el modal
+    setShowModal(true);
         setTimeout(() => {
           navigate("/administration");
         }, 3000);
