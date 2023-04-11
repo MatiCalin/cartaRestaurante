@@ -15,10 +15,25 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
     imageUrl: "",
   });
 
-  const handleSubmit = (event) => {
+  const menuExists = async (nombre) => {
+    const resp = await menuApi.get("/admin/menus");
+    const menus = resp.data.menus;
+    return menus.some((menu) => menu.nombre === nombre);
+  };
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const { nombre, detalle, estado, precio, categorias, imageUrl } =
       formValues;
+
+      if (await menuExists(nombre)) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Ya existe un menú con ese nombre',
+          icon: 'error',
+        });
+        return;
+      }
 
     if (!nombre || !detalle || !estado || !precio || !categorias || !imageUrl) {
       Swal.fire({

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import "../auth/pages/css/login.css";
+import "./css/login.css";
 import Alert from "react-bootstrap/Alert";
 import menuApi from "../../api/menuApi";
 import Modal from "react-bootstrap/Modal";
@@ -14,6 +14,8 @@ export const LoginScreen = () => {
   const [msgError, setMsgError] = useState("");
   const [showModal, setShowModal] = useState(false);
 
+
+
   const startLogin = async (email, password) => {
     try {
       const resp = await menuApi.post("/auth/", {
@@ -24,12 +26,13 @@ export const LoginScreen = () => {
       //guardamos token en localStorage
       localStorage.setItem("token", resp.data.token);
       localStorage.setItem("usr", btoa(resp.data.name));
-
+      
       if (resp.data.rol === "usuario") {
         setTimeout(() => {
           navigate("/home");
         }, 3000);
       } else {
+        
         setTimeout(() => {
           navigate("/administration");
         }, 3000);
@@ -41,11 +44,14 @@ export const LoginScreen = () => {
         setError(false);
       }, 4000);
     }
+    
   };
 
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     // Mostrar el modal
     setShowModal(true);
 

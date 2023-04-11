@@ -49,31 +49,31 @@ export const RegisterScreen = () => {
     const emailExists = checkEmailExists(email);
     //validaciones
 
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!name || !email || !password) {
-    //   setError(true);
-    //   setMsgError("Todos los campos son obligatorios")
-    //   setTimeout(() => {
-    //     setError(false);
-    //   }, 4000);
-    // } else if (!emailRegex.test(email)) {
-    //   setError(true);
-    //   setMsgError("El email ingresado no es valido")
-    //   setTimeout(() => {
-    //     setError(false);
-    //   }, 4000);
-    // } else if (password.length < 5){
-    //   setError(true);
-    //   setMsgError("La contraseña debe ser mayor a 5 caracteres")
-    //   setTimeout(() => {
-    //     setError(false);
-    //   }, 4000);
-    // } else if (emailExists) {
-    //   setError(true);
-    //   setMsgError("El correo electrónico ya está registrado");
-    //   setTimeout(() => {
-    //     setError(false);
-    //   }, 4000);}
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name || !email || !password) {
+      setError(true);
+      setMsgError("Todos los campos son obligatorios")
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
+    } else if (!emailRegex.test(email)) {
+      setError(true);
+      setMsgError("El email ingresado no es valido")
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
+    } else if (password.length < 5){
+      setError(true);
+      setMsgError("La contraseña debe ser mayor a 5 caracteres")
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
+    } else if (emailExists) {
+      setError(true);
+      setMsgError("El correo electrónico ya está registrado");
+      setTimeout(() => {
+        setError(false);
+      }, 4000);}
     sendRegister(name, email, password);
   };
 
