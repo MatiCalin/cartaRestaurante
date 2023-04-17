@@ -37,7 +37,7 @@ const FoodOrderTable = () => {
       order._id === selectedOrder
         ? {
             ...order,
-            estado: order.estado === "pendiente" ? "realizado" : "pendiente",
+            estado: order.estado === "En proceso" ? "Aceptado" : "En proceso",
           }
         : order
     );
@@ -164,19 +164,19 @@ const FoodOrderTable = () => {
                 </span>
               </td>
               <td
-                  className={order.estado === 'pendiente'
+                  className={order.estado === 'En proceso'
                       ? "bg-danger text-white text-center"
                       : "bg-success text-white text-center"}
               >
-                {order.estado === "pendiente" ? "Pendiente" : "Realizado"}
+                {order.estado === "En proceso" ? "En proceso" : "Aceptado"}
               </td>
               <td className="text-center">
                 <Button
                     className="btn btn-sm"
-                    variant={order.estado === "pendiente" ? "primary" : "warning"}
+                    variant={order.estado === "En proceso" ? "success" : "warning"}
                     onClick={() => handleStatusChange(order._id)}
                 >
-                  {order.estado === "pendiente" ? "Realizado" : "Pendiente"}
+                  {order.estado === "En proceso" ? "Aceptar" : "En proceso"}
                 </Button>
                 {' '}
                 <Button

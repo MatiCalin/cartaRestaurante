@@ -6,6 +6,7 @@ import menuApi from "../../api/menuApi";
 import { useNavigate } from "react-router-dom";
 import "./css/registro.css";
 import Swal from "sweetalert";
+import emailjs from "emailjs-com";
 
 export const RegisterScreen = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,14 @@ export const RegisterScreen = () => {
   const [error, setError] = useState("false");
   const [msgError, setMsgError] = useState("");
   const navigate = useNavigate();
+
+  let templateParams = {
+    from_name: "Fast Food Grill",
+    user_name: `${name}`,
+    destinatario: `${email}`,
+    message:
+      "Te has registrado correctamente a nuestra página. Ya puedes comenzar a utilizar nuestros servicios",
+  };
 
   const sendRegister = async (name, email, password) => {
     try {
@@ -52,19 +61,19 @@ export const RegisterScreen = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!name || !email || !password) {
       setError(true);
-      setMsgError("Todos los campos son obligatorios")
+      setMsgError("Todos los campos son obligatorios");
       setTimeout(() => {
         setError(false);
       }, 4000);
     } else if (!emailRegex.test(email)) {
       setError(true);
-      setMsgError("El email ingresado no es valido")
+      setMsgError("El email ingresado no es valido");
       setTimeout(() => {
         setError(false);
       }, 4000);
-    } else if (password.length < 5){
+    } else if (password.length < 5) {
       setError(true);
-      setMsgError("La contraseña debe ser mayor a 5 caracteres")
+      setMsgError("La contraseña debe ser mayor a 5 caracteres");
       setTimeout(() => {
         setError(false);
       }, 4000);
@@ -73,8 +82,31 @@ export const RegisterScreen = () => {
       setMsgError("El correo electrónico ya está registrado");
       setTimeout(() => {
         setError(false);
-      }, 4000);}
+      }, 4000);
+      
+    }
+
     sendRegister(name, email, password);
+
+    //INICIO ENVIO DE MAIL REGISTRO EXITOSO
+
+    emailjs
+      .send(
+        "service_l4kq8i7",
+        "template_jdv3a5m",
+        templateParams,
+        "R9t8z8WTPAmEc3EgF"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+
+    //FIN ENVIO DE MAIL REGISTRO EXITOSO
   };
 
   return (

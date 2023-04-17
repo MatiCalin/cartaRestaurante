@@ -266,7 +266,7 @@ const MenuForm = ({ show, onHide, onSubmit, menu }) => {
           <Form.Group controlId="formImageUrl" className="mb-3">
             <Form.Label>• URL de imagen</Form.Label>
             <Form.Control
-              type="text"
+              type="url"
               placeholder="Ingrese la URL de la imagen"
               name="imageUrl"
               value={formValues.imageUrl}

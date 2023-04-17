@@ -6,6 +6,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import menuApi from "../../api/menuApi";
 import "./css/navBar.css";
 import Swal from "sweetalert";
+import { Modal } from "react-bootstrap";
 
 export const NavbarC = ({
   allProducts,
@@ -40,6 +41,17 @@ export const NavbarC = ({
   const navigate = useNavigate();
 
   const [active, setActive] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  // Funcionamiento Modal
+
+  const modalOpen = () =>{
+    setShowModal(true)
+    setTimeout(() => {
+      setShowModal(false)
+    }, 3000);
+    
+  }
 
   // Eliminar productos independientes
   const EliminarProducto = (menu) => {
@@ -95,7 +107,7 @@ export const NavbarC = ({
                 />
               </Link>
               <div className="navLinks">
-                <NavLink
+                <NavLink onClick={modalOpen}
                   className={({ isActive }) =>
                     `nav-item nav-link ${isActive ? "active" : ""}`
                   }
@@ -103,7 +115,7 @@ export const NavbarC = ({
                 >
                   Home
                 </NavLink>
-                <NavLink
+                <NavLink onClick={modalOpen}
                   className={({ isActive }) =>
                     `nav-item nav-link ${isActive ? "active" : ""} ms-auto`
                   }
@@ -112,18 +124,18 @@ export const NavbarC = ({
                   Nuestros menus
                 </NavLink>
                 {!verificarAdmin ? (
-                  <NavLink
+                  <NavLink onClick={modalOpen}
                     className={({ isActive }) =>
                       `nav-item nav-link ${isActive ? "active" : ""}`
                     }
                     to="/pedidos"
-                  >
+                    >
                     Pedidos
                   </NavLink>
                 ) : (
                   ""
                 )}
-                <NavLink
+                <NavLink onClick={modalOpen}
                   className={({ isActive }) =>
                     `nav-item nav-link ${isActive ? "active" : ""}`
                   }
@@ -133,7 +145,7 @@ export const NavbarC = ({
                 </NavLink>
 
                 {verificarAdmin && (
-                  <NavLink
+                  <NavLink onClick={modalOpen}
                     className={({ isActive }) =>
                       `nav-item nav-link ${isActive ? "active" : ""}`
                     }
@@ -279,6 +291,20 @@ export const NavbarC = ({
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <Modal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+            centered
+            className="loadingModal"
+          >
+            <Modal.Body className="loadingModalBody">
+              <div className="loading-container">
+                <div className="spinner"></div>
+                <div className="spinner-center"></div>
+                <div className="loading-text text-light">Cargando...</div>
+              </div>
+            </Modal.Body>
+          </Modal>
     </div>
   );
 };
