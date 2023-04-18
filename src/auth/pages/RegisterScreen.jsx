@@ -50,12 +50,15 @@ export const RegisterScreen = () => {
     try {
       const response = await menuApi.get(`/auth/check-email/${email}`);
       return response.data.exists;
-    } catch (error) {}
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const emailExists = checkEmailExists(email);
+    e.preventDefault();
     //validaciones
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -82,31 +85,35 @@ export const RegisterScreen = () => {
       setMsgError("El correo electrónico ya está registrado");
       setTimeout(() => {
         setError(false);
-      }, 4000);
+      }, 4000);      
+    } 
+      sendRegister(name, email, password);
+
       
-    }
+ 
 
-    sendRegister(name, email, password);
+      //INICIO ENVIO DE MAIL REGISTRO EXITOSO
 
-    //INICIO ENVIO DE MAIL REGISTRO EXITOSO
+      emailjs.send(
+          "service_l4kq8i7",
+          "template_jdv3a5m",
+          templateParams,
+          "2Vzu_Q7zRYOuPjApY"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+  
+      //FIN ENVIO DE MAIL REGISTRO EXITOSO
+    
+    
 
-    emailjs
-      .send(
-        "service_l4kq8i7",
-        "template_jdv3a5m",
-        templateParams,
-        "R9t8z8WTPAmEc3EgF"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
 
-    //FIN ENVIO DE MAIL REGISTRO EXITOSO
   };
 
   return (
