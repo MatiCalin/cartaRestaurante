@@ -48,8 +48,8 @@ export const RegisterScreen = () => {
 
   const checkEmailExists = async (email) => {
     try {
-      const response = await menuApi.get(`/auth/check-email/${email}`);
-      return response.data.exists;
+      const response = await menuApi.get(`/admin/Usuarios/`);
+      // console.log(response.data.exists); 
       
     } catch (error) {
       console.log(error);
@@ -57,6 +57,7 @@ export const RegisterScreen = () => {
   };
 
   const handleSubmit = (e) => {
+    
     const emailExists = checkEmailExists(email);
     e.preventDefault();
     //validaciones
@@ -82,7 +83,7 @@ export const RegisterScreen = () => {
       }, 4000);
     } else if (emailExists) {
       setError(true);
-      setMsgError("El correo electrónico ya está registrado");
+      setMsgError("El correo electronico ya está registrado");
       setTimeout(() => {
         setError(false);
       }, 4000);      
@@ -102,10 +103,10 @@ export const RegisterScreen = () => {
         )
         .then(
           (result) => {
-            console.log(result.text);
+            return(result.text);
           },
           (error) => {
-            console.log(error.text);
+            return(error.text);
           }
         );
   
