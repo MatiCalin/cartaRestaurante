@@ -48,8 +48,8 @@ export const RegisterScreen = () => {
 
   const checkEmailExists = async (email) => {
     try {
-      const response = await menuApi.get(`/admin/Usuarios/`);
-      console.log(response.data.exists); 
+      const response = await menuApi.get(`/auth/check-email/${email}`);
+      return response.data.exists;
       
     } catch (error) {
       console.log(error);
@@ -103,10 +103,10 @@ export const RegisterScreen = () => {
         )
         .then(
           (result) => {
-            return(result.text);
+            console.log(result.text);
           },
           (error) => {
-            return(error.text);
+            console.log(error.text);
           }
         );
   
