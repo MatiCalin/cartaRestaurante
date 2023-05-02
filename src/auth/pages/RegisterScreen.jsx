@@ -49,7 +49,7 @@ export const RegisterScreen = () => {
   const checkEmailExists = async (email) => {
     try {
       const response = await menuApi.get(`/admin/Usuarios/`);
-      // console.log(response.data.exists); 
+      console.log(response.data.exists); 
       
     } catch (error) {
       console.log(error);
