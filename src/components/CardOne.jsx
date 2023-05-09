@@ -11,7 +11,7 @@ export const CardOne = () => {
   return (
     <>
       <div className="CardOne-Container">
-        <Row xs={1} md={3} className="g-4">
+        <Row xs={1} md={3} className="gx-0">
           <Card
             className="CardOne-Subcontainer"
             style={{ width: "10rem", maxHeight: "15rem", margin: "1rem" }}

@@ -33,7 +33,7 @@ export const CarouselHome = () => {
         <Carousel.Item>
           <img
             className="cover-image"
-            src="https://ventuscorp.pe/wp-content/uploads/2021/07/Blog-Ventus-Papas-fritas.png"
+            src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2020/10/como-hacer-unas-patatas-fritas-sanas-saludables-engorden-menos-2120057.jpg?tf=3840x"
             alt="Third slide"
           />
 

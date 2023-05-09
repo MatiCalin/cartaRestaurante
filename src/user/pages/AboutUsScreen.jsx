@@ -13,7 +13,7 @@ export const AboutUsScreen = () => {
     <div className="aboutBody">
       <div className="aboutUs">
         <h1 className="py-2">¿QUIENES SOMOS?</h1>
-        <img src={img7} alt="[texto alternativo de la imagen]" />
+        <img src={img7} alt="[texto alternativo de la imagen]" className="img-fluid"/>
         <p className="aboutUsBody py-2 my-4">
           Somos estudiantes de Programacion en Rolling Code. Presentamos nuestro
           Proyecto Final: Carta Restaurante{" "}

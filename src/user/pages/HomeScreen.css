@@ -113,6 +113,9 @@
   width: 80%;
   font-family: "Ubuntu", sans-serif;
 }
+
+
+
 .CardThree Button:hover {
   transform: translateY(-3px);
 }
@@ -120,9 +123,23 @@
   color: coral;
 }
 
+@media screen and (max-width: 413px) {
+  .CardThree Button {
+    position: relative;
+    bottom: 0.70rem;  
+    font-size: 12px !important;
+  }
+}
+
 @media screen and (max-width: 820px) {
   .CardThree {
     height: 22rem !important;
+  }
+
+  .CardThree Button {
+    position: relative;
+    bottom: 1rem;  
+    font-size: 15px;
   }
 }
 
