@@ -1,70 +1,15 @@
-# Getting Started with Create React App
+# Fast Food Grill
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+En este proyecto desarrollamos una aplicación mediante la cual se pueda elegir entre diversos platos de comida y luego agregarlos a un carrito de compras, para finalmente concretar la compra.
+Para ello primero creamos una pestaña de registro y login mediante el cual el usuario puede ingresar a la pagina principal para navegar por las distintas opciones.
+Al mismo tiempo existe una pagina de administración mediante la cual el administrador puede entre otras cosas dar de alta y baja los menus, crear nuevos, modificarlos e incluso confirmar los pedidos realizados por el usuario. También se pueden inhabilitar usuarios evitando con esto que ingresen a la página.
+La aplicación fue realizada utilizando react js principalmente para el frontend, y adicionalmente se utilizaron otras tecnologias y herramientas como bcrypt para realizar la encriptación de contraseñas como tambien JWToken para validar el tiempo de expiración del mismo. Por su parte tambien se desarrolló la parte de backend utilizando mongo db como base de datos, como tambien express y node js. Dicho repositorio correspondiente al backend tambien se puede encontrar en mi perfil como "cartaRestaurante Backend". 
 
-## Available Scripts
+----------------------------------------------------------------------------------------------------------------------------------
 
-In the project directory, you can run:
+# Fast Food Grill
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+In this project we develop an application through which you can choose between various food dishes and then add them to a shopping cart, to finally complete the purchase.
+To do this, we first create a registration and login tab through which the user can enter the main page to navigate through the different options.
+At the same time we create an administration page through which the administrator can do a lot of things, like register and cancel the menus, create new ones, modify them and even confirm the orders made by the user. Users can also be disabled by preventing them from entering the page.
+The application was made using react js mainly for the frontend, and additionally other technologies and tools were used such as bcrypt to encrypt passwords as well as JWToken to validate its expiration time. For its part, the backend part was also developed using mongo db as a database, as well as express and node js. Said repository corresponding to the backend can also be found in my profile as "cartaRestaurante Backend".
